@@ -1,35 +1,34 @@
-require("dotenv").config();
-
-const express = require("express");
-const app = express();
-const { Client } = require("pg");
-const bp = require("body-parser");
-const PORT = 8080;
+const db              = require("./database/db");
+const bp              = require("body-parser");
+const authController  = require('./controllers/authController')
+const express         = require("express");
+const app             = express();
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-const db = new Client({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: 5432
-});
-
 app.get("/", (req, res) => {
-    console.log("Hello world!");
+    console.log('hello world!');
 });
 
-// DON'T TOUCH THIS
-db.connect((err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(`[*] Connected to ${process.env.DB_DATABASE}`);
+// public tours
+app.post("/api/register", authController.register);
+app.post("/api/login", authController.login);
+
+// protected tours
+
+// sync with the database
+db.sequelize.authenticate()
+  .then(() => {
+    console.log("[*] Synced db.");
+  })
+  .catch((err) => {
+    console.log("[-] Failed to sync db: " + err.message);
   });
-  
-app.listen(8080, () => {
+
+
+// start the whole server
+const PORT = 8080;
+app.listen(PORT, () => {
     console.log(`[*] Server is running on port ${PORT}`);
 });
