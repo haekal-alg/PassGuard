@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS loginInfo (
-    logInfoId               uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
+    loginInfoId             uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
     userId                  uuid                REFERENCES  users (userId),
     name                    TEXT                NOT NULL,
     username                TEXT                NULL,
@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS loginInfo (
 );
 
 CREATE TABLE IF NOT EXISTS secureNote (
-    secNoteId               uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
+    secureNoteId            uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
     userId                  uuid                REFERENCES  users (userId),
     name                    TEXT                NOT NULL,
     notes                   TEXT                NULL
 );
 
 CREATE TABLE IF NOT EXISTS creditCard (
-    cardId                  uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
+    creditCardId            uuid                PRIMARY KEY DEFAULT UUID_GENERATE_V4(),
     userId                  uuid                REFERENCES  users (userId),
     name                    TEXT                NOT NULL,
     holderName              TEXT                NULL,
