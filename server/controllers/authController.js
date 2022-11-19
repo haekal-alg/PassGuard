@@ -1,9 +1,11 @@
-const jwt           = require('jsonwebtoken');
-const cipher        = require('./../cipher');
-const catchAsync    = require('./../utils/catchAsync');
-const AppError      = require('./../utils/appError');
-const Users         = require("./../models/userModel");
+const jwt            = require('jsonwebtoken');
+const cipher         = require('../libs/cipher');
+const catchAsync     = require('./../utils/catchAsync');
+const AppError       = require('./../utils/appError');
+const Users          = require("./../models/userModel");
 const userController = require("./userController");
+const { promisify }  = require('util');
+const { decode } = require('punycode');
 
 const signToken = id => {
     return jwt.sign(
@@ -23,7 +25,7 @@ const sendTokenAndVault = async (user, statusCode, res) => {
     };
 
     // only send cookie in an https connection
-    if (process.env.NODE_ENV === 'PRODUCTION')
+    if (process.env.NODE_ENV === 'production')
         cookieOptions.secure = true;
 
     // set the cookie (sent along wit data)
@@ -74,6 +76,7 @@ UNIT TESTS:
 3. [X] What if the VALUE of input field is empty?
 */
 exports.register = catchAsync(async (req, res, next) => {
+    // hashed the master password again on server side
     const [ hashedMP, randomSalt ] = cipher.hashData(req.body.password);
     Users.create({
         name            : req.body.name,
@@ -81,51 +84,58 @@ exports.register = catchAsync(async (req, res, next) => {
         masterPassword  : hashedMP,
         key             : req.body.key,           // protected symmetric key
         salt            : randomSalt 
-    }).then(data => {
+    }).then(() => {
         res.status(201).send({ status: "Register success"});
     }).catch(err => {
-        let errorMessage;
+        var errorMessage;
         
         // UNIT TEST [2]
-        if (err.message == 'Validation error') errorMessage = 'Email has already been used'
+        if (err.message == 'Validation error') errorMessage = 'The Email has already been taken'
         
         res.status(200).send({ status: errorMessage });
     });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-    let token;
+    // Check if token is there
     const authHeader = req.headers.authorization;
-
-    // 1) Check if token is there
     if (authHeader && authHeader.startsWith('Bearer')) {
-        token = req.headers.authorization.split(' ')[1];
+        var token = req.headers.authorization.split(' ')[1];
     }
     if (!token) {
+        // [TODO] redirect to login page
         return next(
             new AppError('You are not logged in! Please log in to get access.', 401)
         );
     }
 
-    // 2) Verification token
+    // Verification token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    if (!decoded) {
+        return next(
+        new AppError('The user belonging to this token does no longer exist.', 401)
+        );
+    }
 
-    // 3) Check if user still exists
-    const currentUser = await User.findById(decoded.id);
+    // Check if user still exists
+    const currentUser = await Users.findByPk(decoded.id, { raw: true });
+    //console.log(currentUser);
     if (!currentUser) {
         return next(
         new AppError('The user belonging to this token does no longer exist.', 401)
         );
     }
 
-    // 4) Check if user changed password after the token was issued
+    /*
+    // Check if user changed password after the token was issued
     if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
         new AppError('User recently changed password! Please log in again.', 401)
         );
     }
+    */
 
-    // GRANT ACCESS TO PROTECTED ROUTE
-    req.user = currentUser;
-    next();
+    // Grant access to protected routes
+    req.userId = currentUser.userId;
+    next(); // send user id to the next middleware
 });

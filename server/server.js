@@ -1,27 +1,35 @@
 require("dotenv").config();
-const db                    = require("./database/db");
 const bp                    = require("body-parser");
+const express               = require("express");
+const db                    = require("./database/db");
 const authController        = require('./controllers/authController');
 const loginInfoController   = require('./controllers/loginInfoController');
-const userController        = require('./controllers/userController');
-const express               = require("express");
+const globalErrorHandler    = require('./controllers/errorController');
 const app                   = express();
+
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
+// public tours
 app.get("/", (req, res) => {
     console.log('hello world!');
 });
-
-
-// public tours
 app.route("/api/register").post(authController.register);
 app.route("/api/login").post(authController.login);
 
 // protected tours
-//app.route('/api/user/createNewLoginInfo').post(loginInfoController.createNewLoginInfo);
+// [TODO] what if the logged in user tried to access other user's data if they know other user's id?
+app.route('/api/user/loginInfo')
+    .post(authController.protect, loginInfoController.createNewLoginInfo)   // create new one
+    .patch(authController.protect, loginInfoController.updateLoginInfo)     // update existing one
+    .delete(authController.protect, loginInfoController.deleteLoginInfo);   // delete
 
+// [TODO] create tours for secure note 
+
+// [TODO] create tours for secure note 
+
+app.use(globalErrorHandler);
 
 // authenticate and sync to the database
 db.sequelize.sync(

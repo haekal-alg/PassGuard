@@ -14,10 +14,10 @@ const getVault = async function(user) {
         raw: true
     });
 
-    // get credit card
+    // [TODO] get credit card
     const creditData = "";
 
-    // get secure note
+    // [TODO] get secure note
     const noteData = "";
 
     data = { profile: {
