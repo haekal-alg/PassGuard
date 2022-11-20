@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-// [TODO]
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
     process.env.DB_DATABASE,
@@ -9,6 +8,7 @@ const sequelize = new Sequelize(
     {
         logging: false,
         host: process.env.DB_HOST,
+        returning: true,
         dialect: 'postgres'
     }
 );
