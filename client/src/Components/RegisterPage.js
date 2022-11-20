@@ -2,6 +2,7 @@ import "./RegisterPage.css";
 import { useRef } from "react";
 
 const chiper = require('./Cipher')
+const crypto = require('crypto');
 
 function RegisterPage() {
   const inputEmail = useRef(null);
@@ -11,31 +12,48 @@ function RegisterPage() {
 
   function handleClick() {
     if (inputEmail.current.value === '' ) {
-      alert('Please enter an email address')
+      alert('Please enter an email address');
     }
     if (inputUsername.current.value === '' ) {
-      alert('Tolong masukan username yang anda inginkan')
+      alert('Tolong masukan username yang anda inginkan');
     }
     if (inputMasterPassword.current.value === '' ) {
-      alert('Tolong masukan master password')
+      alert('Tolong masukan master password');
     }
     if (inputMasterPasswordRetype.current.value === '' ) {
-      alert('tolong ketikkan ulang password')
+      alert('tolong ketikkan ulang password');
     }
     if (inputMasterPassword.current.value !== inputMasterPasswordRetype.current.value) {
-      alert('Master password that you have entered is different, try again!')
+      alert('Master password that you have entered is different, try again!');
     }
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.current.value)) {
       console.log(inputEmail.current.value);
     }
     else {
-      alert('Please enter a valid email address')
+      alert('Please enter a valid email address');
     }
     console.log(inputUsername.current.value);
     console.log(inputMasterPassword.current.value);
     console.log(inputMasterPasswordRetype.current.value);
+    if (inputMasterPassword.current.value === inputMasterPasswordRetype.current.value) {
+      // Master Key (result : 128 bit)
+      const masterKey = chiper.hashDataWithSalt(inputMasterPassword.current.value, inputEmail.current.value);
+      console.log(masterKey);
 
-    console.log(chiper.hashDataWithSalt(inputMasterPassword.current.value, inputEmail.current.value))
+      // Master Password Hash (result : 128 bit)
+      const masterPasswordHash = chiper.hashDataWithSalt(inputMasterPassword.current.value, masterKey);
+      console.log(masterPasswordHash);
+
+      // Defining key
+      const symmetricKey = crypto.randomBytes(32);
+      
+      // Defining iv
+      const iv = crypto.randomBytes(16);
+      
+      // Protected Private Key (result : 288 bit)
+      const protectedPrivateKey = chiper.aes256(iv, masterKey, symmetricKey);
+      console.log(protectedPrivateKey);
+    }
   }
 
   return (
