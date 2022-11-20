@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+.topnav {
+  overflow: hidden;
+  background-color: #cd6b10;
+}
+
+body {
+  background: #e80505;
+  background: linear-gradient(to right, #fdd819 0%, #e80505 100%);
+}
+
+.topnav a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.login_button {
+  background: black;
+  border-radius: 10px;
+  color: white;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.app {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.menu {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.about {
+  position: absolute;
+  width: 1085px;
+  height: 325px;
+  margin-top: 400px;
+  margin-left: 20px;
+  background: #e80505;
+  background: linear-gradient(to right, #fccf31 0%, #f55555 100%);
+  border-radius: 50px 50px 100px 50px;
+  z-index: -1;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 28px;
+  padding-left: 60px;
+  font-family: "Poppins", sans-serif;
+}
+
+.description {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 60px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.gambar {
+  position: absolute;
+  top: 20%;
+  left: 60%;
+}
+
+.get_button {
+  background: black;
+  border-radius: 10px;
+  color: white;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 60px;
+}
+
+.bot_nav {
+  overflow: hidden;
+  background-color: #8A8A8A;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+}

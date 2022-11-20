@@ -1,11 +1,11 @@
-import ExpenseItem from "./Components/ExpenseItem";
+// import LoginPage from "./Components/LoginPage";
+import RegisterPage from "./Components/RegisterPage";
+// import HomePage from "./Components/HomePage";
+// import VaultPage from "./Components/VaultPage";
 
 function App() {
   return (
-    <div>
-      <h2>Let's get started!</h2>
-      <ExpenseItem></ExpenseItem>
-    </div>
+    <RegisterPage></RegisterPage>
   );
 }
 

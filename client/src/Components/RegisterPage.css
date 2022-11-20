@@ -1,136 +1,136 @@
-@import url("https://fonts.googleapis.com/css?family=inter:700");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 body {
-    background-color: rgba(237, 242, 247, 1);
-    position: relative;
-    font-family: "Inter";
-  }
-  
-  .topnav {
-    overflow: hidden;
-    background-color: #cd6b10;
-  }
-  
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 17px 20px;
-    text-decoration: none;
-    font-size: 24px;
-  }
-  
-  .topnav-right {
-    float: right;
-  }
-  
-  .main {
-    width: 400px;
-    height: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: 110px 0 0 -200px;
-    background: #cd6b10;
-    border-radius: 35px;
-  }
-  
-  .efek {
-    width: 400px;
-    height: 402px;
-    position: absolute;
-    top: -30%;
-    left: 48%;
-    margin: 110px 0 0 -200px;
-    background: white;
-    border-radius: 35px;
-    z-index: 2;
-    text-align: center;
-  }
-  
-  h1 {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 44px;
-  }
-  
-  p {
-    font-size: 14px;
-  }
-  
-  input {
-    padding: 10px 45px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #EDF2F7;
-    margin-bottom: 10px;
-    border: none;
-  }
-  
-  label {
-    position: relative;
-  }
-  
-  label[id=email]:before {
-    content: "";
-    position: absolute;
-    left: 15px;
-    top: 2px;
-    bottom: 0;
-    width: 17px;
-    height: 14.25px;
-    background: url("./Resource/email_icon_png.png");
-  }
-  
-  label[id=master_password]:before {
-    content: "";
-    position: absolute;
-    right:210px;
-    top: 43px;
-    width: 17px;
-    height: 19px;
-    background: url("./Resource/gembok_icon.svg");
-  }
-  
-  label[id=username]:before {
-    content: "";
-    position: absolute;
-    right:210px;
-    top: 43px;
-    width: 17px;
-    height: 19px;
-    background: url("./Resource/human_icon.svg");
-  }
+  background-color: rgba(237, 242, 247, 1);
+  position: relative;
+  font-family: "Inter";
+}
 
-  .forgot {
-    position: absolute;
-    bottom: 78px;
-    left: 82px;
-    font-weight: 600;
-    font-size: 12px;
-  }
-  
-  .login_button {
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding-right: 23px; 
-    display: inline-block;
-    font-size: 16px;
-    background-color: #FF7D1F;
-    margin: 25px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-image: url(./Resource/right_arrow_icon.svg);
-    background-repeat: no-repeat;
-    background-position: 18px 10px;
-  }
-  
-  .login_button:hover {
-    background-color: orange;
-  }
-  
-  .copyright {
-    font-size: x-small;
-    font-weight: 600;
-  }
-  
+.topnav {
+  overflow: hidden;
+  background-color: #cd6b10;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 17px 20px;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.main {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 110px 0 0 -200px;
+  background: #cd6b10;
+  border-radius: 35px;
+}
+
+.efek {
+  width: 400px;
+  height: 402px;
+  position: absolute;
+  top: -30%;
+  left: 48%;
+  margin: 110px 0 0 -200px;
+  background: white;
+  border-radius: 35px;
+  z-index: 2;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
+}
+
+p {
+  font-size: 14px;
+}
+
+input {
+  padding: 10px 45px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #edf2f7;
+  margin-bottom: 10px;
+  border: none;
+}
+
+label {
+  position: relative;
+}
+
+label[id="email"]:before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 2px;
+  bottom: 0;
+  width: 17px;
+  height: 14.25px;
+  background: url("./Resource/email_icon_png.png");
+}
+
+label[id="master_password"]:before {
+  content: "";
+  position: absolute;
+  right: 210px;
+  top: 43px;
+  width: 17px;
+  height: 19px;
+  background: url("./Resource/gembok_icon.svg");
+}
+
+label[id="username"]:before {
+  content: "";
+  position: absolute;
+  right: 210px;
+  top: 43px;
+  width: 17px;
+  height: 19px;
+  background: url("./Resource/human_icon.svg");
+}
+
+.forgot {
+  position: absolute;
+  bottom: 78px;
+  left: 82px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.login_button {
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding-right: 23px;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #ff7d1f;
+  margin: 25px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-image: url(./Resource/right_arrow_icon.svg);
+  background-repeat: no-repeat;
+  background-position: 18px 10px;
+}
+
+.login_button:hover {
+  background-color: orange;
+}
+
+.copyright {
+  font-size: x-small;
+  font-weight: 600;
+}

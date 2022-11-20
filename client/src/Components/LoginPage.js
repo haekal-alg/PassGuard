@@ -25,7 +25,6 @@ function LoginPage() {
           </label>
           <p className="forgot">Forgot password? Click here</p>
           <div>
-            {/* <button type="submit" className="button_login"><img src="./Resource/right_arrow_icon.jpg" alt="right arrow"/>Login</button> */}
             <input type="button" value="Login" className="login_button" />
           </div>
           <br />
