@@ -14,45 +14,57 @@ function RegisterPage() {
     if (inputEmail.current.value === '' ) {
       alert('Please enter an email address');
     }
-    if (inputUsername.current.value === '' ) {
-      alert('Tolong masukan username yang anda inginkan');
-    }
-    if (inputMasterPassword.current.value === '' ) {
-      alert('Tolong masukan master password');
-    }
-    if (inputMasterPasswordRetype.current.value === '' ) {
-      alert('tolong ketikkan ulang password');
-    }
-    if (inputMasterPassword.current.value !== inputMasterPasswordRetype.current.value) {
-      alert('Master password that you have entered is different, try again!');
-    }
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.current.value)) {
-      console.log(inputEmail.current.value);
-    }
     else {
-      alert('Please enter a valid email address');
-    }
-    console.log(inputUsername.current.value);
-    console.log(inputMasterPassword.current.value);
-    console.log(inputMasterPasswordRetype.current.value);
-    if (inputMasterPassword.current.value === inputMasterPasswordRetype.current.value) {
-      // Master Key (result : 128 bit)
-      const masterKey = chiper.hashDataWithSalt(inputMasterPassword.current.value, inputEmail.current.value);
-      console.log(masterKey);
+      if (inputUsername.current.value === '' ) {
+        alert('Please enter the username field');
+      }
+      else {
+        if (inputMasterPassword.current.value === '' ) {
+          alert('Please enter a master password');
+        }
+        else {
+          if (inputMasterPasswordRetype.current.value === '' ) {
+            alert('Please Re-type the master password');
+          }
+          else {
+            if (inputMasterPassword.current.value !== inputMasterPasswordRetype.current.value) {
+              alert('Master password that you have entered is different, try again!');
+            }
+            else {
+              if (inputMasterPassword.current.value === inputMasterPasswordRetype.current.value) {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.current.value)) {
+                  // print semua input ke console
+                  console.log(inputEmail.current.value);
+                  console.log(inputUsername.current.value);
+                  console.log(inputMasterPassword.current.value);
+                  console.log(inputMasterPasswordRetype.current.value);
 
-      // Master Password Hash (result : 128 bit)
-      const masterPasswordHash = chiper.hashDataWithSalt(inputMasterPassword.current.value, masterKey);
-      console.log(masterPasswordHash);
-
-      // Defining key
-      const symmetricKey = crypto.randomBytes(32);
-      
-      // Defining iv
-      const iv = crypto.randomBytes(16);
-      
-      // Protected Private Key (result : 288 bit)
-      const protectedPrivateKey = chiper.aes256(iv, masterKey, symmetricKey);
-      console.log(protectedPrivateKey);
+                  // Master Key (result : 128 bit)
+                  const masterKey = chiper.hashDataWithSalt(inputMasterPassword.current.value, inputEmail.current.value);
+                  console.log(masterKey);
+            
+                  // Master Password Hash (result : 128 bit)
+                  const masterPasswordHash = chiper.hashDataWithSalt(inputMasterPassword.current.value, masterKey);
+                  console.log(masterPasswordHash);
+            
+                  // Defining key
+                  const symmetricKey = crypto.randomBytes(32);
+                  
+                  // Defining iv
+                  const iv = crypto.randomBytes(16);
+                  
+                  // Protected Private Key (result : 288 bit)
+                  const protectedPrivateKey = chiper.aes256(iv, masterKey, symmetricKey);
+                  console.log(protectedPrivateKey);
+                }
+                else {
+                  alert('Please enter a valid email address');
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 
