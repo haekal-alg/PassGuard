@@ -1,11 +1,10 @@
 const jwt            = require('jsonwebtoken');
-const cipher         = require('../libs/cipher');
+const cipher         = require('./../libs/cipher');
 const catchAsync     = require('./../utils/catchAsync');
 const AppError       = require('./../utils/appError');
 const Users          = require("./../models/userModel");
 const userController = require("./userController");
 const { promisify }  = require('util');
-const { decode } = require('punycode');
 
 const signToken = id => {
     return jwt.sign(
@@ -83,16 +82,17 @@ exports.register = catchAsync(async (req, res, next) => {
         email           : req.body.email,
         masterPassword  : hashedMP,
         key             : req.body.key,           // protected symmetric key
+        iv              : req.body.iv,
         salt            : randomSalt 
     }).then(() => {
         res.status(201).send({ status: "Register success"});
     }).catch(err => {
-        var errorMessage;
-        
+        //console.log(err)
         // UNIT TEST [2]
-        if (err.message == 'Validation error') errorMessage = 'The Email has already been taken'
-        
-        res.status(200).send({ status: errorMessage });
+        if (err.message == 'Validation error')
+            return next(new AppError('Duplicate email', 200));
+
+        return next(new AppError('Register failed', 200));
     });
 });
 

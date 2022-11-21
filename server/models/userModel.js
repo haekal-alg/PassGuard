@@ -17,15 +17,19 @@ const Users = db.sequelize.define("users", {
           allowNull: false
      },
      masterPassword: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: false
      },
      key: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
+          allowNull: false
+     },
+     iv: {
+          type: DataTypes.TEXT,
           allowNull: false
      },
      salt: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: false
      },
      }, {

@@ -1,18 +1,27 @@
 require("dotenv").config();
-const bp                    = require("body-parser");
-const express               = require("express");
 const db                    = require("./database/db");
 const authController        = require('./controllers/authController');
 const dataController        = require('./controllers/dataController');
 const globalErrorHandler    = require('./controllers/errorController');
+const bp                    = require("body-parser");
+const express               = require("express");
+const cors                  = require("cors");
 const app                   = express();
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
+//var corsOptions = {
+//  origin: 'http://localhost:3000',
+//  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//}
+
+app.use(cors());
+app.options('*', cors());
+
 // PUBLIC TOURS
-app.get("/", (req, res) => {
-    console.log('hello world!');
+app.get("/api/test", (req, res) => {
+    res.send("hello from backend!");
 });
 app.route("/api/register").post(authController.register);
 app.route("/api/login").post(authController.login);
@@ -21,7 +30,7 @@ app.route("/api/login").post(authController.login);
 // what if the logged in user tried to access other user's data assuming they know other user's id?
 // > they can't. there's a condition (in data controller) 
 //   to check if the id of the user accessing the data matched with the foreign key in data they're accessing. 
-app.route('/api/user/(|loginInfo|secureNote|creditCard)')                                   
+app.route('/api/user/(|loginInfo|secureNote|creditCard)', cors())                                   
     .post(authController.protect, dataController.createData)      // create new one
     .patch(authController.protect, dataController.updateData)     // update existing one
     .delete(authController.protect, dataController.deleteData);   // delete
@@ -39,7 +48,6 @@ db.sequelize.sync(
 });
 
 // start the whole server
-const PORT = 8080;
-app.listen(PORT, () => {
-    console.log(`[+] Server is running on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`[+] Server is running on port ${process.env.PORT}`);
 });

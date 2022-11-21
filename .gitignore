@@ -1,4 +1,6 @@
 notes.txt
 /server/node_modules/
+/client/node_modules/
 /server/.env
 /server/.vscode/
+/client/.vscode/
