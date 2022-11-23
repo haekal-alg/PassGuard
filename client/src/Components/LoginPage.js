@@ -17,18 +17,18 @@ function LoginPage() {
         <div className="efek">
           <h1>Login</h1>
           <h5>Sign-in to your account</h5>
-          <label id="email">
+          <label id="emailLogin">
             <input type="text" placeholder="Email Address" />
           </label>
-          <label id="master_password">
+          <label id="passwordLogin">
             <input type="text" placeholder="Master Password" />
           </label>
-          <p className="forgot">Forgot password? Click here</p>
+          <p className="forgotLogin">Forgot password? Click here</p>
           <div>
-            <input type="button" value="Login" className="login_button" />
+            <input type="button" value="Login" className="loginButton" />
           </div>
           <br />
-          <p className="copyright">@PassGuard, inc</p>
+          <p className="copyrightLogin">@PassGuard, inc</p>
         </div>
       </div>
     </body>

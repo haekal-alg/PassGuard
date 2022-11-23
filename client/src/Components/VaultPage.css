@@ -1,20 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 body {
-  background-color: #d0cece;
+  background-color: #FFF5E9;
+  position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
-.topnav {
+.topnavVault {
   overflow: hidden;
   background-color: #f27500;
   text-align: center;
 }
 
-.topnav a {
+.topnavVault a {
   color: black;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
   line-height: 50px;
+  padding: 0px 16px;
 }
 
 .app {
@@ -24,56 +27,141 @@ body {
   padding-left: 10px;
 }
 
-.menu {
+.menuVault {
   font-weight: 400;
   font-size: 15px;
   padding: 0px 15px;
 }
 
-.vault {
+.topnavVault a:hover {
+  background-color: orange;
+  color: white;
+}
+
+.topnavVault a.active {
+  font-weight: 700;
+}
+
+#vault {
   position: fixed;
   left: 42%;
 }
 
-.generate {
+#generate {
   position: fixed;
   left: 47%;
 }
 
-.report {
+#report {
   position: fixed;
   left: 54%;
 }
 
+#vaultItems {
+  position: absolute;
+  top: 60px;
+  left: 40%;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+#addItems {
+  position: absolute;
+  top: 88px;
+  right: 13%;
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  background: #F27500;
+  border-radius: 10px;
+  padding: 6px 25px;
+}
+
+#addItems:hover {
+  background-color: orange;
+  color: white;
+}
+
 .mode {
   position: absolute;
-  position: absolute;
-  top: 150px;
-  left: 15%;
-  width: 264px;
-  height: 309px;
-  background: #d9d9d9;
+  top: 140px;
+  left: 17%;
+  width: 240px;
+  height: 180px;
+  background: #FFFFFF;
   border-radius: 20px;
+  border: 1px solid black;
+}
+
+#all {
+  padding-left: 38px; 
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px;
+  transition-duration: 0.4s;
+  background-image: url(./Resource/all.svg);
+  font-family: "Poppins", sans-serif;
+  background-repeat: no-repeat;
+  background-position: 15px 5px;
+}
+
+#loginItems {
+  padding-left: 38px; 
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px;
+  transition-duration: 0.4s;
+  background-image: url(./Resource/login.svg);
+  font-family: "Poppins", sans-serif;
+  background-repeat: no-repeat;
+  background-position: 15px 5px;
+}
+
+#cardItems {
+  padding-left: 38px; 
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px;
+  transition-duration: 0.4s;
+  background-image: url(./Resource/cards.svg);
+  font-family: "Poppins", sans-serif;
+  background-repeat: no-repeat;
+  background-position: 15px 5px;
+}
+
+#secureNotesItems {
+  padding-left: 38px; 
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px;
+  transition-duration: 0.4s;
+  background-image: url(./Resource/notes.svg);
+  font-family: "Poppins", sans-serif;
+  background-repeat: no-repeat;
+  background-position: 15px 5px;
 }
 
 .detail {
   position: absolute;
-  top: 75px;
+  top: 140px;
   left: 40%;
-  width: 652px;
-  height: 483px;
-  background: #d9d9d9;
+  width: 600px;
+  height: 320px;
+  background: #FFFFFF;
   border-radius: 10px;
+  border: 1px solid black;
 }
 
-.bot_nav {
+.bot_nav_vault {
   overflow: hidden;
-  background-color: #8a8a8a;
+  background-color: #8A8A8A;
   position: fixed;
   text-align: center;
   bottom: 0;
   width: 100%;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 8px;
+  font-size: 10px;
+  padding: 5px 0px;
 }

@@ -1,16 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
-.topnav {
-  overflow: hidden;
-  background-color: #cd6b10;
-}
-
 body {
-  background: #e80505;
-  background: linear-gradient(to right, #fdd819 0%, #e80505 100%);
+  background: #FFF5E9;
+  position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
-.topnav a {
+.topnav_home {
+  overflow: hidden;
+  background: linear-gradient(135deg, #FDD819 0%, #E80505 100%);
+}
+
+.topnav_home a {
   float: left;
   color: black;
   text-align: center;
@@ -23,14 +24,13 @@ body {
   float: right;
 }
 
-.login_button {
+.login_button_home {
   background: black;
   border-radius: 10px;
   color: white;
-  width: 100px;
-  height: 30px;
   margin-top: 10px;
   margin-right: 10px;
+  padding: 5px 40px;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -54,8 +54,7 @@ body {
   height: 325px;
   margin-top: 400px;
   margin-left: 20px;
-  background: #e80505;
-  background: linear-gradient(to right, #fccf31 0%, #f55555 100%);
+  background: linear-gradient(135deg, #FDD819 0%, #E80505 100%);
   border-radius: 50px 50px 100px 50px;
   z-index: -1;
 }
@@ -81,25 +80,24 @@ body {
 
 .gambar {
   position: absolute;
-  top: 20%;
+  top: 225%;
   left: 60%;
 }
 
 .get_button {
   background: black;
-  border-radius: 10px;
+  border-radius: 50px;
   color: white;
-  width: 100px;
-  height: 30px;
   margin-top: 10px;
   margin-right: 10px;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 12px;
+  padding: 10px 20px;
   margin-left: 60px;
 }
 
-.bot_nav {
+.bot_nav_home {
   overflow: hidden;
   background-color: #8A8A8A;
   position: fixed;
@@ -108,5 +106,6 @@ body {
   width: 100%;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 8px;
+  font-size: 10px;
+  padding: 5px 0px;
 }
