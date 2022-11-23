@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=inter:700");
 
 body {
-  background-color: rgba(237, 242, 247, 1);
+  background-color: #FFF5E9;
   position: relative;
-  font-family: "Inter";
+  font-family: 'Inter', sans-serif;
 }
 
 .topnav {
@@ -62,7 +62,6 @@ input {
   padding: 10px 45px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #EDF2F7;
-  margin-bottom: 19px;
   border: none;
 }
 
@@ -70,7 +69,7 @@ label {
   position: relative;
 }
 
-label[id=email]:before {
+label[id=emailLogin]:before {
   content: "";
   position: absolute;
   left: 15px;
@@ -81,17 +80,17 @@ label[id=email]:before {
   background: url("./Resource/email_icon_png.png");
 }
 
-label[id=master_password]:before {
+label[id=passwordLogin]:before {
   content: "";
   position: absolute;
   right:210px;
-  top: 52px;
+  top: 45px;
   width: 17px;
   height: 19px;
   background: url("./Resource/gembok_icon.svg");
 }
 
-.forgot {
+.forgotLogin {
   position: absolute;
   top: 204px;
   left: 82px;
@@ -99,7 +98,7 @@ label[id=master_password]:before {
   font-size: 12px;
 }
 
-.login_button {
+.loginButton {
   color: white;
   border: none;
   border-radius: 30px;
@@ -115,11 +114,12 @@ label[id=master_password]:before {
   background-position: 18px 10px;
 }
 
-.login_button:hover {
+.loginButton:hover {
   background-color: orange;
 }
 
-.copyright {
+.copyrightLogin {
+  margin-top: 40px;
   font-size: x-small;
   font-weight: 600;
 }

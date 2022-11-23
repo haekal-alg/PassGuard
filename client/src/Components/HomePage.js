@@ -12,7 +12,7 @@ function HomePage() {
 
   return (
     <body>
-      <div className="topnav">
+      <div className="topnav_home">
         <a href="#App" className="app">
           PassGuard
         </a>
@@ -26,10 +26,10 @@ function HomePage() {
           Contact
         </a>
         <div className="topnav-right">
-          <input type="button" value="login" className="login_button" onClick={navigateLogin} />
+          <input type="button" value="login" className="login_button_home" onClick={navigateLogin}/>
         </div>
       </div>
-      <div className="main">
+      <div className="main_home">
         <div className="container">
           <div className="image">
             <img src="https://pic.onlinewebfonts.com/svg/img_201862.png" alt="gembok" width="171" height="177" className="gambar"/>
@@ -51,9 +51,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <div className="bot_nav">
-          <p>@PassGuard, inc</p>
-      </div>
+      <div className="bot_nav_home">@PassGuard, inc</div>
     </body>
   );
 }

@@ -51,56 +51,36 @@ function LoginPage() {
 		}
 	}
 
-	return (
-		<body>
-			<div className="topnav">
-				<a href="#Logo">Logo</a>
-				<a href="#PassGuard">PassGuard</a>
-				<div className="topnav-right">
-					<a href="/home">Home</a>
-					<a href="/register">Register</a>
-				</div>
-			</div>
-			<div className="main">
-				<div className="efek">
-					<h1>Login</h1>
-					<h5>Sign-in to your account</h5>
-
-					<label id="email">
-						<input 
-							ref={inputEmail}
-							type="email" 
-							id="email"
-							name="email" 
-							placeholder="Email"
-							required="" 
-							className="form-control" 
-						/>
-					</label>
-
-					<label id="master_password">
-						<input
-							ref={inputMasterPassword}
-							type="password"
-							placeholder="Master Password"
-						/>
-					</label>
-
-					<div>
-						<input 
-							type="button"
-							value="Login"
-							className="login_button"
-							onClick={loginHandler}
-						/>
-					</div>
-
-					<br />
-					<p className="copyright">@PassGuard, inc</p>
-				</div>
-			</div>
-		</body>
-	);
+  return (
+    <body>
+      <div className="topnav">
+        <a href="#Logo">Logo</a>
+        <a href="#PassGuard">PassGuard</a>
+        <div className="topnav-right">
+          <a href="#Home">Home</a>
+          <a href="#Register">Register</a>
+        </div>
+      </div>
+      <div className="main">
+        <div className="efek">
+          <h1>Login</h1>
+          <h5>Sign-in to your account</h5>
+          <label id="emailLogin">
+            <input type="text" placeholder="Email Address" />
+          </label>
+          <label id="passwordLogin">
+            <input type="text" placeholder="Master Password" />
+          </label>
+          <p className="forgotLogin">Forgot password? Click here</p>
+          <div>
+            <input type="button" value="Login" className="loginButton" />
+          </div>
+          <br />
+          <p className="copyrightLogin">@PassGuard, inc</p>
+        </div>
+      </div>
+    </body>
+  );
 }
 
 export default LoginPage;

@@ -29,6 +29,7 @@ function RegisterPage() {
 			alert('Please enter an email address');
 			return;
 		}
+		
 		if (inputUsername.current.value === '' ) {
 			alert('Please enter the username field');
 			inputUsername.current.focus();
