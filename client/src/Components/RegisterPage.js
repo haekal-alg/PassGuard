@@ -1,22 +1,18 @@
 import "./RegisterPage.css";
 import { useRef } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const cipher = require('./../libs/cipher');
-
-function encryptPasswordAndHashKey(emailField, masterPassField) {
-	const masterKey = cipher.hashDataWithSalt(masterPassField, emailField); // 128 bit
-	const symmetricKey = cipher.generateSymmetricKey();
-	const iv = cipher.generateIV();
-	
-	const masterPasswordHash = cipher.hashDataWithSalt(masterPassField, masterKey); // 128 bit
-	const protectedSymmetricKey = cipher.aes256(iv, masterKey, symmetricKey); // 288 bit
-
-	return [iv, masterPasswordHash, protectedSymmetricKey];
-}
+const toastifyWrapper = require('../libs/toastifyWrapper');
 
 function RegisterPage() {
+	const navigate = useNavigate();
+	const navigateLogin = () => {
+		navigate('/login');
+	};
+
 	const inputEmail = useRef(null);
 	const inputUsername = useRef(null);
 	const inputMasterPassword = useRef(null);
@@ -24,67 +20,69 @@ function RegisterPage() {
 
 	async function createAccountHandler() {
 		if (inputEmail.current.value === '' ) {
-			// this works 
-			//toast.warning('Warning Notification !', {
-			//	position: toast.POSITION.TOP_LEFT
-			//});
 			if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.current.value))  {
 				alert("Please enter a valid email address");
+				inputEmail.current.focus();
 				return;
 			}
+			inputEmail.current.focus();
 			alert('Please enter an email address');
 			return;
 		}
 		if (inputUsername.current.value === '' ) {
 			alert('Please enter the username field');
+			inputUsername.current.focus();
 			return;
 		}
 		if (inputMasterPassword.current.value === '' ) {
 			alert('Please enter a master password');
+			inputMasterPassword.current.focus();
 			return;
 		}
 		if (inputMasterPasswordRetype.current.value === '' ) {
 			alert('Please Re-type the master password');
+			inputMasterPasswordRetype.current.focus();
 			return;
 		}
 		if (inputMasterPassword.current.value !== inputMasterPasswordRetype.current.value) {
 			alert('Master password that you have entered is different, try again!');
+			inputMasterPasswordRetype.current.focus();
 			return;
 		}
 
-		var toastID = toast.loading("Please wait...");
+		let toastID = toast.loading("Creating your account...");
 		await new Promise(r => setTimeout(r, 50)); // have to add delay. if not, somehow the notification doesnt show up
 
 		const nameField = inputUsername.current.value;
 		const emailField = inputEmail.current.value;
 		const masterPassField = inputMasterPassword.current.value;
-		const [iv, masterPasswordHash, protectedSymmetricKey] = encryptPasswordAndHashKey(emailField, masterPassField);
+
+		const [iv, masterPasswordHash, protectedSymmetricKey] = cipher.encryptPasswordAndHashKey(emailField, masterPassField);
 
 		// send data to server at /api/register
 		const registerData = {
 				name		: nameField,
 				email		: emailField,
-				password	: masterPasswordHash,
-				key			: protectedSymmetricKey,
-				iv			: iv.toString('hex')
+				password	: Buffer.from(masterPasswordHash).toString('base64'),
+				key			: Buffer.from(protectedSymmetricKey).toString('base64'),
+				iv			: Buffer.from(iv).toString('base64')
 		}
-		console.log(registerData);
 		// [TODO] simpan url dalam config file atau variabel
 		const response = await fetch('http://localhost:8080/api/register', {
-							method: 'POST',
-							body: JSON.stringify(registerData), // you have to use json.stringify otherwise it throws cors error? wat?!?
-							headers: { 'Content-type': 'application/json' }
-						});
+						method: 'POST',
+						body: JSON.stringify(registerData), // you have to use json.stringify otherwise it throws cors error? wat?!?
+						headers: { 'Content-type': 'application/json' }
+					});
 			
 		const data = await response.json();
-		if (data.message === 'Duplicate email') {
-			toast.update(toastID, { render: "This email has already been taken", type: "error" });
-			setTimeout(() => { toast.dismiss(toastID); }, 2000);
+		if (data.status === 'success') {
+			toastifyWrapper.update(toast, toastID, data.message, "Your account has been sucessfully registered");
+			navigateLogin();
+		}
+		else if (data.status === 'error') {
+			toastifyWrapper.update(toast, toastID, data.message, "error");
 			return;
 		}
-		
-		toast.update(toastID, { render: "Your account has been successfully registered ", type: "success" });
-		setTimeout(() => { toast.dismiss(toastID); }, 2000);
 	}
 
 	return (
@@ -93,8 +91,8 @@ function RegisterPage() {
 				<a href="#Logo">Logo</a>
 				<a href="#PassGuard">PassGuard</a>
 				<div className="topnav-right">
-					<a href="#Home">Home</a>
-					<a href="#Login">Login</a>
+					<a href="/">Home</a>
+					<a href="/login">Login</a>
 				</div>
 			</div>
 			<div className="main">

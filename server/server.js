@@ -11,11 +11,6 @@ const app                   = express();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-//var corsOptions = {
-//  origin: 'http://localhost:3000',
-//  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-//}
-
 app.use(cors());
 app.options('*', cors());
 
@@ -27,10 +22,7 @@ app.route("/api/register").post(authController.register);
 app.route("/api/login").post(authController.login);
 
 // PROTECTED TOURS
-// what if the logged in user tried to access other user's data assuming they know other user's id?
-// > they can't. there's a condition (in data controller) 
-//   to check if the id of the user accessing the data matched with the foreign key in data they're accessing. 
-app.route('/api/user/(|loginInfo|secureNote|creditCard)', cors())                                   
+app.route('/api/user/(|loginInfo|secureNote|creditCard)')                                   
     .post(authController.protect, dataController.createData)      // create new one
     .patch(authController.protect, dataController.updateData)     // update existing one
     .delete(authController.protect, dataController.deleteData);   // delete

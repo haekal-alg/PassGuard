@@ -4,3 +4,4 @@ notes.txt
 /server/.env
 /server/.vscode/
 /client/.vscode/
+.eslintcache

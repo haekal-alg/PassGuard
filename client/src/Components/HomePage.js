@@ -1,6 +1,15 @@
 import "./HomePage.css";
+import { useNavigate } from 'react-router-dom';
 
+/* [TODO] resolve this error,
+Warning: validateDOMNesting(...): <body> cannot appear as a child of <div>.
+*/
 function HomePage() {
+  const navigate = useNavigate();
+  const navigateLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <body>
       <div className="topnav">
@@ -17,7 +26,7 @@ function HomePage() {
           Contact
         </a>
         <div className="topnav-right">
-          <input type="button" value="login" className="login_button" />
+          <input type="button" value="login" className="login_button" onClick={navigateLogin} />
         </div>
       </div>
       <div className="main">
@@ -26,7 +35,9 @@ function HomePage() {
             <img src="https://pic.onlinewebfonts.com/svg/img_201862.png" alt="gembok" width="171" height="177" className="gambar"/>
           </div>
           <div className="about">
-            <p className="title">Easiest way to secure your password!</p>
+            <p className="title">
+              Easiest way to secure your password!
+            </p>
             <p className="description">
               PassGuard is a password manager designed to securely store
             </p>
