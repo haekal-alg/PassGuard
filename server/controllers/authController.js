@@ -1,5 +1,5 @@
 const jwt            = require('jsonwebtoken');
-const cipher         = require('./../libs/cipher');
+const cipher         = require('./../../client/src/libs/cipher');
 const catchAsync     = require('./../utils/catchAsync');
 const AppError       = require('./../utils/appError');
 const Users          = require("./../models/userModel");
@@ -34,7 +34,6 @@ const sendTokenAndVault = async (user, statusCode, res) => {
     res.status(statusCode).json(sendToClient);
 };
 
-
 /*
 UNIT TESTS:
 1. [✓] What if email is not correct / doesnt exist?
@@ -42,25 +41,25 @@ UNIT TESTS:
 */
 exports.login = catchAsync(async (req, res, next) => {
     const email = req.body.email;
-    const password = req.body.password;
+    const decodedPassword = Buffer.from(req.body.password, 'base64');
 
     // get user entry based on email
     const user = await Users.findOne({ where: { email : email }, raw: true });
     
     // UNIT TEST [1]
-    // if user is not found, do not continue and immediately throw an error
     if (!user) {
         return next(new AppError('Incorrect email or password', 401));
     }
 
     // if user is found, get the actual master password and salt from user table
     const actualMP = user.masterPassword;
-    const actualSalt = user.salt;
+
     // hash input password with the actual salt
-    const inputMP = cipher.hashDataWithSalt(password, actualSalt)
+    const actualSalt = Buffer.from(user.salt, 'base64');
+    var inputMP = cipher.hashDataWithSalt(decodedPassword, actualSalt)
+    inputMP = Buffer.from(inputMP).toString('base64');
 
     // UNIT TEST [2]
-    // if master password does not match then do not login
     if (!(inputMP == actualMP)) {
         return next(new AppError('Incorrect email or password', 401));
     }
@@ -75,19 +74,25 @@ UNIT TESTS:
 3. [X] What if the VALUE of input field is empty?
 */
 exports.register = catchAsync(async (req, res, next) => {
+    console.log("[REGISTER] client side => " + req.body.password);
+
+    const decodedPassword = Buffer.from(req.body.password, 'base64');
+
     // hashed the master password again on server side
-    const [ hashedMP, randomSalt ] = cipher.hashData(req.body.password);
+    const [ hashedMP, randomSalt ] = cipher.hashData(decodedPassword);
+
+    console.log("[REGISTER] server side => " + Buffer.from(hashedMP).toString('base64'));
+
     Users.create({
         name            : req.body.name,
         email           : req.body.email,
-        masterPassword  : hashedMP,
+        masterPassword  : Buffer.from(hashedMP).toString('base64'),
         key             : req.body.key,           // protected symmetric key
         iv              : req.body.iv,
-        salt            : randomSalt 
+        salt            : Buffer.from(randomSalt).toString('base64')
     }).then(() => {
-        res.status(201).send({ status: "Register success"});
+        res.status(201).send({ status: "success", message: "Your account has been successfully registered"});
     }).catch(err => {
-        //console.log(err)
         // UNIT TEST [2]
         if (err.message == 'Validation error')
             return next(new AppError('Duplicate email', 200));

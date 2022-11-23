@@ -28,7 +28,8 @@ const getVault = async function(user) {
         raw: true
     });
 
-    data = { profile: {
+    data = { status: "success", 
+             profile: {
                 id: user.userId, 
                 name: user.name, 
                 email: user.email, 
