@@ -74,14 +74,14 @@ UNIT TESTS:
 3. [X] What if the VALUE of input field is empty?
 */
 exports.register = catchAsync(async (req, res, next) => {
-    console.log("[REGISTER] client side => " + req.body.password);
+    //console.log("[REGISTER] client side => " + req.body.password);
 
     const decodedPassword = Buffer.from(req.body.password, 'base64');
 
     // hashed the master password again on server side
     const [ hashedMP, randomSalt ] = cipher.hashData(decodedPassword);
 
-    console.log("[REGISTER] server side => " + Buffer.from(hashedMP).toString('base64'));
+    //console.log("[REGISTER] server side => " + Buffer.from(hashedMP).toString('base64'));
 
     Users.create({
         name            : req.body.name,
@@ -95,7 +95,7 @@ exports.register = catchAsync(async (req, res, next) => {
     }).catch(err => {
         // UNIT TEST [2]
         if (err.message == 'Validation error')
-            return next(new AppError('Duplicate email', 200));
+            return next(new AppError('This Email has already been taken ', 200));
 
         return next(new AppError('Register failed', 200));
     });

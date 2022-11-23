@@ -77,8 +77,8 @@ function RegisterPage() {
 			
 		const data = await response.json();
 		if (data.status === 'success') {
-			toastifyWrapper.update(toast, toastID, data.message, "Your account has been sucessfully registered");
 			navigateLogin();
+			toastifyWrapper.update(toast, toastID, "Your account has been sucessfully registered", "success");
 		}
 		else if (data.status === 'error') {
 			toastifyWrapper.update(toast, toastID, data.message, "error");

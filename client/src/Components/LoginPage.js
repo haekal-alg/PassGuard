@@ -14,11 +14,13 @@ function LoginPage() {
 
 	async function loginHandler() {
 		if (inputEmail.current.value === '' ) {
-			alert('Please enter the username field');
+			alert('Please enter your email');
+			inputEmail.current.focus();
 			return;
 		}
 		if (inputMasterPassword.current.value === '' ) {
 			alert('Please enter a master password');
+			inputMasterPassword.current.focus();
 			return;
 		}
 
@@ -58,7 +60,7 @@ function LoginPage() {
         <a href="#PassGuard">PassGuard</a>
         <div className="topnav-right">
           <a href="#Home">Home</a>
-          <a href="#Register">Register</a>
+          <a href="/register">Register</a>
         </div>
       </div>
       <div className="main">
@@ -66,14 +68,13 @@ function LoginPage() {
           <h1>Login</h1>
           <h5>Sign-in to your account</h5>
           <label id="emailLogin">
-            <input type="text" placeholder="Email Address" />
+            <input type="text" placeholder="Email Address" ref={inputEmail} />
           </label>
           <label id="passwordLogin">
-            <input type="text" placeholder="Master Password" />
+            <input type="text" placeholder="Master Password" ref={inputMasterPassword} />
           </label>
-          <p className="forgotLogin">Forgot password? Click here</p>
           <div>
-            <input type="button" value="Login" className="loginButton" />
+            <input type="button" value="Login" className="loginButton" onClick={loginHandler}/>
           </div>
           <br />
           <p className="copyrightLogin">@PassGuard, inc</p>
