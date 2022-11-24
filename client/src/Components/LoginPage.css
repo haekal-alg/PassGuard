@@ -77,7 +77,7 @@ label[id=emailLogin]:before {
   bottom: 0;
   width: 17px;
   height: 14.25px;
-  background: url("./Resource/email_icon_png.png");
+  background: url("./resource/email_icon_png.png");
 }
 
 label[id=passwordLogin]:before {
@@ -87,7 +87,7 @@ label[id=passwordLogin]:before {
   top: 45px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/gembok_icon.svg");
+  background: url("./resource/gembok_icon.svg");
 }
 
 .forgotLogin {
@@ -109,7 +109,7 @@ label[id=passwordLogin]:before {
   margin: 50px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-image: url(./Resource/right_arrow_icon.svg);
+  background-image: url(./resource/right_arrow_icon.svg);
   background-repeat: no-repeat;
   background-position: 18px 10px;
 }

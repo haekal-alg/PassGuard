@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./LoginPage.css";
 
-const cipher = require('./../libs/cipher');
+const cipher = require('../libs/cipher');
 const toastifyWrapper = require('../libs/toastifyWrapper');
 
 function LoginPage() {
@@ -44,6 +44,8 @@ function LoginPage() {
 					});
 			
 		const data = await response.json();
+		console.log(data);
+
 		if (data.status === 'success') {
 			// navigate to fault
 			toastifyWrapper.update(toast, toastID, "Login success", "success");
@@ -68,10 +70,10 @@ function LoginPage() {
           <h1>Login</h1>
           <h5>Sign-in to your account</h5>
           <label id="emailLogin">
-            <input type="text" placeholder="Email Address" ref={inputEmail} />
+            <input autoComplete="off" type="text" placeholder="Email Address" ref={inputEmail} />
           </label>
           <label id="passwordLogin">
-            <input type="text" placeholder="Master Password" ref={inputMasterPassword} />
+            <input autoComplete="off" type="text" placeholder="Master Password" ref={inputMasterPassword} />
           </label>
           <div>
             <input type="button" value="Login" className="loginButton" onClick={loginHandler}/>

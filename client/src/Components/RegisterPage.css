@@ -79,7 +79,7 @@ label[id="email"]:before {
   bottom: 0;
   width: 17px;
   height: 14.25px;
-  background: url("./Resource/email_icon_png.png");
+  background: url("./resource/email_icon_png.png");
 }
 
 label[id="master_password"]:before {
@@ -89,7 +89,7 @@ label[id="master_password"]:before {
   top: 43px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/gembok_icon.svg");
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id="username"]:before {
@@ -99,7 +99,7 @@ label[id="username"]:before {
   top: 43px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/human_icon.svg");
+  background: url("./resource/human_icon.svg");
 }
 
 .forgot {
@@ -121,7 +121,7 @@ label[id="username"]:before {
   margin: 20px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-image: url(./Resource/right_arrow_icon.svg);
+  background-image: url(./resource/right_arrow_icon.svg);
   background-repeat: no-repeat;
   background-position: 18px 10px;
 }
@@ -133,4 +133,10 @@ label[id="username"]:before {
 .copyright {
   font-size: x-small;
   font-weight: 600;
+}
+
+.passwordStrengthMeter:before {
+  position: absolute;
+  top: 5px;
+  right: 123px;
 }

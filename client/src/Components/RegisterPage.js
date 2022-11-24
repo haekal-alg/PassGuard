@@ -1,10 +1,12 @@
 import "./RegisterPage.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import PasswordStrengthMeter from './PasswordStrengthMeter';
+import React from 'react';
 
-const cipher = require('./../libs/cipher');
+const cipher = require('../libs/cipher');
 const toastifyWrapper = require('../libs/toastifyWrapper');
 
 function RegisterPage() {
@@ -76,6 +78,8 @@ function RegisterPage() {
 					});
 			
 		const data = await response.json();
+		//console.log(data);
+
 		if (data.status === 'success') {
 			navigateLogin();
 			toastifyWrapper.update(toast, toastID, "Your account has been sucessfully registered", "success");
@@ -85,7 +89,8 @@ function RegisterPage() {
 			return;
 		}
 	}
-
+	
+	const [ Masterpassword, setMPValue ] = useState("");
 	return (
 		<div className="body">
 			<div className="topnav">
@@ -96,6 +101,7 @@ function RegisterPage() {
 					<a href="/login">Login</a>
 				</div>
 			</div>
+
 			<div className="main">
 				<div className="efek">
 					<h1>Register</h1>
@@ -119,10 +125,15 @@ function RegisterPage() {
 
 					<label id="master_password">
 						<input
+							value={Masterpassword}
 							ref={inputMasterPassword}
 							type="password"
 							placeholder="Master Password"
+							onChange={(e) => setMPValue(e.target.value)}
 						/>
+						<label id="passwordStrengthMeter">
+							<PasswordStrengthMeter password={Masterpassword} />
+						</label>
 					</label>
 
 					<label id="master_password">
@@ -149,6 +160,7 @@ function RegisterPage() {
 					<p className="copyright">@PassGuard, inc</p>
 				</div>
 			</div>
+
 		</div>
 	);
 }
