@@ -6,38 +6,48 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.topnav {
+.topnavMain {
   overflow: hidden;
-  background-color: #cd6b10;
+  background-color: #CD6B10;
 }
 
-.topnav a {
+.topnavMain a {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 17px 20px;
+  padding: 10px 20px;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 18px;
 }
 
-.topnav-right {
+.topnavMain a:hover {
+  background-color: orange;
+  color: white;
+}
+
+.topnav-rightMain {
   float: right;
 }
 
-.main {
+#logo {
+  height: 30px;
+  width: 50px;
+}
+
+.mainLogin {
   width: 400px;
-  height: 390px;
-  position: relative;
-  top: 50%;
+  height: 376px;
+  position: absolute;
+  top: 30%;
   left: 50%;
   margin: 110px 0 0 -200px;
-  background: #cd6b10;
+  background: #F95900;
   border-radius: 35px;
 }
 
-.efek {
+.efekLogin {
   width: 400px;
-  height: 390px;
+  height: 370px;
   position: absolute;
   top: -30%;
   left: 48%;
@@ -77,7 +87,7 @@ label[id=emailLogin]:before {
   bottom: 0;
   width: 17px;
   height: 14.25px;
-  background: url("./resource/email_icon_png.png");
+  background: url("./Resource/email_icon_png.png");
 }
 
 label[id=passwordLogin]:before {
@@ -87,15 +97,29 @@ label[id=passwordLogin]:before {
   top: 45px;
   width: 17px;
   height: 19px;
-  background: url("./resource/gembok_icon.svg");
+  background: url("./Resource/gembok_icon.svg");
 }
 
-.forgotLogin {
+label[id=emailLogin] {
+  top: 10px;
+}
+
+label[id=passwordLogin] {
+  top: 25px;
+}
+
+#forgotLogin {
   position: absolute;
-  top: 204px;
+  top: 234px;
   left: 82px;
   font-weight: 600;
   font-size: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+#forgotLogin:hover {
+  text-decoration: underline;
 }
 
 .loginButton {
@@ -106,10 +130,10 @@ label[id=passwordLogin]:before {
   display: inline-block;
   font-size: 16px;
   background-color: #FF7D1F;
-  margin: 50px 2px;
+  margin: 60px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-image: url(./resource/right_arrow_icon.svg);
+  background-image: url("./Resource/right_arrow_icon.svg");
   background-repeat: no-repeat;
   background-position: 18px 10px;
 }
@@ -119,7 +143,6 @@ label[id=passwordLogin]:before {
 }
 
 .copyrightLogin {
-  margin-top: 40px;
   font-size: x-small;
   font-weight: 600;
 }
