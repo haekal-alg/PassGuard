@@ -10,10 +10,10 @@ const cipher = require("../libs/cipher");
 const toastifyWrapper = require("../libs/toastifyWrapper");
 
 function RegisterPage() {
-	// const navigate = useNavigate();
-	// const navigateLogin = () => {
-	//   navigate("/login");
-	// };
+	const navigate = useNavigate();
+	const navigateLogin = () => {
+	  navigate("/login");
+	};
 
 	const inputEmail = useRef(null);
 	const inputUsername = useRef(null);
@@ -160,8 +160,7 @@ function RegisterPage() {
 						/>
 					</label>
 
-					{/* [TODO] pas di textnya di klik redirect ke login page */}
-					<p className="forgot">Already have an account? Click here</p>
+					<a href="/login" className="forgot">Already have an account? Click here</a>
 
 					<div>
 						<input

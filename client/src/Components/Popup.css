@@ -6,7 +6,7 @@
   z-index: 10;
 }
 .popup {
-  height: 440px;
+  height: 460px;
   width: 40%;
   background-color: white;
   position: absolute;
@@ -39,11 +39,11 @@
 }
 
 #saveButton {
-  margin-left: 150px;
+  margin-left: 30%;
 }
 
 #cancelButton {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 #cancelButton, #saveButton {

@@ -126,6 +126,7 @@ label[id="username"]:before {
 	left: 82px;
 	font-weight: 600;
 	font-size: 10px;
+	color: black;
 }
 
 .login_button {

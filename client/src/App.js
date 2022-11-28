@@ -1,7 +1,7 @@
 //import HomePage from "./Components/HomePage";
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
-//import VaultPage from "./Components/VaultPage";
+import LoginPage from "./Components/LoginPage";
+import RegisterPage from "./Components/RegisterPage";
+import VaultPage from "./Components/VaultPage";
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -10,13 +10,14 @@ import React from 'react';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
-      </Routes>
-      <ToastContainer />
-    </BrowserRouter>
+    <VaultPage></VaultPage>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/register" element={<RegisterPage/>} />
+    //     <Route path="/login" element={<LoginPage/>} />
+    //   </Routes>
+    //   <ToastContainer />
+    // </BrowserRouter>
   );
 }
 

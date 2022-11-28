@@ -1,4 +1,3 @@
-// import styled, { css } from "styled-components";
 import React from "react";
 import { useRef } from "react";
 import { toast } from "react-toastify";
@@ -53,7 +52,7 @@ function LoginPage() {
     console.log(data);
 
     if (data.status === "success") {
-      // navigate to fault
+      // navigate to vault
       toastifyWrapper.update(toast, toastID, "Login success", "success");
     } else if (data.status === "error") {
       toastifyWrapper.update(toast, toastID, data.message, "error");
@@ -90,9 +89,9 @@ function LoginPage() {
               ref={inputMasterPassword}
             />
           </label>
-          <a href="#forgot" id="forgotLogin">
+          {/* <a href="#forgot" id="forgotLogin">
             Forgot password? Click here
-          </a>
+          </a> */}
           <div>
             <input
               type="button"
