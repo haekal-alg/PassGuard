@@ -1,8 +1,8 @@
 /* Page sementara untuk menampung berbagai modul/komponen yang belum di integrasi*/
 import React, { useRef, useContext, useEffect, useState } from "react";
-import AuthContext from './../store/auth-context';
+import AuthContext from '../store/auth-context';
 
-const hibp = require("./../libs/alertBreached");
+const hibp = require("../libs/alertBreached");
 var generator = require('generate-password');
 
 

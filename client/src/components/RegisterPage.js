@@ -31,7 +31,7 @@ function RegisterPage() {
 				inputEmail.current.focus();
 				return;
 			}
-			return;
+			//return;
 		}
 		if (inputUsername.current.value === "") {
 			alert("Please enter the username field");
