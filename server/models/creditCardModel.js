@@ -18,7 +18,12 @@ const creditCard = db.sequelize.define("creditCard", {
      },
      name: {
          type: DataTypes.STRING,
-         allowNull: false
+         allowNull: false,
+          validate: {
+               checkLength(value) {
+                    if (value.length <= 0) { throw new Error("Name cannot be empty"); }
+               },
+          },
      },
      holderName: {
          type: DataTypes.STRING,

@@ -1,24 +1,22 @@
-import "./RegisterPage.css";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
-import React from "react";
+import "./RegisterPage.css";
 
 const cipher = require("../libs/cipher");
-const toastifyWrapper = require("../libs/toastifyWrapper");
 
 function RegisterPage() {
 	const navigate = useNavigate();
-	const navigateLogin = () => {
-	  navigate("/login");
-	};
 
 	const inputEmail = useRef(null);
 	const inputUsername = useRef(null);
 	const inputMasterPassword = useRef(null);
 	const inputMasterPasswordRetype = useRef(null);
+
+  const [ isLoading, setIsLoading ] = useState(false);
 
 	async function createAccountHandler() {
 		var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -27,7 +25,6 @@ function RegisterPage() {
 			alert("Please enter an email address");
 			return;
 		}
-
 		if (inputEmail.current.value !== "") {
 			if (!inputEmail.current.value.match(validRegex)) {
 				alert("Please enter a valid email address");
@@ -36,15 +33,18 @@ function RegisterPage() {
 			}
 			return;
 		}
-
 		if (inputUsername.current.value === "") {
 			alert("Please enter the username field");
 			inputUsername.current.focus();
 			return;
 		}
-
 		if (inputMasterPassword.current.value === "") {
 			alert("Please enter a master password");
+			inputMasterPassword.current.focus();
+			return;
+		}
+		if (inputMasterPassword.current.value.length < 8) {
+			alert("Master password must be at least 8 characters long");
 			inputMasterPassword.current.focus();
 			return;
 		}
@@ -62,7 +62,8 @@ function RegisterPage() {
 			return;
 		}
 
-		let toastID = toast.loading("Creating your account...");
+		/* Construct payloads */
+		setIsLoading(true);
 		await new Promise((r) => setTimeout(r, 50)); // have to add delay. if not, somehow the notification doesnt show up
 
 		const nameField = inputUsername.current.value;
@@ -89,22 +90,20 @@ function RegisterPage() {
 
 		const data = await response.json();
 		//console.log(data);
+		setIsLoading(false);
+
+		// [TODO] Lakukan pengecekan breached password sebelum melakukan register.
+		// 		  Jika terdeteksi maka beritahu user apakah ingin melanjutkan apa tidak.  
 
 		if (data.status === "success") {
-		//   navigateLogin();
-			toastifyWrapper.update(
-				toast,
-				toastID,
-				"Your account has been sucessfully registered",
-				"success"
-			);
+			navigate("/login");
 		} else if (data.status === "error") {
-			toastifyWrapper.update(toast, toastID, data.message, "error");
-			return;
+			toast.error(data.message);
 		}
 	}
 
-	const [Masterpassword, setMPValue] = useState("");
+	const [ Masterpassword, setMPValue ] = useState("");
+  
 	return (
 		<div className="body">
 			<div className="topnavRegister">
@@ -160,14 +159,15 @@ function RegisterPage() {
 						/>
 					</label>
 
-					<a href="/login" className="forgot">Already have an account? Click here</a>
+					<a href="/login" className="forgot">Already have an account? Click here to login</a>
 
 					<div>
 						<input
 							type="button"
-							value="Create Account"
-							className="login_button"
+							value={(isLoading) ? "Creating..." : "Create Account"}
+							className={(isLoading) ? "login_button_loading" : "login_button"}
 							onClick={createAccountHandler}
+							disabled={(isLoading) ? true : false}
 						/>
 					</div>
 
