@@ -16,20 +16,23 @@ function RegisterPage() {
 	const inputMasterPassword = useRef(null);
 	const inputMasterPasswordRetype = useRef(null);
 
-	const [ isLoading, setIsLoading ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
 
 	async function createAccountHandler() {
+		var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 		if (inputEmail.current.value === "") {
-			if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.current.value)) {
+			inputEmail.current.focus();
+			alert("Please enter an email address");
+			return;
+		}
+		if (inputEmail.current.value !== "") {
+			if (!inputEmail.current.value.match(validRegex)) {
 				alert("Please enter a valid email address");
 				inputEmail.current.focus();
 				return;
 			}
-			alert("Please enter your email");
-			inputEmail.current.focus();
 			return;
 		}
-
 		if (inputUsername.current.value === "") {
 			alert("Please enter the username field");
 			inputUsername.current.focus();
@@ -100,6 +103,7 @@ function RegisterPage() {
 	}
 
 	const [ Masterpassword, setMPValue ] = useState("");
+  
 	return (
 		<div className="body">
 			<div className="topnavRegister">
@@ -155,8 +159,7 @@ function RegisterPage() {
 						/>
 					</label>
 
-					{/* [TODO] pas di textnya di klik redirect ke login page */}
-					<p className="forgot"><a href="/login">Already have an account? Click here to login</a></p>
+					<a href="/login" className="forgot">Already have an account? Click here to login</a>
 
 					<div>
 						<input

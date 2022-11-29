@@ -1,4 +1,6 @@
 import "./VaultPage.css";
+import "./Popup.css";
+import PopUp from "./Popup";
 
 function VaultPage() {
   return (
@@ -20,7 +22,8 @@ function VaultPage() {
         </div>
       </div>
       <p id="vaultItems">Vault Items</p>
-      <input type="button" value="+ Add Item" id="addItems" />
+      <PopUp></PopUp>
+      
       <div className="mode">
         <p id="all">All Items</p>
         <br />
