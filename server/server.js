@@ -3,6 +3,7 @@ const db                    = require("./database/db");
 const authController        = require('./controllers/authController');
 const dataController        = require('./controllers/dataController');
 const globalErrorHandler    = require('./controllers/errorController');
+const userController        = require('./controllers/userController');
 const bp                    = require("body-parser");
 const express               = require("express");
 const cors                  = require("cors");
@@ -22,10 +23,13 @@ app.route("/api/register").post(authController.register);
 app.route("/api/login").post(authController.login);
 
 // PROTECTED TOURS
+app.route("/api/sync").get(authController.protect, userController.sync);
+
 app.route('/api/user/(|loginInfo|secureNote|creditCard)')                                   
     .post(authController.protect, dataController.createData)      // create new one
     .patch(authController.protect, dataController.updateData)     // update existing one
     .delete(authController.protect, dataController.deleteData);   // delete
+
 
 
 app.use(globalErrorHandler);

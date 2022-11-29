@@ -18,7 +18,14 @@ const LoginInfo = db.sequelize.define("loginInfo", {
      },
      name: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          validate: {
+               checkLength(value) {
+                    if (value.length <= 0) {
+                         throw new Error("Name cannot be empty");
+                    }
+               },
+          },
      },
      username: {
           type: DataTypes.STRING,

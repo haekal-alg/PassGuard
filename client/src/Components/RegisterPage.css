@@ -22,7 +22,7 @@ body {
 
 .topnavRegister a:hover {
   background-color: orange;
-  color: white;
+  color: white
 }
 
 .topnav-rightRegister {
@@ -84,7 +84,7 @@ label[id="email"]:before {
   bottom: 0;
   width: 17px;
   height: 14.25px;
-  background: url("./Resource/email_icon_png.png");
+  background: url("./resource/email_icon_png.png");
 }
 
 label[id="master_password"]:before {
@@ -94,7 +94,7 @@ label[id="master_password"]:before {
   top: 43px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/gembok_icon.svg");
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"]:before {
@@ -104,7 +104,7 @@ label[id="retypeMaster_password"]:before {
   height: 19px;
   left: 15px;
   top: 2px;
-  background: url("./Resource/gembok_icon.svg");
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"] {
@@ -118,12 +118,12 @@ label[id="username"]:before {
   top: 43px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/human_icon.svg");
+  background: url("./resource/human_icon.svg");
 }
 
 .forgot {
   position: inherit;
-  bottom: 70px;
+  bottom: 60px;
   left: 82px;
   font-weight: 600;
   font-size: 10px;
@@ -138,9 +138,24 @@ label[id="username"]:before {
   font-size: 16px;
   background-color: #ff7d1f;
   margin: 10px 2px;
-  transition-duration: 0.4s;
+  transition-duration: 0.1s;
   cursor: pointer;
-  background-image: url("./Resource/right_arrow_icon.svg");
+  background-image: url("./resource/right_arrow_icon.svg");
+  background-repeat: no-repeat;
+  background-position: 18px 10px;
+}
+
+.login_button_loading {
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding-right: 23px;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #fdbd8f;;
+  margin: 10px 2px;
+  transition-duration: 0.1s;
+  background-image: url("./resource/right_arrow_icon.svg");
   background-repeat: no-repeat;
   background-position: 18px 10px;
 }

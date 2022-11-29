@@ -2,7 +2,7 @@ const catchAsync    = require('./../utils/catchAsync');
 const AppError      = require('./../utils/appError');
 const LoginInfo     = require("./../models/loginInfoModel");
 const secureNote    = require('./../models/secureNoteModel');
-const creditCard    = require("./../models/creditCardModel")
+const creditCard    = require("./../models/creditCardModel");
 
 /*
 1. what happens if username and password empty?

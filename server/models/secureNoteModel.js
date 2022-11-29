@@ -18,10 +18,15 @@ const secureNote = db.sequelize.define("secureNote", {
      },
      name: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          validate: {
+               checkLength(value) {
+                    if (value.length <= 0) { throw new Error("Name cannot be empty"); }
+               },
+          },
      },
      notes: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: true
      },
      }, {

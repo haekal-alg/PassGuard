@@ -87,7 +87,7 @@ label[id=emailLogin]:before {
   bottom: 0;
   width: 17px;
   height: 14.25px;
-  background: url("./Resource/email_icon_png.png");
+  background: url("./resource/email_icon_png.png");
 }
 
 label[id=passwordLogin]:before {
@@ -97,7 +97,7 @@ label[id=passwordLogin]:before {
   top: 45px;
   width: 17px;
   height: 19px;
-  background: url("./Resource/gembok_icon.svg");
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id=emailLogin] {
@@ -131,15 +131,30 @@ label[id=passwordLogin] {
   font-size: 16px;
   background-color: #FF7D1F;
   margin: 60px 2px;
-  transition-duration: 0.4s;
+  width: 150px;
   cursor: pointer;
-  background-image: url("./Resource/right_arrow_icon.svg");
+  background-image: url("./resource/right_arrow_icon.svg");
+  background-repeat: no-repeat;
+  background-position: 18px 10px;
+}
+
+.loginButtonLoading {
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding-right: 23px; 
+  display: inline-block;
+  font-size: 16px;
+  background-color: #fdbd8f;
+  margin: 60px 2px;
+  width: 150px;
+  background-image: url("./resource/right_arrow_icon.svg");
   background-repeat: no-repeat;
   background-position: 18px 10px;
 }
 
 .loginButton:hover {
-  background-color: orange;
+  background-color: #e8690f;
 }
 
 .copyrightLogin {

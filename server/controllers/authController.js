@@ -5,6 +5,7 @@ const AppError       = require('./../utils/appError');
 const Users          = require("./../models/userModel");
 const userController = require("./userController");
 const { promisify }  = require('util');
+const exp = require('constants');
 
 const signToken = id => {
     return jwt.sign(
@@ -14,12 +15,13 @@ const signToken = id => {
     );
 };
 
-const sendTokenAndVault = async (user, statusCode, res) => {
+const sendToken = async (user, statusCode, res) => {
     const token = signToken(user.userId);
+    const expirationTime = new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000);
 
     // cookie properties
     const cookieOptions = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000),
+        expires: expirationTime,
         httpOnly: true // cannot be accessed or modified in browser, prevent XSS
     };
 
@@ -30,8 +32,12 @@ const sendTokenAndVault = async (user, statusCode, res) => {
     // set the cookie (sent along wit data)
     res.cookie('jwt', token, cookieOptions);
 
-    const sendToClient = await userController.getVault(user);
-    res.status(statusCode).json(sendToClient);
+    //const sendToClient = await userController.getVault(user);
+    res.status(statusCode).json({ 
+        status: "success",
+        idToken: token,
+        expirationTime: expirationTime
+    });
 };
 
 /*
@@ -64,7 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Incorrect email or password', 401));
     }
 
-    sendTokenAndVault(user, 201, res);
+    sendToken(user, 201, res);
 });
 
 /*
@@ -102,7 +108,7 @@ exports.register = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-    // Check if token is there
+    // Check if token availabel in HTTP header
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer')) {
         var token = req.headers.authorization.split(' ')[1];
@@ -139,7 +145,7 @@ exports.protect = catchAsync(async (req, res, next) => {
         );
     }
     */
-
+    //console.log("[*] This user is logged in => " + currentUser.userId);
     // Grant access to protected routes
     req.userId = currentUser.userId;
     next(); // send user id to the next middleware
