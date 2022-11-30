@@ -66,4 +66,6 @@
 #message {
   width:400px; 
   height:90px;
+  resize: none;
+  padding: 7px;
 }

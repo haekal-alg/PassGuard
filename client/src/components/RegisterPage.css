@@ -21,8 +21,8 @@ body {
 }
 
 .topnavRegister a:hover {
-  background-color: orange;
-  color: white
+	background-color: orange;
+	color: white
 }
 
 .topnav-rightRegister {
@@ -31,7 +31,7 @@ body {
 
 .main {
 	width: 400px;
-	height: 410px;
+	height: 430px;
 	position: absolute;
 	top: 10%;
 	left: 50%;
@@ -42,7 +42,7 @@ body {
 
 .efek {
 	width: 400px;
-	height: 414px;
+	height: 440px;
 	position: absolute;
 	top: -30%;
 	left: 48%;
@@ -76,88 +76,89 @@ label {
 }
 
 label[id="email"]:before {
-  content: "";
-  position: absolute;
-  left: 15px;
-  top: 2px;
-  bottom: 0;
-  width: 17px;
-  height: 14.25px;
-  background: url("./resource/email_icon_png.png");
+	content: "";
+	position: absolute;
+	left: 15px;
+	top: 2px;
+	bottom: 0;
+	width: 17px;
+	height: 14.25px;
+	background: url("./resource/email_icon_png.png");
 }
 
 label[id="master_password"]:before {
-  content: "";
-  position: absolute;
-  right: 210px;
-  top: 43px;
-  width: 17px;
-  height: 19px;
-  background: url("./resource/gembok_icon.svg");
+	content: "";
+	position: absolute;
+	right: 224px;
+	top: 46px;
+	width: 17px;
+	height: 19px;
+	background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"]:before {
-  content: "";
-  position: absolute;
-  width: 17px;
-  height: 19px;
-  left: 15px;
-  top: 2px;
-  background: url("./resource/gembok_icon.svg");
+	content: "";
+	position: absolute;
+	width: 17px;
+	height: 19px;
+	left: 15px;
+	top: 1px;
+	background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"] {
 	bottom: 12px;
+	left: 10px;
 }
 
 label[id="username"]:before {
-  content: "";
-  position: absolute;
-  right: 210px;
-  top: 43px;
-  width: 17px;
-  height: 19px;
-  background: url("./resource/human_icon.svg");
+	content: "";
+	position: absolute;
+	right: 224px;
+	top: 46px;
+	width: 17px;
+	height: 19px;
+	background: url("./resource/human_icon.svg");
 }
 
 .forgot {
-  position: inherit;
-  bottom: 60px;
-  left: 82px;
-  font-weight: 600;
-  font-size: 10px;
-  color: black;
+	position: inherit;
+	bottom: 85px;
+	left: 75px;
+	font-weight: 600;
+	font-size: 10px;
+	color: black;
 }
 
 .login_button {
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding-right: 23px;
-  display: inline-block;
-  font-size: 16px;
-  background-color: #ff7d1f;
-  margin: 10px 2px;
-  transition-duration: 0.1s;
-  cursor: pointer;
-  background-image: url("./resource/right_arrow_icon.svg");
-  background-repeat: no-repeat;
-  background-position: 18px 10px;
+	color: white;
+	border: none;
+	border-radius: 30px;
+	padding-right: 23px;
+	display: inline-block;
+	font-size: 16px;
+	background-color: #ff7d1f;
+	margin: 10px 2px;
+	transition-duration: 0.1s;
+	cursor: pointer;
+	background-image: url("./resource/right_arrow_icon.svg");
+	background-repeat: no-repeat;
+	background-position: 18px 10px;
 }
 
 .login_button_loading {
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding-right: 23px;
-  display: inline-block;
-  font-size: 16px;
-  background-color: #fdbd8f;;
-  margin: 10px 2px;
-  transition-duration: 0.1s;
-  background-image: url("./resource/right_arrow_icon.svg");
-  background-repeat: no-repeat;
-  background-position: 18px 10px;
+	color: white;
+	border: none;
+	border-radius: 30px;
+	padding-right: 23px;
+	display: inline-block;
+	font-size: 16px;
+	background-color: #fdbd8f;;
+	margin: 10px 2px;
+	transition-duration: 0.1s;
+	background-image: url("./resource/right_arrow_icon.svg");
+	background-repeat: no-repeat;
+	background-position: 18px 10px;
 }
 
 .login_button:hover {
@@ -171,6 +172,28 @@ label[id="username"]:before {
 
 #passwordStrengthMeter {
 	position: inherit;
-	left: 80px;
+	left: 70px;
 	bottom: 15px;
+}
+
+i {
+  position: absolute;
+  top: 70%;
+  right: 20px;
+}
+
+i:hover {
+  color: #e8690f;
+  cursor: pointer;
+}
+
+.eyeRetype {
+  position: inherit;
+  top: 0%;
+  right: 38px;
+}
+
+.eyeRetype:hover {
+  color: #e8690f;
+  cursor: pointer;
 }
