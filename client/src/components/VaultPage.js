@@ -3,13 +3,14 @@ import "./VaultPage.css";
 import ModeSecureNotes from "./ModeSecureNotes";
 import ReactDOM from "react-dom/client";
 import AuthContext from '../store/auth-context';
+import { useNavigate } from "react-router-dom";
 
 function VaultPage() {
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<ModeSecureNotes />);
+    navigate("/note");
   };
   
   const logoutHandler = () => {

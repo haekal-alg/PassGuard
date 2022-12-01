@@ -83,7 +83,7 @@ function LoginPage() {
 		if (data.status === "success") {
 			authCtx.login(data.idToken, data.expirationTime);
 			//authCtx.login(data.idToken, new Date(Date.now() + 3000));
-			navigate("/test"); /* FOR TESTING ONLY. Real value is /vault */
+			navigate("/vault"); /* FOR TESTING ONLY. Real value is /vault */
 		} else if (data.status === "error") {
 			toast.error(data.message);
 		}

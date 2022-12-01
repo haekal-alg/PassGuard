@@ -3,20 +3,25 @@ import ReactDOM from "react-dom/client";
 import ModeSecureNotes from "./ModeSecureNotes";
 import ModeLogin from "./ModeLogin";
 import "./ModeCard.css";
+import { useNavigate } from "react-router-dom";
 
 function ModeCard() {
-  const root = ReactDOM.createRoot(document.getElementById("root"));
+  const navigate = useNavigate();
+  const savePopup = () => {
+    navigate("/vault");
+    alert("Item successfully added");
+  };
   const closePopup = () => {
-    root.render(<VaultPage />);
+    navigate("/vault");
   };
   const NoteHandler = () => {
-    root.render(<ModeSecureNotes />);
+    navigate("/note");
   };
   const LoginHandler = () => {
-    root.render(<ModeLogin />);
+    navigate("/loginInfo");
   };
   const CardHandler = () => {
-    root.render(<ModeCard />);
+    navigate("/card");
   };
   return (
     <div className="body">
@@ -41,7 +46,7 @@ function ModeCard() {
               </div>
             </div>
             <p>Hello World!</p>
-            <button onClick={closePopup} id="saveButton">
+            <button onClick={savePopup} id="saveButton">
               Save
             </button>
             <button onClick={closePopup} id="cancelButton">

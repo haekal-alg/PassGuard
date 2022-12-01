@@ -11,6 +11,9 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import AuthContext from './store/auth-context';
+import ModeSecureNotes from './components/ModeSecureNotes';
+import ModeCard from './components/ModeCard';
+import ModeLogin from './components/ModeLogin';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -18,12 +21,20 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/test" element={ 
-					(authCtx.isLoggedIn) ? <TestPage/> : <Navigate to='/login' />
+				<Route path="/vault" element={ 
+					(authCtx.isLoggedIn) ? <VaultPage/> : <Navigate to='/login' />
+				} />
+				<Route path="/note" element={ 
+					(authCtx.isLoggedIn) ? <ModeSecureNotes/> : <Navigate to='/login' />
+				} />
+				<Route path="/card" element={ 
+					(authCtx.isLoggedIn) ? <ModeCard/> : <Navigate to='/login' />
+				} />
+				<Route path="/loginInfo" element={ 
+					(authCtx.isLoggedIn) ? <ModeLogin/> : <Navigate to='/login' />
 				} />
 				<Route path="/register" element={<RegisterPage/>} />
 				<Route path="/login" element={<LoginPage/>} />
-				<Route path="/vault" element={<VaultPage/>} />
 				<Route path="*" element={
 					<Navigate to='/login' />
 				} />

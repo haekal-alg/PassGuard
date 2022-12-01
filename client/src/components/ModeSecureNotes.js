@@ -3,20 +3,47 @@ import ReactDOM from "react-dom/client";
 import ModeLogin from "./ModeLogin";
 import ModeCard from "./ModeCard";
 import "./ModeSecureNotes.css"
+import React, { useRef, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ModeSecureNotes() {
-  const root = ReactDOM.createRoot(document.getElementById("root"));
+  const inputNoteName = useRef(null);
+	const inputMessage = useRef(null);
+  const navigate = useNavigate();
+
+  async function savePopup() {
+    /* Send data to server */
+		// const response = await fetch("http://localhost:8080/api/secureNote", {
+		// 	method: "POST",
+		// 	body: JSON.stringify({
+		// 		name: inputNoteName,
+		// 		notes: inputMessage,
+		// 	}),
+		// 	headers: { "Content-type": "application/json" },
+		// });
+    // const data = await response.json();
+    // if (data.status === "success") {
+		// 	authCtx.login(data.idToken, data.expirationTime);
+		// 	//authCtx.login(data.idToken, new Date(Date.now() + 3000));
+		// 	navigate("/vault"); /* FOR TESTING ONLY. Real value is /vault */
+		// } else if (data.status === "error") {
+		// 	toast.error(data.message);
+		// }
+
+    alert("Item successfully added");
+    navigate("/vault");
+  };
   const closePopup = () => {
-    root.render(<VaultPage />);
+    navigate("/vault");
   };
   const NoteHandler = () => {
-    root.render(<ModeSecureNotes />);
+    navigate("/note");
   };
   const LoginHandler = () => {
-    root.render(<ModeLogin />);
+    navigate("/loginInfo");
   };
   const CardHandler = () => {
-    root.render(<ModeCard />);
+    navigate("/card");
   };
   return (
     <div className="body">
@@ -41,12 +68,12 @@ function ModeSecureNotes() {
               </div>
             </div>
             <p>Name</p>
-            <input type="text" id="noteName" />
+            <input type="text" id="noteName" ref={inputNoteName} />
             <br />
             <p>Notes</p>
-            <textarea name="message" id="message"></textarea>
+            <textarea name="message" id="message" ref={inputMessage}></textarea>
             <br />
-            <button onClick={closePopup} id="saveButton">
+            <button onClick={savePopup} id="saveButton">
               Save
             </button>
             <button onClick={closePopup} id="cancelButton">
