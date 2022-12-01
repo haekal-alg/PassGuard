@@ -20,42 +20,31 @@ body {
   padding: 0px 16px;
 }
 
+.topnav-rightVault {
+	float: right;
+}
+
+.logout {
+  background-color: #f27500;
+  color: black;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  padding-right: 10px;
+  padding-top: 15px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: white;
+}
+
 .app {
   font-weight: 700;
   font-size: 20px;
   float: left;
   padding-left: 10px;
 }
-
-/* .menuVault {
-  font-weight: 400;
-  font-size: 15px;
-  padding: 0px 15px;
-}
-
-.topnavVault a:hover {
-  background-color: orange;
-  color: white;
-}
-
-.topnavVault a.active {
-  font-weight: 700;
-}
-
-#vault {
-  position: fixed;
-  left: 42%;
-} */
-
-/* #generate {
-  position: fixed;
-  left: 47%;
-}
-
-#report {
-  position: fixed;
-  left: 54%;
-} */
 
 #vaultItems {
   position: absolute;
@@ -164,4 +153,116 @@ body {
   font-weight: 700;
   font-size: 10px;
   padding: 5px 0px;
+}
+
+.mainPopup {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  z-index: 10;
+}
+.popup {
+  height: 460px;
+  width: 40%;
+  background-color: white;
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  border-radius: 10px;
+  filter: blur(0px);
+}
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 24px;
+}
+
+#addItems {
+  position: absolute;
+  top: 88px;
+  right: 13%;
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  background: #f27500;
+  border-radius: 10px;
+  padding: 6px 25px;
+  border-color: #f27500;
+}
+
+#saveButton {
+  margin-left: 30%;
+}
+
+#cancelButton {
+  margin-left: 20px;
+}
+
+#cancelButton, #saveButton {
+  background-color: #F27500;
+  border-color: #F27500;
+  border-radius: 10px;
+  padding: 7px;
+  margin-top: 14px;
+}
+
+.popup-body {
+  margin-left: 10%;
+  font-size: 18px;
+}
+
+#type_border, #noteName, #message {
+  border-radius: 10px;
+}
+
+#message {
+  width:400px; 
+  height:90px;
+  resize: none;
+  padding: 7px;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }

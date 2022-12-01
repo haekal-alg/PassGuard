@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
-//import HomePage from "./Components/HomePage";
+//import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-//import VaultPage from "./Components/VaultPage";
+import VaultPage from "./components/VaultPage";
 import TestPage from "./components/TestPage";
-
 
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,6 +23,7 @@ function App() {
 				} />
 				<Route path="/register" element={<RegisterPage/>} />
 				<Route path="/login" element={<LoginPage/>} />
+				<Route path="/vault" element={<VaultPage/>} />
 				<Route path="*" element={
 					<Navigate to='/login' />
 				} />

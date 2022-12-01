@@ -89,7 +89,7 @@ label[id="email"]:before {
 label[id="master_password"]:before {
 	content: "";
 	position: absolute;
-	right: 224px;
+	right: 210px;
 	top: 46px;
 	width: 17px;
 	height: 19px;
@@ -114,7 +114,7 @@ label[id="retypeMaster_password"] {
 label[id="username"]:before {
 	content: "";
 	position: absolute;
-	right: 224px;
+	right: 210px;
 	top: 46px;
 	width: 17px;
 	height: 19px;
@@ -123,8 +123,8 @@ label[id="username"]:before {
 
 .forgot {
 	position: inherit;
-	bottom: 85px;
-	left: 75px;
+	bottom: 102px;
+	left: 80px;
 	font-weight: 600;
 	font-size: 10px;
 	color: black;
@@ -168,11 +168,12 @@ label[id="username"]:before {
 .copyright {
 	font-size: x-small;
 	font-weight: 600;
+	margin-top: 40px;
 }
 
 #passwordStrengthMeter {
 	position: inherit;
-	left: 70px;
+	left: 80px;
 	bottom: 15px;
 }
 

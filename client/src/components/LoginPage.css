@@ -91,7 +91,7 @@ label[id=emailLogin]:before {
 label[id=passwordLogin]:before {
   content: "";
   position: absolute;
-  right:224px;
+  right: 210px;
   top: 45px;
   width: 17px;
   height: 19px;

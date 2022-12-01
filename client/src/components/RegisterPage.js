@@ -89,7 +89,7 @@ function RegisterPage() {
 			iv: Buffer.from(iv).toString("base64"),
 		};
 		// [TODO] simpan url dalam config file atau variabel
-		const response = await fetch("http://localhost:5432/api/register", {
+		const response = await fetch("http://localhost:8080/api/register", {
 			method: "POST",
 			body: JSON.stringify(registerData), // you have to use json.stringify otherwise it throws cors error? wat?!?
 			headers: { "Content-type": "application/json" },

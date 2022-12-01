@@ -67,7 +67,7 @@ function LoginPage() {
 		);
 
 		/* Send data to server */
-		const response = await fetch("http://localhost:5432/api/login", {
+		const response = await fetch("http://localhost:8080/api/login", {
 			method: "POST",
 			body: JSON.stringify({
 				email: emailField,
