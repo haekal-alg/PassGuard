@@ -1,0 +1,19 @@
+body.notfound {
+    background-color: #fcfefc;
+    width: 100%; 
+    height: 100vh;
+    font-family: 'Avenir', sans-serif;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
+.center_h1 {
+    margin-left: auto;
+    margin-right: 250px;
+    width: 40%;
+}

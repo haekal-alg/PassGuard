@@ -73,32 +73,37 @@ function RegisterPage() {
 		const [iv, masterPasswordHash, protectedSymmetricKey] =
 			cipher.encryptPasswordAndHashKey(emailField, masterPassField);
 
-		// send data to server at /api/register
-		const registerData = {
-			name: nameField,
-			email: emailField,
-			password: Buffer.from(masterPasswordHash).toString("base64"),
-			key: Buffer.from(protectedSymmetricKey).toString("base64"),
-			iv: Buffer.from(iv).toString("base64"),
-		};
-		// [TODO] simpan url dalam config file atau variabel
-		const response = await fetch("http://localhost:8080/api/register", {
-			method: "POST",
-			body: JSON.stringify(registerData), // you have to use json.stringify otherwise it throws cors error? wat?!?
-			headers: { "Content-type": "application/json" },
-		});
+		/* Send data to server */
+		let response;
+		try {
+			response = await fetch(`${process.env.REACT_APP_API_URL}/api/register`, {
+				method: "POST",
+				body: JSON.stringify({
+					name: nameField,
+					email: emailField,
+					password: Buffer.from(masterPasswordHash).toString("base64"),
+					key: Buffer.from(protectedSymmetricKey).toString("base64"),
+					iv: Buffer.from(iv).toString("base64"),
+				}),
+				headers: { "Content-type": "application/json" },
+			});
+		} catch (err) {
+			toast.error("The server seems to be down. Please try again.");
+			setIsLoading(false);
+			return;
+		}
 
 		const data = await response.json();
-		//console.log(data);
 		setIsLoading(false);
-
-		// [TODO] Lakukan pengecekan breached password sebelum melakukan register.
-		// 		  Jika terdeteksi maka beritahu user apakah ingin melanjutkan apa tidak.  
 
 		if (data.status === "success") {
 			navigate("/login");
+			toast.success(data.message);
 		} else if (data.status === "error") {
 			toast.error(data.message);
+		} else {
+			// if server is up but unknown error message is sent
+			toast.error("The server seems to be down. Please try again.");
 		}
 	}
 

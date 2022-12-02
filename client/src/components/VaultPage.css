@@ -100,7 +100,7 @@ body {
   font-size: 16px;
   margin: 10px 10px;
   transition-duration: 0.4s;
-  background-image: url(./Resource/all.svg);
+  background-image: url(./resource/all.svg);
   font-family: "Poppins", sans-serif;
   background-repeat: no-repeat;
   background-position: 15px 5px;
@@ -112,7 +112,7 @@ body {
   font-size: 16px;
   margin: 10px 10px;
   transition-duration: 0.4s;
-  background-image: url(./Resource/login.svg);
+  background-image: url(./resource/login.svg);
   font-family: "Poppins", sans-serif;
   background-repeat: no-repeat;
   background-position: 15px 5px;
@@ -124,7 +124,7 @@ body {
   font-size: 16px;
   margin: 10px 10px;
   transition-duration: 0.4s;
-  background-image: url(./Resource/cards.svg);
+  background-image: url(./resource/cards.svg);
   font-family: "Poppins", sans-serif;
   background-repeat: no-repeat;
   background-position: 15px 5px;
@@ -136,7 +136,7 @@ body {
   font-size: 16px;
   margin: 10px 10px;
   transition-duration: 0.4s;
-  background-image: url(./Resource/notes.svg);
+  background-image: url(./resource/notes.svg);
   font-family: "Poppins", sans-serif;
   background-repeat: no-repeat;
   background-position: 15px 5px;

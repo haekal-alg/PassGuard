@@ -9,6 +9,7 @@
 		"aes256": "^1.1.0",
 		"crypto-js": "^4.1.1",
 		"csprng": "^0.1.2",
+		"dotenv": "^16.0.3",
 		"formik": "^2.2.9",
 		"generate-password": "^1.7.0",
 		"react": "^18.0.0",
@@ -26,7 +27,6 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
-	"proxy": "http://localhost:8080",
 	"eslintConfig": {
 		"extends": [
 			"react-app",

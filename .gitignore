@@ -1,7 +1,15 @@
-notes.txt
-/server/node_modules/
+# client
 /client/node_modules/
-/server/.env
-/server/.vscode/
 /client/.vscode/
-.eslintcache
+/client/.eslintcache
+/client/.env*
+/client/build/
+
+# server
+/server/node_modules/
+/server/.vscode/
+/server/**/*.env
+/server/public/
+
+.vscode/
+

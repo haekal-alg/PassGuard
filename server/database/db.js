@@ -1,16 +1,19 @@
-require("dotenv").config();
-
+const config = require('./../config');
 const Sequelize = require("sequelize");
+
 const sequelize = new Sequelize(
-    process.env.DB_DATABASE,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+    config.DB_DATABASE,
+    config.DB_USER,
+    config.DB_PASSWORD,
     {
         logging: false,
-        host: process.env.DB_HOST,
+        host: config.DB_HOST,
         returning: true,
-        dialect: 'postgres'
-    }
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: (config.NODE_ENV == 'development') ? false : true
+        }
+    },
 );
 
 const db = {};
