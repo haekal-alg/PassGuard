@@ -15,6 +15,7 @@ import ModeSecureNotes from './components/ModeSecureNotes';
 import ModeCard from './components/ModeCard';
 import ModeLogin from './components/ModeLogin';
 
+
 function App() {
 	const authCtx = useContext(AuthContext);
 
@@ -24,13 +25,13 @@ function App() {
 				<Route path="/vault" element={ 
 					(authCtx.isLoggedIn) ? <VaultPage/> : <Navigate to='/login' />
 				} />
-				<Route path="/note" element={ 
+				<Route path="/vault/note" element={ 
 					(authCtx.isLoggedIn) ? <ModeSecureNotes/> : <Navigate to='/login' />
 				} />
-				<Route path="/card" element={ 
+				<Route path="/vault/card" element={ 
 					(authCtx.isLoggedIn) ? <ModeCard/> : <Navigate to='/login' />
 				} />
-				<Route path="/loginInfo" element={ 
+				<Route path="/vault/loginInfo" element={ 
 					(authCtx.isLoggedIn) ? <ModeLogin/> : <Navigate to='/login' />
 				} />
 				<Route path="/register" element={<RegisterPage/>} />
