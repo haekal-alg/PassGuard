@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function ModeLogin() {
   const navigate = useNavigate();
-  
+
   const savePopup = () => {
     navigate("/vault");
     alert("Item successfully added");
@@ -39,14 +39,32 @@ function ModeLogin() {
             <div className="dropdownLogin">
               <button className="dropbtnLogin">Item Type</button>
               <div className="dropdown-contentLogin">
-                <button onClick={NoteHandler} className="ModeNote">Secure Note</button>
+                <button onClick={NoteHandler} className="ModeNote">
+                  Secure Note
+                </button>
                 <br />
-                <button onClick={LoginHandler} className="ModeLogin">Login</button>
+                <button onClick={LoginHandler} className="ModeLogin">
+                  Login
+                </button>
                 <br />
-                <button onClick={CardHandler} className="ModeCard">Card</button>
+                <button onClick={CardHandler} className="ModeCard">
+                  Card
+                </button>
               </div>
             </div>
-            <p>TES123</p>
+            <div>
+              <p>Name</p>
+              <input type="text"></input>
+            </div>
+            <div>
+              <p>Email</p>
+              <input type="email"></input>
+            </div>
+            <div>
+              <p>Password</p>
+              <input type="password"></input>
+            </div>
+
             <button onClick={savePopup} id="saveButton">
               Save
             </button>

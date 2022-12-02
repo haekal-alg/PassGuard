@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 body {
-  background-color: #FFF5E9;
+  background-color: #fff5e9;
   position: relative;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .topnavNote {
@@ -29,7 +29,7 @@ body {
 
 .bot_nav_vault {
   overflow: hidden;
-  background-color: #8A8A8A;
+  background-color: #8a8a8a;
   position: fixed;
   text-align: center;
   bottom: 0;
@@ -49,7 +49,7 @@ body {
 }
 .popup {
   height: 460px;
-  width: 40%;
+  width: 10%;
   background-color: white;
   position: absolute;
   top: 25%;
@@ -68,39 +68,40 @@ body {
 }
 
 #saveButton {
-  margin-left: 30%;
+  margin-left: 1%;
 }
 
 #cancelButton {
-  margin-left: 20px;
+  margin-left: 1%;
 }
 
-#cancelButton, #saveButton {
-  background-color: #F27500;
-  border-color: #F27500;
+#cancelButton,
+#saveButton {
+  background-color: #f27500;
+  border-color: #f27500;
   border-radius: 10px;
-  padding: 7px;
-  margin-top: 14px;
 }
 
 .popup-body {
-  margin-left: 10%;
+  margin-left: 20px;
   font-size: 18px;
 }
 
-#type_border, #noteName, #message {
+#type_border,
+#noteName,
+#message {
   border-radius: 10px;
 }
 
 #message {
-  width:400px; 
-  height:90px;
+  width: 400px;
+  height: 90px;
   resize: none;
   padding: 7px;
 }
 
 .dropbtnLogin {
-  background-color: #F27500;
+  background-color: #f27500;
   color: white;
   padding: 10px 40px;
   font-size: 16px;
@@ -119,7 +120,7 @@ body {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 10px;
 }
@@ -131,7 +132,9 @@ body {
   display: block;
 }
 
-.dropdown-contentLogin button:hover {background-color: #f1f1f1}
+.dropdown-contentLogin button:hover {
+  background-color: #f1f1f1;
+}
 
 .dropdownLogin:hover .dropdown-contentLogin {
   display: block;
@@ -141,7 +144,9 @@ body {
   background-color: orange;
 }
 
-.ModeNote, .ModeLogin, .ModeCard {
+.ModeNote,
+.ModeLogin,
+.ModeCard {
   border-radius: 10px;
   background-color: white;
   cursor: pointer;

@@ -38,14 +38,41 @@ function ModeCard() {
             <div className="dropdownCard">
               <button className="dropbtnCard">Item Type</button>
               <div className="dropdown-contentCard">
-                <button onClick={NoteHandler} className="ModeNote">Secure Note</button>
+                <button onClick={NoteHandler} className="ModeNote">
+                  Secure Note
+                </button>
                 <br />
-                <button onClick={LoginHandler} className="ModeLogin">Login</button>
+                <button onClick={LoginHandler} className="ModeLogin">
+                  Login
+                </button>
                 <br />
-                <button onClick={CardHandler} className="ModeCard">Card</button>
+                <button onClick={CardHandler} className="ModeCard">
+                  Card
+                </button>
               </div>
             </div>
-            <p>Hello World!</p>
+            <div className="firstRow">
+              <p>Name</p>
+              <p>Cardholder name</p>
+            </div>
+            <div className="secondRow">
+              <input type="text"></input>
+              <input type="text"></input>
+            </div>
+            <div className="thirdRow">
+              <p>Card Number</p>
+              <p>Brand</p>
+            </div>
+            <div className="fourthRow">
+              <input type="text"></input>
+              <input type="text"></input>
+            </div>
+            <div className="fifthRow">
+              <p>Expiration Date</p>
+            </div>
+            <div className="sixthRow">
+              <input type="text"></input>
+            </div>
             <button onClick={savePopup} id="saveButton">
               Save
             </button>
