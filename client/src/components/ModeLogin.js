@@ -25,13 +25,13 @@ function ModeLogin() {
     navigate("/vault");
   };
   const NoteHandler = () => {
-    navigate("/note");
+    navigate("/vault/note");
   };
   const LoginHandler = () => {
-    navigate("/loginInfo");
+    navigate("/vault/loginInfo");
   };
   const CardHandler = () => {
-    navigate("/card");
+    navigate("/vault/card");
   };
 
   const check = async () => {

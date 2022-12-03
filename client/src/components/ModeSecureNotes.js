@@ -2,48 +2,58 @@ import VaultPage from "./VaultPage";
 import ReactDOM from "react-dom/client";
 import ModeLogin from "./ModeLogin";
 import ModeCard from "./ModeCard";
-import "./ModeSecureNotes.css"
+import "./ModeSecureNotes.css";
 import React, { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../store/auth-context";
 
 function ModeSecureNotes() {
+  const authCtx = useContext(AuthContext);
   const inputNoteName = useRef(null);
-	const inputMessage = useRef(null);
+  const inputMessage = useRef(null);
   const navigate = useNavigate();
+  const [isVaultChanged, setIsVaultChanged] = useState(false);
 
   async function savePopup() {
-    /* Send data to server */
-		// const response = await fetch("http://localhost:8080/api/secureNote", {
-		// 	method: "POST",
-		// 	body: JSON.stringify({
-		// 		name: inputNoteName,
-		// 		notes: inputMessage,
-		// 	}),
-		// 	headers: { "Content-type": "application/json" },
-		// });
-    // const data = await response.json();
-    // if (data.status === "success") {
-		// 	authCtx.login(data.idToken, data.expirationTime);
-		// 	//authCtx.login(data.idToken, new Date(Date.now() + 3000));
-		// 	navigate("/vault"); /* FOR TESTING ONLY. Real value is /vault */
-		// } else if (data.status === "error") {
-		// 	toast.error(data.message);
-		// }
+    const response = await fetch("http://localhost:8080/api/user/secureNote", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: authCtx.login,
+        name: inputNoteName.current.value,
+        notes: inputMessage.current.value,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + authCtx.token,
+      },
+    });
 
-    alert("Item successfully added");
-    navigate("/vault");
-  };
+    const data = await response.json();
+    console.log(data);
+
+    if (!(data.status && data.status === "error")) setIsVaultChanged(true); // has to exist for every handler that changes the vault
+    
+    if (inputMessage !== "") {
+      alert("Item successfully added");
+      navigate("/vault");
+    }
+    else {
+      alert("Pleas fill the required field");
+      navigate("/vault/note");
+    }
+  }
+
   const closePopup = () => {
     navigate("/vault");
   };
   const NoteHandler = () => {
-    navigate("/note");
+    navigate("/vault/note");
   };
   const LoginHandler = () => {
-    navigate("/loginInfo");
+    navigate("/vault/loginInfo");
   };
   const CardHandler = () => {
-    navigate("/card");
+    navigate("/vault/card");
   };
   return (
     <div className="body">
@@ -60,11 +70,17 @@ function ModeSecureNotes() {
             <div className="dropdownNote">
               <button className="dropbtnNote">Item Type</button>
               <div className="dropdown-contentNote">
-                <button onClick={NoteHandler} className="ModeNote">Secure Note</button>
+                <button onClick={NoteHandler} className="ModeNote">
+                  Secure Note
+                </button>
                 <br />
-                <button onClick={LoginHandler} className="ModeLogin">Login</button>
+                <button onClick={LoginHandler} className="ModeLogin">
+                  Login
+                </button>
                 <br />
-                <button onClick={CardHandler} className="ModeCard">Card</button>
+                <button onClick={CardHandler} className="ModeCard">
+                  Card
+                </button>
               </div>
             </div>
             <p>Name</p>
