@@ -1,7 +1,7 @@
-import VaultPage from "./VaultPage";
+// import VaultPage from "./VaultPage";
 import ReactDOM from "react-dom/client";
-import ModeSecureNotes from "./ModeSecureNotes";
-import ModeLogin from "./ModeLogin";
+// import ModeSecureNotes from "./ModeSecureNotes";
+// import ModeLogin from "./ModeLogin";
 import "./ModeCard.css";
 import { useNavigate } from "react-router-dom";
 
@@ -24,36 +24,36 @@ function ModeCard() {
     navigate("/card");
   };
   return (
-    <div className="body">
-      <div className="topnavVault">
-        <a href="#App" className="app">
+    <div className="bodyCd">
+      <div className="topnavNote">
+        <a href="#App" className="appCd">
           PassGuard
         </a>
       </div>
-      <div className="mainPopup">
-        <div className="popup">
-          <div className="popup-header">Add Item</div>
-          <div className="popup-body">
+      <div className="mainPopupCd">
+        <div className="popupCd">
+          <div className="popup-headerCd">Add Item</div>
+          <div className="popup-bodyCd">
             <p>Type of Item</p>
-            <div className="dropdownCard">
-              <button className="dropbtnCard">Item Type</button>
-              <div className="dropdown-contentCard">
-                <button onClick={NoteHandler} className="ModeNote">
+            <div className="dropdownCardCd">
+              <button className="dropbtnCardCd">Item Type</button>
+              <div className="dropdown-contentCardCd">
+                <button onClick={NoteHandler} className="ModeNoteCd">
                   Secure Note
                 </button>
                 <br />
-                <button onClick={LoginHandler} className="ModeLogin">
+                <button onClick={LoginHandler} className="ModeLoginCd">
                   Login
                 </button>
                 <br />
-                <button onClick={CardHandler} className="ModeCard">
+                <button onClick={CardHandler} className="ModeCardCd">
                   Card
                 </button>
               </div>
             </div>
             <div className="firstRow">
               <p>Name</p>
-              <p>Cardholder name</p>
+              <p className="CardNumbertxt">Cardholder name</p>
             </div>
             <div className="secondRow">
               <input type="text"></input>
@@ -73,16 +73,16 @@ function ModeCard() {
             <div className="sixthRow">
               <input type="text"></input>
             </div>
-            <button onClick={savePopup} id="saveButton">
+            <button onClick={savePopup} id="saveButtonCd">
               Save
             </button>
-            <button onClick={closePopup} id="cancelButton">
+            <button onClick={closePopup} id="cancelButtonCd">
               Cancel
             </button>
           </div>
         </div>
       </div>
-      <div className="bot_nav_vault">@PassGuard, inc</div>
+      <div className="bot_nav_vaultCd">@PassGuard, inc</div>
     </div>
   );
 }

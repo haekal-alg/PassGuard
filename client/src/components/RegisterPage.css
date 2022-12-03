@@ -1,180 +1,181 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 body {
-	background-color: #FFF5E9;
-	position: relative;
-	font-family: 'Inter', sans-serif;
+  background-color: #fff5e9;
+  position: relative;
+  font-family: "Inter", sans-serif;
 }
 
 .topnavRegister {
-	overflow: hidden;
-	background-color: #cd6b10;
+  overflow: hidden;
+  background-color: #f95900;
 }
 
 .topnavRegister a {
-	float: left;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 10px 20px;
-	text-decoration: none;
-	font-size: 18px;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .topnavRegister a:hover {
-	background-color: orange;
-	color: white
+  background-color: orange;
+  color: white;
 }
 
 .topnav-rightRegister {
-	float: right;
+  float: right;
 }
 
 .main {
-	width: 400px;
-	height: 430px;
-	position: absolute;
-	top: 10%;
-	left: 50%;
-	margin: 110px 0 0 -200px;
-	background: #cd6b10;
-	border-radius: 35px;
+  width: 400px;
+  height: 430px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  margin: 110px 0 0 -200px;
+  background: #f95900;
+  border-radius: 35px;
 }
 
 .efek {
-	width: 400px;
-	height: 440px;
-	position: absolute;
-	top: -30%;
-	left: 48%;
-	margin: 110px 0 0 -200px;
-	background: white;
-	border-radius: 35px;
-	z-index: 2;
-	text-align: center;
+  width: 400px;
+  height: 440px;
+  position: absolute;
+  top: -30%;
+  left: 48%;
+  margin: 110px 0 0 -200px;
+  background: white;
+  border-radius: 35px;
+  z-index: 2;
+  text-align: center;
 }
 
 h1 {
-	font-weight: 700;
-	font-size: 32px;
-	line-height: 44px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
 }
 
 p {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 input {
-	padding: 10px 45px;
-	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-	background-color: #edf2f7;
-	margin-bottom: 10px;
-	border: none;
+  padding: 10px 45px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #edf2f7;
+  margin-bottom: 10px;
+  border: none;
 }
 
 label {
-	position: relative;
+  position: relative;
 }
 
 label[id="email"]:before {
-	content: "";
-	position: absolute;
-	left: 15px;
-	top: 2px;
-	bottom: 0;
-	width: 17px;
-	height: 14.25px;
-	background: url("./resource/email_icon_png.png");
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 2px;
+  bottom: 0;
+  width: 17px;
+  height: 14.25px;
+  background: url("./resource/email_icon_png.png");
 }
 
 label[id="master_password"]:before {
-	content: "";
-	position: absolute;
-	right: 210px;
-	top: 46px;
-	width: 17px;
-	height: 19px;
-	background: url("./resource/gembok_icon.svg");
+  content: "";
+  position: absolute;
+  right: 210px;
+  top: 46px;
+  width: 17px;
+  height: 19px;
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"]:before {
-	content: "";
-	position: absolute;
-	width: 17px;
-	height: 19px;
-	left: 15px;
-	top: 1px;
-	background: url("./resource/gembok_icon.svg");
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 19px;
+  left: 15px;
+  top: 1px;
+  background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"] {
-	bottom: 12px;
-	left: 10px;
+  bottom: 12px;
+  left: 10px;
 }
 
 label[id="username"]:before {
-	content: "";
-	position: absolute;
-	right: 210px;
-	top: 46px;
-	width: 17px;
-	height: 19px;
-	background: url("./resource/human_icon.svg");
+  content: "";
+  position: absolute;
+  right: 210px;
+  top: 46px;
+  width: 17px;
+  height: 19px;
+  background: url("./resource/human_icon.svg");
 }
 
 .forgot {
-	position: inherit;
-	bottom: 102px;
-	left: 80px;
-	font-weight: 600;
-	font-size: 10px;
-	color: black;
+  position: inherit;
+  bottom: 102px;
+  left: 80px;
+  font-weight: 600;
+  font-size: 10px;
+  color: black;
 }
 
 .login_button {
-	color: white;
-	border: none;
-	border-radius: 30px;
-	padding-right: 23px;
-	display: inline-block;
-	font-size: 16px;
-	background-color: #ff7d1f;
-	margin: 10px 2px;
-	transition-duration: 0.1s;
-	cursor: pointer;
-	background-image: url("./resource/right_arrow_icon.svg");
-	background-repeat: no-repeat;
-	background-position: 18px 10px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding-right: 23px;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #ff7d1f;
+  margin: 10px 2px;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  background-image: url("./resource/right_arrow_icon.svg");
+  background-repeat: no-repeat;
+  background-position: 18px 10px;
 }
 
 .login_button_loading {
-	color: white;
-	border: none;
-	border-radius: 30px;
-	padding-right: 23px;
-	display: inline-block;
-	font-size: 16px;
-	background-color: #fdbd8f;;
-	margin: 10px 2px;
-	transition-duration: 0.1s;
-	background-image: url("./resource/right_arrow_icon.svg");
-	background-repeat: no-repeat;
-	background-position: 18px 10px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding-right: 23px;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #fdbd8f;
+  margin: 10px 2px;
+  transition-duration: 0.1s;
+  background-image: url("./resource/right_arrow_icon.svg");
+  background-repeat: no-repeat;
+  background-position: 18px 10px;
 }
 
 .login_button:hover {
-	background-color: orange;
+  background-color: orange;
 }
 
 .copyright {
-	font-size: x-small;
-	font-weight: 600;
-	margin-top: 40px;
+  font-size: x-small;
+  font-weight: 600;
+  margin-top: 40px;
 }
 
 #passwordStrengthMeter {
-	position: inherit;
-	left: 80px;
-	bottom: 15px;
+  position: inherit;
+  left: 80px;
+  bottom: 15px;
 }
 
 i {

@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 body {
-  background-color: #FFF5E9;
+  background-color: #fff5e9;
   position: relative;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .topnavVault {
   overflow: hidden;
-  background-color: #f27500;
+  background-color: #f95900;
   text-align: center;
 }
 
@@ -21,11 +21,11 @@ body {
 }
 
 .topnav-rightVault {
-	float: right;
+  float: right;
 }
 
 .logout {
-  background-color: #f27500;
+  background-color: #f95900;
   color: black;
   border: none;
   font-weight: 700;
@@ -62,13 +62,13 @@ body {
   font-size: 12px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  background: #F27500;
+  background: #f95900;
   border-radius: 10px;
   padding: 6px 25px;
 }
 
 #addItems:hover {
-  background-color: orange;
+  background-color: #f95900;
   color: white;
 }
 
@@ -78,13 +78,13 @@ body {
   left: 17%;
   width: 240px;
   height: 180px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   border: 1px solid black;
 }
 
 #all {
-  padding-left: 38px; 
+  padding-left: 38px;
   display: inline-block;
   font-size: 16px;
   margin: 10px 10px;
@@ -96,7 +96,7 @@ body {
 }
 
 #loginItems {
-  padding-left: 38px; 
+  padding-left: 38px;
   display: inline-block;
   font-size: 16px;
   margin: 10px 10px;
@@ -108,7 +108,7 @@ body {
 }
 
 #cardItems {
-  padding-left: 38px; 
+  padding-left: 38px;
   display: inline-block;
   font-size: 16px;
   margin: 10px 10px;
@@ -120,7 +120,7 @@ body {
 }
 
 #secureNotesItems {
-  padding-left: 38px; 
+  padding-left: 38px;
   display: inline-block;
   font-size: 16px;
   margin: 10px 10px;
@@ -137,14 +137,14 @@ body {
   left: 40%;
   width: 600px;
   height: 320px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 10px;
   border: 1px solid black;
 }
 
 .bot_nav_vault {
   overflow: hidden;
-  background-color: #8A8A8A;
+  background-color: #8a8a8a;
   position: fixed;
   text-align: center;
   bottom: 0;
@@ -203,9 +203,10 @@ body {
   margin-left: 20px;
 }
 
-#cancelButton, #saveButton {
-  background-color: #F27500;
-  border-color: #F27500;
+#cancelButton,
+#saveButton {
+  background-color: #f95900;
+  border-color: #f95900;
   border-radius: 10px;
   padding: 7px;
   margin-top: 14px;
@@ -216,19 +217,21 @@ body {
   font-size: 18px;
 }
 
-#type_border, #noteName, #message {
+#type_border,
+#noteName,
+#message {
   border-radius: 10px;
 }
 
 #message {
-  width:400px; 
-  height:90px;
+  width: 400px;
+  height: 90px;
   resize: none;
   padding: 7px;
 }
 
 .dropbtn {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -246,7 +249,7 @@ body {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -257,7 +260,9 @@ body {
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
   display: block;

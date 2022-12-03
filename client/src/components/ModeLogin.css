@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
-body {
+.bodyLg {
   background-color: #fff5e9;
   position: relative;
   font-family: "Inter", sans-serif;
 }
 
-.topnavNote {
+.topnavLogin {
   overflow: hidden;
   background-color: #f27500;
   text-align: center;
 }
 
-.topnavNote a {
+.topnavLogin a {
   color: black;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
@@ -20,14 +20,14 @@ body {
   padding: 0px 16px;
 }
 
-.appNote {
+.appNoteLg {
   font-weight: 700;
   font-size: 20px;
   float: left;
   padding-left: 10px;
 }
 
-.bot_nav_vault {
+.bot_nav_vaultLg {
   overflow: hidden;
   background-color: #8a8a8a;
   position: fixed;
@@ -40,16 +40,17 @@ body {
   padding: 5px 0px;
 }
 
-.mainPopup {
+.mainPopupLg {
   height: 100%;
   width: 100%;
+  right: 100px;
   position: absolute;
   top: 70px;
   z-index: 10;
 }
-.popup {
-  height: 460px;
-  width: 10%;
+.popupLg {
+  height: 480px;
+  width: 500px;
   background-color: white;
   position: absolute;
   top: 25%;
@@ -57,47 +58,34 @@ body {
   border-radius: 10px;
   filter: blur(0px);
 }
-.popup-header {
+.popup-headerLg {
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid black;
   width: 50%;
   margin-top: 5%;
-  margin-left: 10%;
+  margin-left: 4%;
   font-size: 24px;
 }
 
-#saveButton {
+#saveButtonLg {
+  margin-left: 40%;
+}
+
+#cancelButtonLg {
   margin-left: 1%;
 }
 
-#cancelButton {
-  margin-left: 1%;
-}
-
-#cancelButton,
-#saveButton {
+#cancelButtonLg,
+#saveButtonLg {
   background-color: #f27500;
   border-color: #f27500;
   border-radius: 10px;
 }
 
-.popup-body {
+.popup-bodyLg {
   margin-left: 20px;
   font-size: 18px;
-}
-
-#type_border,
-#noteName,
-#message {
-  border-radius: 10px;
-}
-
-#message {
-  width: 400px;
-  height: 90px;
-  resize: none;
-  padding: 7px;
 }
 
 .dropbtnLogin {
@@ -144,12 +132,33 @@ body {
   background-color: orange;
 }
 
-.ModeNote,
-.ModeLogin,
-.ModeCard {
+.ModeNoteLg,
+.ModeLoginLg,
+.ModeCardLg {
   border-radius: 10px;
   background-color: white;
   cursor: pointer;
   border-color: white;
   padding: 0px 10px;
+}
+
+.thirdRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+#generateButton,
+#checkButton {
+  background-color: #f27500;
+  border-color: #f27500;
+  border-radius: 10px;
+  margin-left: 40px;
+}
+.eye {
+  right: 20px;
+}
+
+.eye:hover {
+  color: #e8690f;
+  cursor: pointer;
 }

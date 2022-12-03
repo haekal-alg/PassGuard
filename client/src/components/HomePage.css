@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 body {
-  background: #FFF5E9;
+  background: #fff5e9;
   position: relative;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .topnav_home {
   overflow: hidden;
-  background: linear-gradient(135deg, #FDD819 0%, #E80505 100%);
+  background: linear-gradient(135deg, #fdd819 0%, #e80505 100%);
 }
 
 .topnav_home a {
@@ -54,7 +54,7 @@ body {
   height: 325px;
   margin-top: 400px;
   margin-left: 20px;
-  background: linear-gradient(135deg, #FDD819 0%, #E80505 100%);
+  background: linear-gradient(135deg, #fdd819 0%, #e80505 100%);
   border-radius: 50px 50px 100px 50px;
   z-index: -1;
 }
@@ -99,7 +99,7 @@ body {
 
 .bot_nav_home {
   overflow: hidden;
-  background-color: #8A8A8A;
+  background-color: #8a8a8a;
   position: fixed;
   text-align: center;
   bottom: 0;
