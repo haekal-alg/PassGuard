@@ -67,17 +67,24 @@ function LoginPage() {
 		);
 
 		/* Send data to server */
-		const response = await fetch("http://localhost:8080/api/login", {
-			method: "POST",
-			body: JSON.stringify({
-				email: emailField,
-				password: Buffer.from(masterPasswordHash).toString("base64"),
-			}),
-			headers: { "Content-type": "application/json" },
-		});
+		// caught error when the server is down. Prevent infinite loading in button
+		let response;
+		try {
+			response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+				method: "POST",
+				body: JSON.stringify({
+					email: emailField,
+					password: Buffer.from(masterPasswordHash).toString("base64"),
+				}),
+				headers: { "Content-type": "application/json" },
+			});
+		} catch (err) {
+			toast.error("The server seems to be down. Please try again.");
+			setIsLoading(false);
+			return;
+		}
 
 		const data = await response.json(); // consists of only token
-		//console.log(data);
 		setIsLoading(false);
 
 		if (data.status === "success") {
@@ -86,6 +93,8 @@ function LoginPage() {
 			navigate("/vault"); /* FOR TESTING ONLY. Real value is /vault */
 		} else if (data.status === "error") {
 			toast.error(data.message);
+		} else {
+			toast.error("The server seems to be down. Please try again.");
 		}
 	}
 

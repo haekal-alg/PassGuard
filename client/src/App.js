@@ -7,6 +7,7 @@ import RegisterPage from "./components/RegisterPage";
 import VaultPage from "./components/VaultPage";
 import TestPage from "./components/TestPage";
 import HomePage from "./components/HomePage";
+import NotFoundPage from './components/others/NotFoundPage';
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -45,9 +46,10 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/test" element={<TestPage />} />
-        <Route path="*" element={<Navigate to="/login" />} />
+				<Route path="/"			element={<NotFoundPage redirect={"construction"}/>} />
+				<Route path="*" 		element={<NotFoundPage redirect={"not found"}/>} />
+        {/* <Route path="/" element={<HomePage />} /> */}
+        {/* <Route path="/test" element={<TestPage />} /> */}
       </Routes>
       <ToastContainer
         transition={Zoom}

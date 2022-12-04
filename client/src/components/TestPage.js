@@ -20,7 +20,7 @@ function TestPage() {
     useEffect(() => {
         /* [TODO] add validation. if error occured do not sync */
         async function syncVault() {
-            const response = await fetch("http://localhost:8080/api/sync", {
+            const response = await fetch(`${process.env.process.env.REACT_APP_API_URL}/api/sync`, {
                 headers: { "Authorization": 'Bearer ' + authCtx.token }
             });
             let data = await response.json();
@@ -65,7 +65,7 @@ function TestPage() {
     }
 
     async function createHandler() {
-        const response = await fetch("http://localhost:8080/api/user/loginInfo", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/loginInfo`, {
 			method: "POST",
 			body: JSON.stringify({
                 userId: authCtx.login,  

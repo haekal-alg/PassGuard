@@ -1,23 +1,22 @@
+const config         = require('./../config');
 const jwt            = require('jsonwebtoken');
-const cipher         = require('./../../client/src/libs/cipher');
+const cipher         = require('./../libs/cipher');
 const catchAsync     = require('./../utils/catchAsync');
 const AppError       = require('./../utils/appError');
 const Users          = require("./../models/userModel");
-const userController = require("./userController");
 const { promisify }  = require('util');
-const exp = require('constants');
 
 const signToken = id => {
     return jwt.sign(
         { id }, 
-        process.env.JWT_SECRET, 
-        { expiresIn: process.env.JWT_EXPIRES_IN }
+        config.JWT_SECRET, 
+        { expiresIn: config.JWT_EXPIRES_IN }
     );
 };
 
 const sendToken = async (user, statusCode, res) => {
     const token = signToken(user.userId);
-    const expirationTime = new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000);
+    const expirationTime = new Date(Date.now() + config.JWT_COOKIE_EXPIRES_IN * 60 * 1000);
 
     // cookie properties
     const cookieOptions = {
@@ -26,7 +25,7 @@ const sendToken = async (user, statusCode, res) => {
     };
 
     // only send cookie in an https connection
-    if (process.env.NODE_ENV === 'production')
+    if (config.NODE_ENV === 'production')
         cookieOptions.secure = true;
 
     // set the cookie (sent along wit data)
@@ -121,7 +120,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     }
 
     // Verification token
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    const decoded = await promisify(jwt.verify)(token, config.JWT_SECRET);
     if (!decoded) {
         return next(
         new AppError('The user belonging to this token does no longer exist.', 401)
@@ -145,6 +144,7 @@ exports.protect = catchAsync(async (req, res, next) => {
         );
     }
     */
+   
     //console.log("[*] This user is logged in => " + currentUser.userId);
     // Grant access to protected routes
     req.userId = currentUser.userId;
