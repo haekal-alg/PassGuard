@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+.bodyCd {
+  background-color: #fff5e9;
+  position: relative;
+  font-family: "Inter", sans-serif;
+}
+
+.topnavNoteCd {
+  overflow: hidden;
+  background-color: #f27500;
+  text-align: center;
+}
+
+.topnavNoteCd a {
+  color: black;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  line-height: 50px;
+  padding: 0px 16px;
+}
+
+.appNoteCd {
+  font-weight: 700;
+  font-size: 20px;
+  float: left;
+  padding-left: 10px;
+}
+
+.bot_nav_vaultCd {
+  overflow: hidden;
+  background-color: #8a8a8a;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 5px 0px;
+}
+
+.mainPopupCd {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  z-index: 10;
+}
+.popupCd {
+  height: 500px;
+  width: 1000px;
+  background-color: white;
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  border-radius: 10px;
+  filter: blur(0px);
+}
+.popup-headerCd {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 24px;
+}
+.popup-bodyCd {
+  margin-left: 10%;
+}
+#saveButtonCd {
+  margin-left: 40%;
+}
+
+#cancelButtonCd {
+  margin-left: 20px;
+}
+
+#cancelButtonCd,
+#saveButtonCd {
+  background-color: #f27500;
+  border-color: #f27500;
+  border-radius: 10px;
+  padding: 7px;
+  margin-top: 14px;
+}
+
+.dropbtnCardCd {
+  background-color: #f27500;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dropdownCardCd {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-contentCardCd {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-contentCardCd a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-contentCardCd button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdownCardCd:hover .dropdown-contentCardCd {
+  display: block;
+}
+
+.dropdownCardCd:hover .dropbtnCardCd {
+  background-color: orange;
+}
+
+.ModeNoteCd,
+.ModeLoginCd,
+.ModeCardCd {
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  border-color: white;
+  padding: 0px 10px;
+}
+.CardNumbertxt {
+  left: 100px;
+}
+.firstRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.secondRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.thirdRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.fourthRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.fifthRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.sixthRow {
+  margin-right: 300px;
+  display: flex;
+  justify-content: space-between;
+}

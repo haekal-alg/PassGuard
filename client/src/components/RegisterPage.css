@@ -1,78 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 body {
-	background-color: #FFF5E9;
-	position: relative;
-	font-family: 'Inter', sans-serif;
+  background-color: #fff5e9;
+  position: relative;
+  font-family: "Inter", sans-serif;
 }
 
 .topnavRegister {
-	overflow: hidden;
-	background-color: #cd6b10;
+  overflow: hidden;
+  background-color: #f95900;
 }
 
 .topnavRegister a {
-	float: left;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 10px 20px;
-	text-decoration: none;
-	font-size: 18px;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .topnavRegister a:hover {
   background-color: orange;
-  color: white
+  color: white;
 }
 
 .topnav-rightRegister {
-	float: right;
+  float: right;
 }
 
 .main {
-	width: 400px;
-	height: 410px;
-	position: absolute;
-	top: 10%;
-	left: 50%;
-	margin: 110px 0 0 -200px;
-	background: #cd6b10;
-	border-radius: 35px;
+  width: 400px;
+  height: 430px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  margin: 110px 0 0 -200px;
+  background: #f95900;
+  border-radius: 35px;
 }
 
 .efek {
-	width: 400px;
-	height: 414px;
-	position: absolute;
-	top: -30%;
-	left: 48%;
-	margin: 110px 0 0 -200px;
-	background: white;
-	border-radius: 35px;
-	z-index: 2;
-	text-align: center;
+  width: 400px;
+  height: 440px;
+  position: absolute;
+  top: -30%;
+  left: 48%;
+  margin: 110px 0 0 -200px;
+  background: white;
+  border-radius: 35px;
+  z-index: 2;
+  text-align: center;
 }
 
 h1 {
-	font-weight: 700;
-	font-size: 32px;
-	line-height: 44px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
 }
 
 p {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 input {
-	padding: 10px 45px;
-	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-	background-color: #edf2f7;
-	margin-bottom: 10px;
-	border: none;
+  padding: 10px 45px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #edf2f7;
+  margin-bottom: 10px;
+  border: none;
 }
 
 label {
-	position: relative;
+  position: relative;
 }
 
 label[id="email"]:before {
@@ -90,7 +91,7 @@ label[id="master_password"]:before {
   content: "";
   position: absolute;
   right: 210px;
-  top: 43px;
+  top: 46px;
   width: 17px;
   height: 19px;
   background: url("./resource/gembok_icon.svg");
@@ -102,19 +103,20 @@ label[id="retypeMaster_password"]:before {
   width: 17px;
   height: 19px;
   left: 15px;
-  top: 2px;
+  top: 1px;
   background: url("./resource/gembok_icon.svg");
 }
 
 label[id="retypeMaster_password"] {
-	bottom: 12px;
+  bottom: 12px;
+  left: 10px;
 }
 
 label[id="username"]:before {
   content: "";
   position: absolute;
   right: 210px;
-  top: 43px;
+  top: 46px;
   width: 17px;
   height: 19px;
   background: url("./resource/human_icon.svg");
@@ -122,8 +124,8 @@ label[id="username"]:before {
 
 .forgot {
   position: inherit;
-  bottom: 60px;
-  left: 82px;
+  bottom: 102px;
+  left: 80px;
   font-weight: 600;
   font-size: 10px;
   color: black;
@@ -152,7 +154,7 @@ label[id="username"]:before {
   padding-right: 23px;
   display: inline-block;
   font-size: 16px;
-  background-color: #fdbd8f;;
+  background-color: #fdbd8f;
   margin: 10px 2px;
   transition-duration: 0.1s;
   background-image: url("./resource/right_arrow_icon.svg");
@@ -161,16 +163,39 @@ label[id="username"]:before {
 }
 
 .login_button:hover {
-	background-color: orange;
+  background-color: orange;
 }
 
 .copyright {
-	font-size: x-small;
-	font-weight: 600;
+  font-size: x-small;
+  font-weight: 600;
+  margin-top: 40px;
 }
 
 #passwordStrengthMeter {
-	position: inherit;
-	left: 80px;
-	bottom: 15px;
+  position: inherit;
+  left: 80px;
+  bottom: 15px;
+}
+
+i {
+  position: absolute;
+  top: 70%;
+  right: 20px;
+}
+
+i:hover {
+  color: #e8690f;
+  cursor: pointer;
+}
+
+.eyeRetype {
+  position: inherit;
+  top: 0%;
+  right: 38px;
+}
+
+.eyeRetype:hover {
+  color: #e8690f;
+  cursor: pointer;
 }

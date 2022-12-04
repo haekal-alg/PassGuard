@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import "./RegisterPage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye} from "@fortawesome/free-solid-svg-icons";
 
+const eye = < FontAwesomeIcon icon={faEye} display={false} />;
 const cipher = require("../libs/cipher");
 
 function RegisterPage() {
@@ -15,8 +17,13 @@ function RegisterPage() {
 	const inputUsername = useRef(null);
 	const inputMasterPassword = useRef(null);
 	const inputMasterPasswordRetype = useRef(null);
+  	const [ isLoading, setIsLoading ] = useState(false);
 
-  const [ isLoading, setIsLoading ] = useState(false);
+	// Hide & show password
+	const [passwordShown, setPasswordShown] = useState(false);
+	const togglePasswordVisiblity = () => {
+	  setPasswordShown(passwordShown ? false : true);
+	};
 
 	async function createAccountHandler() {
 		var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -112,8 +119,7 @@ function RegisterPage() {
 	return (
 		<div className="body">
 			<div className="topnavRegister">
-				<a href="#Logo">Logo</a>
-				<a href="#PassGuard">PassGuard</a>
+				<a href="/">PassGuard</a>
 				<div className="topnav-rightRegister">
 					<a href="/">Home</a>
 					<a href="/login">Login</a>
@@ -145,10 +151,12 @@ function RegisterPage() {
 						<input
 							value={Masterpassword}
 							ref={inputMasterPassword}
-							type="password"
+							name="password"
+							type={passwordShown ? "text" : "password"}
 							placeholder="Master Password"
 							onChange={(e) => setMPValue(e.target.value)}
 						/>
+						<i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
 						<label id="passwordStrengthMeter">
 							<PasswordStrengthMeter password={Masterpassword} />
 						</label>
@@ -159,13 +167,13 @@ function RegisterPage() {
 					<label id="retypeMaster_password">
 						<input
 							ref={inputMasterPasswordRetype}
-							type="password"
-							placeholder="Re-Type Master Password"
+							name="password"
+							type={passwordShown ? "text" : "password"}
+							placeholder="Master Password"
 						/>
+						<i  className="eyeRetype" onClick={togglePasswordVisiblity}>{eye}</i>{" "}
 					</label>
-
 					<a href="/login" className="forgot">Already have an account? Click here to login</a>
-
 					<div>
 						<input
 							type="button"
@@ -175,7 +183,6 @@ function RegisterPage() {
 							disabled={(isLoading) ? true : false}
 						/>
 					</div>
-
 					<br />
 					<p className="copyright">@PassGuard, inc</p>
 				</div>

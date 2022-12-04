@@ -30,22 +30,22 @@ const Dropdown = ({ placeHolder, options }) => {
 
   const getDisplay = () => {
     if (selectedValue) {
-        return selectedValue.label
+      return selectedValue.label;
     }
     return placeHolder;
   };
 
   const onItemClick = (option) => {
     setSelectedValue(option);
-  }
+  };
 
   const isSelected = (option) => {
     if (!selectedValue) {
-        return false;
+      return false;
     }
 
     return selectedValue.value === option.value;
-  }
+  };
 
   return (
     <div className="dropdown-container">
@@ -53,7 +53,11 @@ const Dropdown = ({ placeHolder, options }) => {
         {showmenu && (
           <div className="dropdown-menu">
             {options.map((option) => (
-              <div onClick={() => onItemClick(option)} key={option.value} className={'dropdown-item ${isSelected(option) && "selected"}'}>
+              <div
+                onClick={() => onItemClick(option)}
+                key={option.value}
+                className={'dropdown-item ${isSelected(option) && "selected"}'}
+              >
                 {option.label}
               </div>
             ))}
