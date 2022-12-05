@@ -1,5 +1,5 @@
-import React, { useRef, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../store/auth-context";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,9 +11,18 @@ const eye = < FontAwesomeIcon icon={faEye} display={false} />;
 const cipher = require("../libs/cipher");
 
 function LoginPage() {
+	const navigate = useNavigate();
+	const location = useLocation()
+	useEffect(() => {
+		const queryParams = new URLSearchParams(location.search)
+		if (queryParams.get("email_verified") === 'true') {
+			navigate("/login", { replace: true });
+			toast.success("Email is verified");
+		}
+	});
+		 
 	const inputEmail = useRef(null);
 	const inputMasterPassword = useRef(null);
-	const navigate = useNavigate();
 
 	const authCtx = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +88,7 @@ function LoginPage() {
 				headers: { "Content-type": "application/json" },
 			});
 		} catch (err) {
-			toast.error("The server seems to be down. Please try again.");
+			toast.error("The server is not responding. Please try again.");
 			setIsLoading(false);
 			return;
 		}
