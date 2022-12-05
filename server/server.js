@@ -28,6 +28,7 @@ app.get("/api/test", (req, res) => {
     res.send("hello from backend!");
 });
 app.route("/api/register").post(authController.register);
+app.route("/api/verification/:token").get(authController.verify);
 app.route("/api/login").post(authController.login);
 
 // PROTECTED TOURS
@@ -48,10 +49,10 @@ app.use(globalErrorHandler);
 
 // authenticate and sync to the database
 // also make new table if does not already exist
-db.sequelize.sync(
-    ).then(() => {
-        console.log(`[${config.NODE_ENV.toUpperCase()}] Connected and synced to ${config.DB_DATABASE} DB`);
-    }).catch((err) => {
+db.sequelize.sync({ force: true })
+    .then(() => {
+        console.log(`[${config.NODE_ENV.toUpperCase()}] Connected and synced to ${config.DB_DATABASE} DB`); })
+    .catch((err) => {
         console.log("[-] Unable to connect to database: " + err.message);
 });
 

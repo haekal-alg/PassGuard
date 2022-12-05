@@ -16,6 +16,11 @@ const Users = db.sequelize.define("users", {
           unique: true,
           allowNull: false
      },
+     emailVerified: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
+          allowNull: false,
+     }, 
      masterPassword: {
           type: DataTypes.TEXT,
           allowNull: false

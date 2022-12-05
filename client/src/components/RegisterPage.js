@@ -95,7 +95,7 @@ function RegisterPage() {
 				headers: { "Content-type": "application/json" },
 			});
 		} catch (err) {
-			toast.error("The server seems to be down. Please try again.");
+			toast.error("The server is not responding. Please try again.");
 			setIsLoading(false);
 			return;
 		}
@@ -105,7 +105,10 @@ function RegisterPage() {
 
 		if (data.status === "success") {
 			navigate("/login");
-			toast.success(data.message);
+			toast.success(
+				<div><strong>{data.message}</strong><br/>Please check your inbox folder and/or spam folder to confirm your email</div>, 
+				{ autoClose: 6500 })
+			;
 		} else if (data.status === "error") {
 			toast.error(data.message);
 		} else {
