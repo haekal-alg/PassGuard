@@ -23,8 +23,19 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 function VaultPage() {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  
   const newNoteName = useRef(null);
 	const newNoteMessage = useRef(null);
+
+  const newLoginName = useRef(null);
+  const newUsername = useRef(null);
+  const newPassword = useRef(null);
+
+  const newCardName = useRef(null);
+  const newCardNumber = useRef(null);
+  const newHolderName = useRef(null);
+  const newBrand = useRef(null);
+  const newExpirationDate = useRef(null);
 
   const handleClickOpen = () => {
     navigate("/vault/note");
@@ -58,6 +69,85 @@ function VaultPage() {
 
   console.log(authCtx.vault);
 
+  // Mengedit Item Vault
+  const [openLogin, setOpenLogin] = useState(false);
+  const closeModalLogin = () => setOpenLogin(false);
+  async function savePopupLogin(loginInfoId) {
+    // send data to server to update data
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/user/loginInfo?loginInfoId=${loginInfoId}&name=${newLoginName.current.value}&username=${newUsername.current.value}&password=${newPassword.current.value}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + authCtx.token,
+        },
+      }
+    );
+
+    const data = await response.json();
+    if (!(data.status && data.status === "error")) setIsVaultChanged(true);
+
+    if (newLoginName !== "" && newUsername !== "" && newPassword !== "") {
+      alert("Item successfully changed");
+    } else {
+      alert("Please fill the Note Message");
+    }
+    setOpenLogin(false);
+  }
+
+  const [openNote, setOpenNote] = useState(false);
+  const closeModalNote = () => setOpenNote(false);
+  async function savePopupNote(secureNoteId) {
+    // send data to server to update data
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/user/secureNote?secureNoteId=${secureNoteId}&name=${newNoteName.current.value}&notes=${newNoteMessage.current.value}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + authCtx.token,
+        },
+      }
+    );
+
+    const data = await response.json();
+    if (!(data.status && data.status === "error")) setIsVaultChanged(true);
+
+    if (newNoteMessage !== "") {
+      alert("Item successfully changed");
+    } else {
+      alert("Please fill the Note Message");
+    }
+    setOpenNote(false);
+  }
+
+  const [openCard, setOpenCard] = useState(false);
+  const closeModalCard = () => setOpenCard(false);
+  async function savePopupCard(creditCardId) {
+    // send data to server to update data
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/user/creditCard?creditCardId=${creditCardId}&name=${newCardName.current.value}&holderName=${newHolderName.current.value}&cardNumber=${newCardNumber.current.value}&brand=${newBrand.current.value}&expirationDate=${newExpirationDate.current.value}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + authCtx.token,
+        },
+      }
+    );
+
+    const data = await response.json();
+    if (!(data.status && data.status === "error")) setIsVaultChanged(true);
+
+    if (newCardName !== "" && newCardNumber !== "" && newBrand !== "" && newHolderName !== "" && newExpirationDate !== "") {
+      alert("Item successfully changed");
+    } else {
+      alert("Please fill the Note Message");
+    }
+    setOpenCard(false);
+  }
+  
   // Menampilkan Item Vault
   function displayLogin(item) {
     console.log(item.name);
@@ -83,32 +173,6 @@ function VaultPage() {
     );
   }
 
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  async function savePopup(secureNoteId) {
-    // send data to server to update data
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/user/secureNote?secureNoteId=${secureNoteId}&name=${newNoteName.current.value}&notes=${newNoteMessage.current.value}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + authCtx.token,
-        },
-      }
-    );
-
-    const data = await response.json();
-    if (!(data.status && data.status === "error")) setIsVaultChanged(true);
-
-    if (newNoteMessage !== "") {
-      alert("Item successfully changed");
-    } else {
-      alert("Please fill the Note Message");
-    }
-    setOpen(false);
-  }
-
   function displayNote(item) {
     console.log(item.name);
     return (
@@ -130,13 +194,13 @@ function VaultPage() {
         </ListItemAvatar>
         {/* <ListItemText><button onClick={item(editNote)}>{item.name}</button></ListItemText> */}
         <ListItemText>
-          <button id="trigger" onClick={() => setOpen((o) => !o)}>
+          <button id="trigger" onClick={() => setOpenNote((o) => !o)}>
             {item.name}
           </button>
           <Popup
-            open={open}
+            open={openNote}
             closeOnDocumentClick
-            onClose={closeModal}
+            onClose={closeModalNote}
             position="right center"
           >
             <div className="editNote">
@@ -146,10 +210,10 @@ function VaultPage() {
               <p>Notes</p>
               <textarea name="message" id="message" defaultValue={item.notes} ref={newNoteMessage} />
               <br />
-              <button onClick={() => savePopup(item.secureNoteId)} id="saveButton">
+              <button onClick={() => savePopupNote(item.secureNoteId)} id="saveButton">
                 Edit
               </button>
-              <button onClick={closeModal} id="cancelButton">
+              <button onClick={closeModalNote} id="cancelButton">
                 Cancel
               </button>
             </div>
@@ -278,7 +342,7 @@ function VaultPage() {
               <List>
                 {authCtx.vault.loginData.map(displayLogin)}
                 {authCtx.vault.noteData.map(displayNote)}
-                {/* {authCtx.vault.cardData.map(displayCard)} */}
+                {authCtx.vault.creditData.map(displayCard)}
               </List>
             </Grid>
           </div>
