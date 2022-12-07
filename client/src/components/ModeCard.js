@@ -19,7 +19,7 @@ function ModeCard() {
   const [isVaultChanged, setIsVaultChanged] = useState(false);
 
   async function savePopup() {
-    const response = await fetch("http://localhost:8080/api/user/loginInfo", {
+    const response = await fetch("http://localhost:8080/api/user/creditCard", {
       method: "POST",
       body: JSON.stringify({
         userId: authCtx.login,
