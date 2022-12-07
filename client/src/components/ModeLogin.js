@@ -4,23 +4,51 @@ import ModeSecureNotes from "./ModeSecureNotes";
 import ModeCard from "./ModeCard";
 import "./ModeLogin.css";
 import { useNavigate } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "../store/auth-context";
 
 const eye = <FontAwesomeIcon icon={faEye} display={false} />;
 const hibp = require("../libs/alertBreached");
 var generator = require("generate-password");
 
 function ModeLogin() {
+  const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const nameRef = useRef(null);
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const savePopup = () => {
-    navigate("/vault");
-    alert("Item successfully added");
-  };
+  const inputLoginName = useRef(null);
+  const inputLoginEmail = useRef(null);
+  const inputLoginPassword = useRef(null);
+  const [isVaultChanged, setIsVaultChanged] = useState(false);
+
+  async function savePopup() {
+    const response = await fetch("http://localhost:8080/api/user/loginInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: authCtx.login,
+        name: inputLoginName.current.value,
+        username: inputLoginEmail.current.value,
+        password: inputLoginPassword.current.value,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + authCtx.token,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!(data.status && data.status === "error")) setIsVaultChanged(true); // has to exist for every handler that changes the vault
+
+    if (inputLoginName !== "") {
+      alert("Item successfully added");
+      navigate("/vault");
+    } else {
+      alert("Pleas fill the required field");
+      navigate("/vault/login");
+    }
+  }
+
   const closePopup = () => {
     navigate("/vault");
   };
@@ -35,7 +63,7 @@ function ModeLogin() {
   };
 
   const check = async () => {
-    const text = passwordRef.current.value;
+    const text = inputLoginPassword.current.value;
 
     if (text === "") {
       alert("Please fill the password field");
@@ -53,7 +81,7 @@ function ModeLogin() {
       uppercase: true,
       excludeSimilarCharacters: true,
     });
-    passwordRef.current.value = password;
+    inputLoginPassword.current.value = password;
   }
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
@@ -89,16 +117,17 @@ function ModeLogin() {
             </div>
             <div>
               <p>Name</p>
-              <input type="text"></input>
+              <input type="text" id="loginName" ref={inputLoginName}></input>
             </div>
             <div>
               <p>Email</p>
-              <input type="email"></input>
+              <input type="email" id="loginEmail" ref={inputLoginEmail}></input>
             </div>
             <p>Password</p>
             <div className="thirdRow">
               <input
-                ref={passwordRef}
+                id="loginPassword"
+                ref={inputLoginPassword}
                 type={passwordShown ? "text" : "password"}
               ></input>
 
