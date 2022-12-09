@@ -183,13 +183,6 @@ function VaultPage() {
   }
 
   function displayNote(item) {
-    console.log(Buffer.from(item.name, "base64").toString("utf8"));
-    console.log(item.name);
-
-    const buff = Buffer.from("aGkgcmVhZGVycw==", "base64");
-    const str = buff.toString("utf8");
-    console.log(str); // hi readers
-
     return (
       <ListItem
         secondaryAction={
@@ -391,25 +384,25 @@ function VaultPage() {
     if (!(data.status && data.status === "error")) setIsVaultChanged(true); // has to exist for every handler that changes the vault
   }
 
-  let filters = "all";
-  function VaultDisplay({ filters }) {
-    switch (filters) {
-      case "login":
-        return <>{authCtx.vault.loginData.map(displayLogin)}</>;
-      case "note":
-        return <>{authCtx.vault.noteData.map(displayNote)}</>;
-      case "card":
-        return <>{authCtx.vault.creditData.map(displayCard)}</>;
-      default:
-        return (
-          <>
-            {authCtx.vault.loginData.map(displayLogin)}
-            {authCtx.vault.noteData.map(displayNote)}
-            {authCtx.vault.creditData.map(displayCard)}
-          </>
-        );
-    }
-  }
+  // let filters = "all";
+  // function VaultDisplay({ filters }) {
+  //   switch (filters) {
+  //     case "login":
+  //       return <>{authCtx.vault.loginData.map(displayLogin)}</>;
+  //     case "note":
+  //       return <>{authCtx.vault.noteData.map(displayNote)}</>;
+  //     case "card":
+  //       return <>{authCtx.vault.creditData.map(displayCard)}</>;
+  //     default:
+  //       return (
+  //         <>
+  //           {authCtx.vault.loginData.map(displayLogin)}
+  //           {authCtx.vault.noteData.map(displayNote)}
+  //           {authCtx.vault.creditData.map(displayCard)}
+  //         </>
+  //       );
+  //   }
+  // }
 
   // yang akan ditampilkan di browser
   return (
@@ -447,7 +440,11 @@ function VaultPage() {
           </div>
           <div className="detail">
             <Grid item xs={12} md={6}>
-              <List>{  VaultDisplay({filters})  }</List>
+              <List>
+                {authCtx.vault.loginData.map(displayLogin)}
+                {authCtx.vault.noteData.map(displayNote)}
+                {authCtx.vault.creditData.map(displayCard)}
+              </List>
             </Grid>
           </div>
           <div className="bot_nav_vault">@PassGuard, inc</div>

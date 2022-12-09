@@ -29,17 +29,17 @@ function App() {
           }
         />
         <Route
-          path="/note"
+          path="/vault/note"
           element={
             authCtx.isLoggedIn ? <ModeSecureNotes /> : <Navigate to="/login" />
           }
         />
         <Route
-          path="/card"
+          path="/vault/card"
           element={authCtx.isLoggedIn ? <ModeCard /> : <Navigate to="/login" />}
         />
         <Route
-          path="/loginInfo"
+          path="/vault/loginInfo"
           element={
             authCtx.isLoggedIn ? <ModeLogin /> : <Navigate to="/login" />
           }

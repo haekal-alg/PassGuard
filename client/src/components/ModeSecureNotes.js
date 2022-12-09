@@ -6,6 +6,7 @@ import "./ModeSecureNotes.css";
 import React, { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
+const cipher = require("../libs/cipher");
 
 function ModeSecureNotes() {
   const authCtx = useContext(AuthContext);
@@ -15,12 +16,51 @@ function ModeSecureNotes() {
   const [isVaultChanged, setIsVaultChanged] = useState(false);
 
   async function savePopup() {
-    const response = await fetch("http://localhost:8080/api/user/secureNote", {
+    const noteNameField = inputNoteName.current.value;
+    const noteMessageField = inputMessage.current.value;
+
+    // Encrypt Secure Note
+    const ivNoteMessage = cipher.generateIV();
+    const noteMessageHash = cipher.hashDataWithSalt(noteMessageField, ivNoteMessage);
+
+    const ivNoteName = cipher.generateIV();
+    const noteNameHash = cipher.hashDataWithSalt(noteNameField, ivNoteName);
+
+    // Encrypt Login Info
+    // const ivLoginName = cipher.generateIV();
+    // const loginNameHash = cipher.hashDataWithSalt(loginNameField, ivLoginName);
+
+    // const ivLoginUsername = cipher.generateIV();
+    // const loginUsernameHash = cipher.hashDataWithSalt(loginUsernameField, ivLoginUsername);
+
+    // const ivLoginPassword = cipher.generateIV();
+    // const loginPasswordHash = cipher.hashDataWithSalt(loginPasswordField, ivLoginPassword);
+
+    // Encrypt Credit Card
+    // const ivCardName = cipher.generateIV();
+    // const cardNameHash = cipher.hashDataWithSalt(cardNameField, ivCardName);
+
+    // const ivCardHolderName = cipher.generateIV();
+    // const cardHolderNameHash = cipher.hashDataWithSalt(holderNameField, ivCardHolderName);
+
+    // const ivCardNumber = cipher.generateIV();
+    // const cardNumberHash = cipher.hashDataWithSalt(cardNumberField, ivCardNumber);
+
+    // const ivCardBrand = cipher.generateIV();
+    // const cardBrandHash = cipher.hashDataWithSalt(cardBrandField, ivCardBrand);
+
+    // const ivCardExpired = cipher.generateIV();
+    // const cardExpiredHash = cipher.hashDataWithSalt(cardExpiredField, ivCardExpired);
+
+    // send data to server
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/secureNote`, {
       method: "POST",
       body: JSON.stringify({
         userId: authCtx.login,
         name: inputNoteName.current.value,
-        notes: inputMessage.current.value,
+        notes: inputNoteName.current.value,
+        // name: Buffer.from(noteNameHash).toString("base64"),
+        // notes: Buffer.from(noteMessageHash).toString("base64"),
       }),
       headers: {
         "Content-type": "application/json",
@@ -38,7 +78,7 @@ function ModeSecureNotes() {
       navigate("/vault");
     }
     else {
-      alert("Pleas fill the required field");
+      alert("Please fill the required field");
       navigate("/vault/note");
     }
   }

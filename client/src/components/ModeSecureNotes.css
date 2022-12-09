@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
-body {
-  background-color: #fff5e9;
-  position: relative;
-  font-family: "Inter", sans-serif;
-}
-
 .topnavNote {
   overflow: hidden;
   background-color: #f27500;
@@ -47,6 +41,7 @@ body {
   top: 70px;
   z-index: 10;
 }
+
 .popup {
   height: 460px;
   width: 40%;
@@ -55,7 +50,6 @@ body {
   top: 25%;
   right: 25%;
   border-radius: 10px;
-  filter: blur(0px);
 }
 .popup-header {
   display: flex;
@@ -95,11 +89,16 @@ body {
   border-radius: 10px;
 }
 
+#noteName {
+  background-color: #f1f1f1;
+}
+
 #message {
   width: 400px;
   height: 90px;
   resize: none;
   padding: 7px;
+  background-color: #f1f1f1;
 }
 
 .dropbtnNote {
