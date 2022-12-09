@@ -45,8 +45,8 @@ function App() {
           }
         />
         <Route path="/register" element={<RegisterPage />} />
-        {/* <Route path="/login" element={<LoginPage />} />
-        <Route path="/card" element={<ModeCard />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/card" element={<ModeCard />} />  */}
         <Route path="/" element={<NotFoundPage redirect={"construction"} />} />
         <Route path="*" element={<NotFoundPage redirect={"not found"} />} />
         {/* <Route path="/" element={<HomePage />} /> */}

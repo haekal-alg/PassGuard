@@ -20,12 +20,15 @@ import { orange } from "@mui/material/colors";
 import NoteIcon from "@mui/icons-material/Note";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
 function VaultPage() {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const newNoteName = useRef(null);
-	const newNoteMessage = useRef(null);
+  const newNoteMessage = useRef(null);
 
   const newLoginName = useRef(null);
   const newUsername = useRef(null);
@@ -140,14 +143,20 @@ function VaultPage() {
     const data = await response.json();
     if (!(data.status && data.status === "error")) setIsVaultChanged(true);
 
-    if (newCardName !== "" && newCardNumber !== "" && newBrand !== "" && newHolderName !== "" && newExpirationDate !== "") {
+    if (
+      newCardName !== "" &&
+      newCardNumber !== "" &&
+      newBrand !== "" &&
+      newHolderName !== "" &&
+      newExpirationDate !== ""
+    ) {
       alert("Item successfully changed");
     } else {
       alert("Please fill the Note Message");
     }
     setOpenCard(false);
   }
-  
+
   // Menampilkan Item Vault
   function displayLogin(item) {
     console.log(item.name);
@@ -168,13 +177,19 @@ function VaultPage() {
             <LoginIcon sx={{ color: orange[800] }} />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText onClick={() => editLogin(item)}>{item.name}</ListItemText>
+        <ListItemText>{item.name}</ListItemText>
       </ListItem>
     );
   }
 
   function displayNote(item) {
+    console.log(Buffer.from(item.name, "base64").toString("utf8"));
     console.log(item.name);
+
+    const buff = Buffer.from("aGkgcmVhZGVycw==", "base64");
+    const str = buff.toString("utf8");
+    console.log(str); // hi readers
+
     return (
       <ListItem
         secondaryAction={
@@ -205,12 +220,25 @@ function VaultPage() {
           >
             <div className="editNote">
               <p>Name</p>
-              <input type="text" id="noteName" defaultValue={item.name} ref={newNoteName} />
+              <input
+                type="text"
+                id="noteName"
+                defaultValue={item.name}
+                ref={newNoteName}
+              />
               <br />
               <p>Notes</p>
-              <textarea name="message" id="message" defaultValue={item.notes} ref={newNoteMessage} />
+              <textarea
+                name="message"
+                id="message"
+                defaultValue={item.notes}
+                ref={newNoteMessage}
+              />
               <br />
-              <button onClick={() => savePopupNote(item.secureNoteId)} id="saveButton">
+              <button
+                onClick={() => savePopupNote(item.secureNoteId)}
+                id="saveButton"
+              >
                 Edit
               </button>
               <button onClick={closeModalNote} id="cancelButton">
@@ -242,7 +270,74 @@ function VaultPage() {
             <CreditCardIcon sx={{ color: orange[800] }} />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText onClick={() => editCard(item)}>{item.name}</ListItemText>
+        <ListItemText>
+          <button id="trigger" onClick={() => setOpenNote((o) => !o)}>
+            {item.name}
+          </button>
+          <Popup
+            open={openNote}
+            closeOnDocumentClick
+            onClose={closeModalNote}
+            position="right center"
+          >
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Required"
+                  defaultValue="Hello World"
+                />
+                <TextField
+                  disabled
+                  id="outlined-disabled"
+                  label="Disabled"
+                  defaultValue="Hello World"
+                />
+                <TextField
+                  id="outlined-password-input"
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                />
+                <TextField
+                  id="outlined-read-only-input"
+                  label="Read Only"
+                  defaultValue="Hello World"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                />
+                <TextField
+                  id="outlined-number"
+                  label="Number"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Search field"
+                  type="search"
+                />
+                <TextField
+                  id="outlined-helperText"
+                  label="Helper text"
+                  defaultValue="Default Value"
+                  helperText="Some important text"
+                />
+              </div>
+            </Box>
+          </Popup>
+        </ListItemText>
       </ListItem>
     );
   }
@@ -296,12 +391,25 @@ function VaultPage() {
     if (!(data.status && data.status === "error")) setIsVaultChanged(true); // has to exist for every handler that changes the vault
   }
 
-  // Edit Item Vault
-  function editNote(item) {}
-
-  function editLogin(item) {}
-
-  function editCard(item) {}
+  let filters = "all";
+  function VaultDisplay({ filters }) {
+    switch (filters) {
+      case "login":
+        return <>{authCtx.vault.loginData.map(displayLogin)}</>;
+      case "note":
+        return <>{authCtx.vault.noteData.map(displayNote)}</>;
+      case "card":
+        return <>{authCtx.vault.creditData.map(displayCard)}</>;
+      default:
+        return (
+          <>
+            {authCtx.vault.loginData.map(displayLogin)}
+            {authCtx.vault.noteData.map(displayNote)}
+            {authCtx.vault.creditData.map(displayCard)}
+          </>
+        );
+    }
+  }
 
   // yang akan ditampilkan di browser
   return (
@@ -339,11 +447,7 @@ function VaultPage() {
           </div>
           <div className="detail">
             <Grid item xs={12} md={6}>
-              <List>
-                {authCtx.vault.loginData.map(displayLogin)}
-                {authCtx.vault.noteData.map(displayNote)}
-                {authCtx.vault.creditData.map(displayCard)}
-              </List>
+              <List>{  VaultDisplay({filters})  }</List>
             </Grid>
           </div>
           <div className="bot_nav_vault">@PassGuard, inc</div>
