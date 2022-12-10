@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 //import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
@@ -16,48 +15,39 @@ import ModeSecureNotes from "./components/ModeSecureNotes";
 import ModeCard from "./components/ModeCard";
 import ModeLogin from "./components/ModeLogin";
 
-function App() {
-  const authCtx = useContext(AuthContext);
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Login from "./components/newLogin";
+import SignUp from "./components/newSignup";
 
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/vault"
-          element={
-            authCtx.isLoggedIn ? <VaultPage /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/vault/note"
-          element={
-            authCtx.isLoggedIn ? <ModeSecureNotes /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/vault/card"
-          element={authCtx.isLoggedIn ? <ModeCard /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/vault/loginInfo"
-          element={
-            authCtx.isLoggedIn ? <ModeLogin /> : <Navigate to="/login" />
-          }
-        />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/card" element={<ModeCard />} />  */}
-        <Route path="/" element={<NotFoundPage redirect={"construction"} />} />
-        <Route path="*" element={<NotFoundPage redirect={"not found"} />} />
-        {/* <Route path="/" element={<HomePage />} /> */}
-        {/* <Route path="/test" element={<TestPage />} /> */}
-      </Routes>
-      <ToastContainer
-        transition={Zoom}
-        hideProgressBar={true}
-        autoClose={3000}
-      />
-    </BrowserRouter>
+    <Router>
+      <div className="App">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+          <div className="container">
+            <img
+              src="./PG_logo.png"
+              classname="app-logo"
+              style={{ width: "150px", height: "45px" }}
+            ></img>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul className="navbar-nav ml-auto"></ul>
+            </div>
+          </div>
+        </nav>
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Routes>
+              <Route exact path="/" element={<Login />} />
+              <Route path="/sign-in" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
 

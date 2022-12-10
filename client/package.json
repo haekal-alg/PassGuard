@@ -14,6 +14,7 @@
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "^12.5.0",
 		"aes256": "^1.1.0",
+		"bootstrap": "^5.2.3",
 		"crypto-js": "^4.1.1",
 		"csprng": "^0.1.2",
 		"dotenv": "^16.0.3",
