@@ -39,7 +39,11 @@ export default class Login extends Component {
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ background: "#4e2fff" }}
+          >
             Submit
           </button>
         </div>

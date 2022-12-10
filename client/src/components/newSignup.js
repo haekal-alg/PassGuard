@@ -4,22 +4,7 @@ export default class SignUp extends Component {
     return (
       <form>
         <h3 style={{ color: "white", fontWeight: "bold" }}>Sign Up</h3>
-        <div className="mb-3">
-          <label style={{ color: "white", fontWeight: "bold" }}>
-            First name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
-          />
-        </div>
-        <div className="mb-3">
-          <label style={{ color: "white", fontWeight: "bold" }}>
-            Last name
-          </label>
-          <input type="text" className="form-control" placeholder="Last name" />
-        </div>
+
         <div className="mb-3">
           <label style={{ color: "white", fontWeight: "bold" }}>
             Email address
@@ -30,16 +15,40 @@ export default class SignUp extends Component {
             placeholder="Enter email"
           />
         </div>
+        <div className="mb-3" style={{ color: "white", fontWeight: "bold" }}>
+          <label>Username</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter username"
+          />
+        </div>
         <div className="mb-3">
-          <label style={{ color: "white", fontWeight: "bold" }}>Password</label>
+          <label style={{ color: "white", fontWeight: "bold" }}>
+            Master Password
+          </label>
           <input
             type="password"
             className="form-control"
-            placeholder="Enter password"
+            placeholder="Enter master password"
+          />
+        </div>
+        <div className="mb-3">
+          <label style={{ color: "white", fontWeight: "bold" }}>
+            Re-type Master Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter master password"
           />
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ background: "#4e2fff" }}
+          >
             Sign Up
           </button>
         </div>
