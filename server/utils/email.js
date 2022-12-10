@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 const config = require("./../config");
 
 function getTransporter() {
-  // if (process.env.NODE_ENV === 'production') {
   return nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -10,16 +9,6 @@ function getTransporter() {
       pass: config.EMAIL_PASSWORD,
     },
   });
-  //}
-
-  // return nodemailer.createTransport({
-  // 	host: config.EMAIL_HOST,
-  // 	port: config.EMAIL_PORT,
-  // 	auth: {
-  // 		user: config.EMAIL_USERNAME,
-  // 		pass: config.EMAIL_PASSWORD
-  // 	}
-  // });
 }
 
 const sendEmail = async (options) => {

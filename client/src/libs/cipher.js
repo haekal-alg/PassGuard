@@ -7,6 +7,7 @@ const ITERATION = 10000;
 const SYMKEY_LENGTH = 32; // or 256 bit
 const SALT_LENGTH = 64;
 const IV_LENGTH =  16;
+const KEYLENGTH = 32;
 
 function generateSymmetricKey() {
     return crypto.randomBytes(SYMKEY_LENGTH);
@@ -21,45 +22,68 @@ function generateIV() {
 }
 
 function hashDataWithSalt(payload, salt) {
-    const derivedKey = crypto.pbkdf2Sync(payload, salt, ITERATION, 64, HASH_TYPE);
+    const derivedKey = crypto.pbkdf2Sync(payload, salt, ITERATION, KEYLENGTH, HASH_TYPE);
     return derivedKey;
 }
 
 function hashData(payload) {
     const randomSalt = generateSalt();
-    const derivedKey = crypto.pbkdf2Sync(payload, randomSalt, ITERATION, 64, HASH_TYPE);
+    const derivedKey = crypto.pbkdf2Sync(payload, randomSalt, ITERATION, KEYLENGTH, HASH_TYPE);
 
     return [derivedKey, randomSalt];
 }
 
 function aes256Encrypt(iv, payload, key) {
-  // Creating Cipheriv with its parameter
-  let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
+    let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
+    let encrypted = cipher.update(payload);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
 
-  // Updating text
-  let encrypted = cipher.update(payload);
-
-  // Using concatenation
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
-  //const encryptedData = encrypted.toString("hex")
-
-  return encrypted;
+    return encrypted;
 }
 
+function aes256Decrypt(iv, encrypted, key) {
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let decrypted = decipher.update(encrypted);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+    return decrypted;
+}
+
+// paramaters are plaintext user input (string)
 function encryptPasswordAndHashKey(emailField, masterPassField) {
-	const masterKey = hashDataWithSalt(masterPassField, emailField);
-	const symmetricKey = generateSymmetricKey();
+	const masterKey = hashDataWithSalt(masterPassField, emailField); // BYTE ARRAY
+	const symmetricKey = generateSymmetricKey(); // BYTE ARRAY
+
 	const iv = generateIV();
+
+    console.log("[ORIGINAL] masterkey => ", Buffer.from(masterKey).toString("base64"));
+    console.log("[ORIGINAL] symkey => ", Buffer.from(symmetricKey).toString("base64"));
+    console.log("[ORIGINAL] IV => ", Buffer.from(iv).toString("base64"));
 	
-	const masterPasswordHash = hashDataWithSalt(masterPassField, masterKey);
-	const protectedSymmetricKey = aes256Encrypt(iv, masterKey, symmetricKey);
+	const masterPasswordHash = hashDataWithSalt(masterPassField, masterKey); // BYTE ARRAY
+	const protectedSymmetricKey = aes256Encrypt(iv, symmetricKey, masterKey);
 
 	return [iv, masterPasswordHash, protectedSymmetricKey];
 }
+
+/*
+const emailField = "muhammadhaekal333@gmail.com";
+const masterPassField = "muhammadhaekal333@gmail.com";
+const [iv, masterPasswordHash, protectedSymmetricKey] = encryptPasswordAndHashKey(emailField, masterPassField);
+
+console.log("\n[ENCRYPTED] protected key => ", protectedSymmetricKey);
+
+const masterKey = hashDataWithSalt(masterPassField, emailField); // BYTE ARRAY
+const decrypted = aes256Decrypt(iv, protectedSymmetricKey, masterKey)
+
+console.log("\n[DECRYPTED] key => ", decrypted);
+*/
+
 
 module.exports.generateSymmetricKey = generateSymmetricKey;
 module.exports.generateIV = generateIV;
 module.exports.hashData = hashData;
 module.exports.hashDataWithSalt = hashDataWithSalt;
-module.exports.aes256 = aes256Encrypt;
+module.exports.aes256Encrypt = aes256Encrypt;
+module.exports.aes256Decrypt = aes256Decrypt;
 module.exports.encryptPasswordAndHashKey = encryptPasswordAndHashKey

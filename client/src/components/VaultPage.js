@@ -441,9 +441,9 @@ function VaultPage() {
           <div className="detail">
             <Grid item xs={12} md={6}>
               <List>
-                {authCtx.vault.loginData.map(displayLogin)}
+                {/* {authCtx.vault.loginData.map(displayLogin)} */}
                 {authCtx.vault.noteData.map(displayNote)}
-                {authCtx.vault.creditData.map(displayCard)}
+                {/* {authCtx.vault.creditData.map(displayCard)} */}
               </List>
             </Grid>
           </div>

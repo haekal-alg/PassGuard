@@ -58,7 +58,7 @@ function ModeSecureNotes() {
       body: JSON.stringify({
         userId: authCtx.login,
         name: inputNoteName.current.value,
-        notes: inputNoteName.current.value,
+        notes: inputMessage.current.value,
         // name: Buffer.from(noteNameHash).toString("base64"),
         // notes: Buffer.from(noteMessageHash).toString("base64"),
       }),
