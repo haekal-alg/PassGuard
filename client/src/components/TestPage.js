@@ -2,6 +2,7 @@
 import React, { useRef, useContext, useEffect, useState } from "react";
 import AuthContext from '../store/auth-context';
 
+const cipher = require("../libs/cipher");
 const hibp = require("../libs/alertBreached");
 var generator = require('generate-password');
 
@@ -13,6 +14,8 @@ function TestPage() {
     
     const authCtx = useContext(AuthContext);
 
+    const [ globalSymkey ] = useState(localStorage.getItem("symkey"));
+
     const [ isVaultChanged, setIsVaultChanged ] = useState(false);
 
     // This hook will get all user data when the page is first opened OR user make changes to their vault
@@ -20,25 +23,92 @@ function TestPage() {
     useEffect(() => {
         /* [TODO] add validation. if error occured do not sync */
         async function syncVault() {
-            const response = await fetch(`${process.env.process.env.REACT_APP_API_URL}/api/sync`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/sync`, {
                 headers: { "Authorization": 'Bearer ' + authCtx.token }
             });
-            let data = await response.json();
+            const data = await response.json();
+            //console.log("syncvault() => ", data)
 
             // store user data in memory
             authCtx.sync(data);
-
-            /* [TODO] Parse data here */
-            console.log(data);
-
             setIsVaultChanged(false);
+
+            return data;
         }
-        syncVault();
+
+        async function parseData() {
+            let symkey;
+            const data = await syncVault();
+
+            const iv = Buffer.from(data.profile.iv, "base64");
+
+            // Get the master key by decrypting protected master key
+            // This condition is only true only when user first logged in
+            if (!(authCtx.masterKey === null)) {
+                const protectedSymmKey = Buffer.from(data.profile.protectedKey, "base64");
+                const masterKey = authCtx.masterKey;
+
+                symkey = cipher.aes256Decrypt(iv, protectedSymmKey, masterKey);
+                symkey = Buffer.from(symkey).toString("base64");
+
+                authCtx.unlock(symkey); // save to local storage
+            }
+            
+            // Parse encrypted user data
+            symkey = Buffer.from(globalSymkey, "base64");
+
+            (data.loginData).forEach(function (item) {
+                const itemName = Buffer.from(item.name, "base64");
+                const decrypted = cipher.aes256Decrypt(iv, itemName, symkey).toString();
+
+                console.log(`${item.name} => ${decrypted}`);
+            });
+            
+        }
+
+        parseData();
     }, [isVaultChanged]);
 
-    const logoutHandler = () => {
-        authCtx.logout();
+
+    // return a json object with all its values encrypted
+    async function userDataEncryptionHandler(userData) {
+        const symkey = Buffer.from(globalSymkey, "base64");
+        const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
+
+        for (let key in userData) {
+            const encrypted = cipher.aes256Encrypt(iv, userData[key], symkey);  // encrypt
+            userData[key] = Buffer.from(encrypted).toString("base64");          // encode with base64 
+        }
+
+        return userData;
     }
+
+    async function createHandler() {
+		let userData = {
+                    name: nameRef.current.value,
+                    username: usernameRef.current.value, 
+                    password: passwordRef.current.value
+                };
+
+        userData = await userDataEncryptionHandler(userData);
+        console.log(userData)
+        
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/loginInfo`, {
+			method: "POST",
+			body: JSON.stringify(userData),
+			headers: { 
+                "Content-type": "application/json" ,
+                "Authorization": 'Bearer ' + authCtx.token
+            },
+		});
+
+        const data = await response.json();
+        console.log(data);
+
+        if (!(data.status && data.status === 'error'))
+            setIsVaultChanged(true); // has to exist for every handler that changes the vault
+    }
+    
 
     /* Check for breached password */
     const check = async () => {
@@ -64,31 +134,14 @@ function TestPage() {
         passwordRef.current.value = password;
     }
 
-    async function createHandler() {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/loginInfo`, {
-			method: "POST",
-			body: JSON.stringify({
-                userId: authCtx.login,  
-				name: nameRef.current.value,
-                username:usernameRef.current.value, 
-				password: passwordRef.current.value
-			}),
-			headers: { 
-                "Content-type": "application/json" ,
-                "Authorization": 'Bearer ' + authCtx.token
-            },
-		});
-
-        const data = await response.json();
-        console.log(data);
-
-        if (!(data.status && data.status === 'error'))
-            setIsVaultChanged(true); // has to exist for every handler that changes the vault
+    const logoutHandler = () => {
+        authCtx.logout();
     }
-    
 
     return (
         <div>
+        {authCtx.vault && (
+        <>
             <label>Name </label>
             <input ref={nameRef}></input>
             <br />
@@ -103,6 +156,8 @@ function TestPage() {
             <br />
             <button onClick={createHandler}>Create</button>
             
+        </>
+        )}
         </div>
     );
 }

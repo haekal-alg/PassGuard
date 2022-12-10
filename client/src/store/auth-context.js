@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 /*
 [TODO]: local storage is cleared whenever the user,
-		1. logout
+		1. [DONE] logout
 		2. closing the page
 */
 let logoutTimer;
@@ -12,9 +12,12 @@ const AuthContext = React.createContext({
 	token: '',
 	isLoggedIn: false,
 	vault: '',
+	masterKey: '', // only used in the first time user logged in
+	symkey: '',
 	login: (token) => {},
 	logout: () => {},
 	sync: (vault) => {},
+	save: (symkey) => {},
 });
 
 const calculateRemainingTime = (expirationTime) => {
@@ -54,14 +57,17 @@ export const AuthContextProvider = (props) => {
 
 	const [token, setToken] = useState(initialToken);
 	const [vault, setVault] = useState(null);
-	const userIsLoggedIn = !!token;
+	const [masterKey, setMasterKey] = useState(null);
 
+	const userIsLoggedIn = !!token;
 
 	const logoutHandler = useCallback(() => {
 		setToken(null);
 		setVault(null);
+		setMasterKey(null);
 		localStorage.removeItem('token');
 		localStorage.removeItem('expirationTime');
+		localStorage.removeItem('symkey');
 
 		if (logoutTimer) {
 			clearTimeout(logoutTimer);
@@ -69,8 +75,9 @@ export const AuthContextProvider = (props) => {
 	}, [])
 
 
-	const loginHandler = (token, expirationTime) => {
+	const loginHandler = (token, expirationTime, masterKey) => {
 		setToken(token);
+		setMasterKey(masterKey);
 		localStorage.setItem('token', token);
 		localStorage.setItem('expirationTime', expirationTime);
 
@@ -82,6 +89,10 @@ export const AuthContextProvider = (props) => {
 	// only store vault data in memory
 	const vaultHandler = (vault) => {
 		setVault(vault);
+	}
+
+	const keyHandler = (symkey) => {
+		localStorage.setItem('symkey', symkey);
 	}
 
 	useEffect(() => {
@@ -96,9 +107,11 @@ export const AuthContextProvider = (props) => {
 		token: token,
 		isLoggedIn: userIsLoggedIn,
 		vault: vault,
+		masterKey: masterKey,
 		login: loginHandler,
 		logout: logoutHandler,
 		sync: vaultHandler,
+		save: keyHandler,
 	};
 
 	return (

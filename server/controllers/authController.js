@@ -143,11 +143,11 @@ exports.register = catchAsync(async (req, res, next) => {
       .status(201)
       .send({ status: "success", message: "Successfully registered" });
   } catch (err) {
-    //console.log(err)
     // UNIT TEST [2]
     if (err.message == "Validation error")
       return next(new AppError("This Email has already been taken ", 200));
 
+    console.log(err)
     return next(new AppError("Register failed", 200));
   }
 });
@@ -166,11 +166,10 @@ exports.verify = catchAsync(async (req, res, next) => {
     { where: { userId: decoded.id } }
   );
 
-  //res.status(200).send("Verification successful");
-  if (config.NODE_ENV == "development");
-  {
+  if (config.NODE_ENV == "development") {
     return res.redirect("http://localhost:3000/login?email_verified=true");
   }
+  
   return res.redirect("/login?email_verified=true");
 });
 

@@ -66,7 +66,7 @@ function LoginPage() {
 		const emailField = inputEmail.current.value;
 		const masterPassField = inputMasterPassword.current.value;
 
-		const masterPasswordKey = cipher.hashDataWithSalt(
+		const masterPasswordKey = cipher.hashDataWithSalt( // MASTER KEY
 			masterPassField,
 			emailField
 		);
@@ -97,9 +97,10 @@ function LoginPage() {
 		setIsLoading(false);
 
 		if (data.status === "success") {
-			authCtx.login(data.idToken, data.expirationTime);
+			authCtx.login(data.idToken, data.expirationTime, masterPasswordKey);
 			//authCtx.login(data.idToken, new Date(Date.now() + 3000));
-			navigate("/vault"); /* FOR TESTING ONLY. Real value is /vault */
+			//navigate("/vault"); 
+			navigate("/test"); /* FOR TESTING ONLY. Real value is /vault */
 		} else if (data.status === "error") {
 			toast.error(data.message);
 		} else {
