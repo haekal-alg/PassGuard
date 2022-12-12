@@ -10,16 +10,16 @@ import NotFoundPage from "./components/others/NotFoundPage";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import AuthContext from "./store/auth-context";
+import authCtx from "./store/auth-context";
 import ModeSecureNotes from "./components/ModeSecureNotes";
 import ModeCard from "./components/ModeCard";
 import ModeLogin from "./components/ModeLogin";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Login from "./components/newLogin";
-import SignUp from "./components/newSignup";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import NewLogin from "./components/NewLogin";
+import NewRegister from "./components/NewRegister";
 
 /*
  <Router>
@@ -75,17 +75,15 @@ function App() {
             authCtx.isLoggedIn ? <ModeLogin /> : <Navigate to="/login" />
           }
         />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<NewRegister />} />
+        <Route path="/login" element={<NewLogin />} />
         {/* <Route path="/card" element={<ModeCard />} />  */}
         {/* <Route path="/" element={<NotFoundPage redirect={"construction"} />} /> */}
         <Route path="*" element={<NotFoundPage redirect={"not found"} />} />
         <Route path="/" element={<HomePage />} />
         <Route
           path="/test"
-          element={
-            authCtx.isLoggedIn ? <TestPage /> : <Navigate to="/login" />
-          }
+          element={authCtx.isLoggedIn ? <TestPage /> : <Navigate to="/login" />}
         />
       </Routes>
       <ToastContainer
