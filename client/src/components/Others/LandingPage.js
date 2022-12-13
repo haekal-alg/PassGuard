@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/css/argon-design-system-react.css";
 
 // reactstrap components
-import {
-  Button,
-  Container,
-  Row,
-  Col
-} from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 
 // core components
 import LandingNavbar from "components/Others/LandingNavbar.js";
@@ -49,8 +44,9 @@ class LandingPage extends Component {
                         Easiest way to secure and manage your passwords!
                       </h1>
                       <p className="lead text-white">
-                        A password manager designed to securely store and manage 
-                        sensitive information such as login information and personal notes.
+                        A password manager designed to securely store and manage
+                        sensitive information such as login information and
+                        personal notes.
                       </p>
                       <div className="btn-wrapper">
                         <Button
@@ -71,9 +67,7 @@ class LandingPage extends Component {
                           <span className="btn-inner--icon mr-1">
                             {/* <i className="ni ni-cloud-download-95" /> */}
                           </span>
-                          <span className="btn-inner--text">
-                            Log in
-                          </span>
+                          <span className="btn-inner--text">Log in</span>
                         </Button>
                       </div>
                     </Col>

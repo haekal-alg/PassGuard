@@ -3,14 +3,21 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-const cipher = require("../libs/cipher");
+const cipher = require("../../libs/cipher");
 function SignUp() {
   const navigate = useNavigate();
+
   const inputEmail = useRef(null);
   const inputUsername = useRef(null);
   const inputMasterPassword = useRef(null);
   const inputMasterPasswordRetype = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Hide & show password
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   async function createAccountHandler() {
     var validRegex =
@@ -174,21 +181,22 @@ function SignUp() {
               />
             </div>
             <div className="d-grid">
-              <button
-                type="submit"
+              <input
+                type="button"
+                value="Submit"
                 className="btn btn-primary"
                 onClick={createAccountHandler}
                 style={{ background: "#4e2fff" }}
-              >
-                Sign Up
-              </button>
+              />
+              {/* Sign Up
+              </button> */}
             </div>
             <p
               className="forgot-password text-right"
               style={{ color: "white", fontWeight: "bold" }}
             >
               Already have an{" "}
-              <a href="/sign-in" style={{ color: "white", fontWeight: "bold" }}>
+              <a href="/login" style={{ color: "white", fontWeight: "bold" }}>
                 account?
               </a>
             </p>

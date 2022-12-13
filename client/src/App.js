@@ -18,8 +18,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import "./App.css";
-import NewLogin from "./components/NewLogin";
-import NewRegister from "./components/NewRegister";
+import NewLogin from "./components/Authentication/NewLogin";
+import NewRegister from "./components/Authentication/NewRegister";
+import RegisterPage from "components/Authentication/RegisterPage";
 
 function App() {
   const authCtx = useContext(AuthContext);

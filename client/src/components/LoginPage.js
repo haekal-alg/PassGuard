@@ -111,6 +111,7 @@ function LoginPage() {
   }
 
   return (
+    
     <div className="body">
       <div className="topnavMain">
         <a href="/">PassGuard</a>
