@@ -56,9 +56,9 @@ function encryptPasswordAndHashKey(emailField, masterPassField) {
 
 	const iv = generateIV();
 
-    console.log("[ORIGINAL] masterkey => ", Buffer.from(masterKey).toString("base64"));
-    console.log("[ORIGINAL] symkey => ", Buffer.from(symmetricKey).toString("base64"));
-    console.log("[ORIGINAL] IV => ", Buffer.from(iv).toString("base64"));
+    //console.log("[ORIGINAL] masterkey => ", Buffer.from(masterKey).toString("base64"));
+    //console.log("[ORIGINAL] symkey => ", Buffer.from(symmetricKey).toString("base64"));
+    //console.log("[ORIGINAL] IV => ", Buffer.from(iv).toString("base64"));
 	
 	const masterPasswordHash = hashDataWithSalt(masterPassField, masterKey); // BYTE ARRAY
 	const protectedSymmetricKey = aes256Encrypt(iv, symmetricKey, masterKey);

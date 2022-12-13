@@ -27,7 +27,7 @@ function TestPage() {
                 headers: { "Authorization": 'Bearer ' + authCtx.token }
             });
             const data = await response.json();
-            //console.log("syncvault() => ", data)
+            console.log("syncvault() => ", data)
 
             // store user data in memory
             authCtx.sync(data);
@@ -51,7 +51,7 @@ function TestPage() {
                 symkey = cipher.aes256Decrypt(iv, protectedSymmKey, masterKey);
                 symkey = Buffer.from(symkey).toString("base64");
 
-                authCtx.unlock(symkey); // save to local storage
+                authCtx.save(symkey); // save to local storage
             }
             
             // Parse encrypted user data
@@ -90,9 +90,12 @@ function TestPage() {
                     password: passwordRef.current.value
                 };
 
+                
+        //console.log(userData)
+
         userData = await userDataEncryptionHandler(userData);
-        console.log(userData)
         
+        // console.log(userData)
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/loginInfo`, {
 			method: "POST",
 			body: JSON.stringify(userData),

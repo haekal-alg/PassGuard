@@ -15,19 +15,28 @@
 		"@testing-library/user-event": "^12.5.0",
 		"aes256": "^1.1.0",
 		"bootstrap": "^5.2.3",
+		"classnames": "^2.3.1",
 		"crypto-js": "^4.1.1",
 		"csprng": "^0.1.2",
 		"dotenv": "^16.0.3",
 		"formik": "^2.2.9",
 		"generate-password": "^1.7.0",
+		"headroom.js": "^0.12.0",
+		"jquery": "^3.6.1",
+		"moment": "^2.29.4",
+		"nouislider": "^14.1.1",
 		"react": "^18.0.0",
+		"react-datetime": "^3.2.0",
 		"react-dom": "^18.0.0",
 		"react-hook-form": "^7.40.0",
 		"react-router-dom": "^6.4.3",
 		"react-scripts": "4.0.1",
 		"react-toastify": "^9.0.0",
 		"reactjs-popup": "^2.0.5",
+		"reactstrap": "^8.4.1",
+		"sass": "^1.53.0",
 		"styled-components": "^5.3.6",
+		"typescript": "^3.9.10",
 		"web-vitals": "^0.2.4",
 		"zxcvbn": "^4.4.2"
 	},
@@ -54,5 +63,9 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.26",
+		"@types/react-dom": "^18.0.9"
 	}
 }
