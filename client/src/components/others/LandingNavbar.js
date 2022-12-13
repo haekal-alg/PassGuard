@@ -75,7 +75,7 @@ class DemoNavbar extends Component {
                       id="tooltip112445449"
                       target="_blank"
                     >
-                      <i className="fa fa-github fa-2x" />
+                      <i className="fa fa-github" />
                       <span className="nav-link-inner--text d-lg-none ml-2">
                         Github
                       </span>

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 // import LoginPage from "./components/Authentication/LoginPage";
 // import RegisterPage from "./components/Authentication/RegisterPage";
 // import VaultPage from "./components/VaultPage";
-// import TestPage from "./components/TestPage";
+import TestPage from "./components/TestPage";
 import NotFoundPage from "components/Others/NotFoundPage";
 import LandingPage from "components/Others/LandingPage.js";
 
