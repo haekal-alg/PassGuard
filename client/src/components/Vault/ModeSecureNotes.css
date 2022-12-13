@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+.topnavNote {
+  overflow: hidden;
+  background-color: #f27500;
+  text-align: center;
+}
+
+.topnavNote a {
+  color: black;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  line-height: 50px;
+  padding: 0px 16px;
+}
+
+.appNote {
+  font-weight: 700;
+  font-size: 20px;
+  float: left;
+  padding-left: 10px;
+}
+
+.bot_nav_vault {
+  overflow: hidden;
+  background-color: #8a8a8a;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 5px 0px;
+}
+
+.mainPopup {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  z-index: 10;
+}
+
+.popup {
+  height: 460px;
+  width: 40%;
+  background-color: white;
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  border-radius: 10px;
+}
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 24px;
+}
+
+#saveButton {
+  margin-left: 30%;
+}
+
+#cancelButton {
+  margin-left: 20px;
+}
+
+#cancelButton,
+#saveButton {
+  background-color: #f27500;
+  border-color: #f27500;
+  border-radius: 10px;
+  padding: 7px;
+  margin-top: 14px;
+}
+
+.popup-body {
+  margin-left: 10%;
+  font-size: 18px;
+}
+
+#type_border,
+#noteName,
+#message {
+  border-radius: 10px;
+}
+
+#noteName {
+  background-color: #f1f1f1;
+}
+
+#message {
+  width: 400px;
+  height: 90px;
+  resize: none;
+  padding: 7px;
+  background-color: #f1f1f1;
+}
+
+.dropbtnNote {
+  background-color: #f27500;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dropdownNote {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-contentNote {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-contentNote a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-contentNote button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdownNote:hover .dropdown-contentNote {
+  display: block;
+}
+
+.dropdownNote:hover .dropbtnNote {
+  background-color: orange;
+}
+
+.ModeNote,
+.ModeLogin,
+.ModeCard {
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  border-color: white;
+  padding: 0px 10px;
+}
