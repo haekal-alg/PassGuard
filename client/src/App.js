@@ -16,6 +16,11 @@ import AuthContext from "store/auth-context";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// import "./App.css";
+import NewLogin from "./components/NewLogin";
+import NewRegister from "./components/NewRegister";
+
 function App() {
   const authCtx = useContext(AuthContext);
 
@@ -57,6 +62,12 @@ function App() {
         /> */}
 
         <Route path="*" element={<NotFoundPage redirect={"not found"} />} />
+        <Route path="/register" element={<NewRegister />} />
+        <Route path="/login" element={<NewLogin />} />
+        <Route
+          path="/test"
+          element={authCtx.isLoggedIn ? <TestPage /> : <Navigate to="/login" />}
+        />
       </Routes>
       <ToastContainer
         transition={Zoom}
