@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useEffect, useState } from "react";
 // import ModeSecureNotes from "./ModeSecureNotes";
 // import ReactDOM from "react-dom/client";
-import AuthContext from "../store/auth-context";
+import AuthContext from "../store/auth-context"; //incorrect path
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 

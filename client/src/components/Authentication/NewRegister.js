@@ -1,10 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
+import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import detectZoom from "detect-zoom";
+import { Helmet } from "react-helmet";
+const eye = <FontAwesomeIcon icon={faEye} display={false} />;
 const cipher = require("../../libs/cipher");
+
+function disableZoom() {
+  const metaTag = document.createElement("meta");
+  metaTag.name = "viewport";
+  metaTag.content =
+    "width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no";
+  document.getElementsByTagName("head")[0].appendChild(metaTag);
+}
 function SignUp() {
+  useEffect(() => {
+    disableZoom();
+  }, []);
   const navigate = useNavigate();
 
   const inputEmail = useRef(null);
@@ -116,8 +132,15 @@ function SignUp() {
       toast.error("The server seems to be down. Please try again.");
     }
   }
+  const [Masterpassword, setMPValue] = useState("");
   return (
     <div className="App">
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        ></meta>
+      </Helmet>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
           <img
@@ -163,22 +186,49 @@ function SignUp() {
                 Master Password
               </label>
               <input
-                type="password"
+                type={passwordShown ? "text" : "password"}
+                value={Masterpassword}
                 ref={inputMasterPassword}
                 className="form-control"
                 placeholder="Enter master password"
-              />
+                onChange={(e) => setMPValue(e.target.value)}
+              />{" "}
+              <i
+                clssname="eye-1"
+                onClick={togglePasswordVisiblity}
+                style={{
+                  position: "absolute",
+                  top: "53%",
+                  right: "690px",
+                  onmouseover: "this.style.backgroundColor='#4e2fff'",
+                  onmouseout: "this.style.backgroundColor=''",
+                }}
+              >
+                {eye}
+              </i>{" "}
+              <PasswordStrengthMeter password={Masterpassword} />
             </div>
+
             <div className="mb-3">
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Re-type Master Password
               </label>
               <input
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 ref={inputMasterPasswordRetype}
                 className="form-control"
                 placeholder="Enter master password"
               />
+              <span>
+                {" "}
+                <i
+                  className="eye-2"
+                  onClick={togglePasswordVisiblity}
+                  style={{ position: "absolute", top: "510px", right: "690px" }}
+                >
+                  {eye}
+                </i>{" "}
+              </span>
             </div>
             <div className="d-grid">
               <input
@@ -193,6 +243,7 @@ function SignUp() {
             </div>
             <p
               className="forgot-password text-right"
+              aw
               style={{ color: "white", fontWeight: "bold" }}
             >
               Already have an{" "}

@@ -95,7 +95,7 @@ function NewLogin() {
     if (data.status === "success") {
       authCtx.login(data.idToken, data.expirationTime, masterPasswordKey);
       //authCtx.login(data.idToken, new Date(Date.now() + 3000));
-      //navigate("/vault");
+      navigate("/vault");
       // navigate("/test"); /* FOR TESTING ONLY. Real value is /vault */
       alert("login success");
     } else if (data.status === "error") {
@@ -146,22 +146,7 @@ function NewLogin() {
                 ref={inputMasterPassword}
               />
             </div>
-            <div className="mb-3">
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                />
-                <label
-                  style={{ color: "white" }}
-                  className="custom-control-label"
-                  htmlFor="customCheck1"
-                >
-                  Remember me
-                </label>
-              </div>
-            </div>
+
             <div className="d-grid">
               <button
                 type="submit"
