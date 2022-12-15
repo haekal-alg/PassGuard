@@ -11,12 +11,22 @@ let logoutTimer;
 const AuthContext = React.createContext({
 	token: '',
 	isLoggedIn: false,
+	nameLoginVault: '',
+	usernameLoginVault: '',
+	passwordLoginVault: '',
+	nameNoteVault: '',
+	messageNoteVault: '',
 	vault: '',
 	masterKey: '', // only used in the first time user logged in
 	symkey: '',
 	login: (token) => {},
 	logout: () => {},
 	sync: (vault) => {},
+	dataNameLoginSync: (nameLoginVault) => {},
+	dataUsernameLoginSync: (nameLoginVault) => {},
+	dataPasswordLoginSync: (passwordLoginVault) => {},
+	dataNameNoteSync: (nameNoteVault) => {},
+	dataMessageNoteSync: (messageNoteVault) => {},
 	save: (symkey) => {},
 });
 
@@ -57,6 +67,11 @@ export const AuthContextProvider = (props) => {
 
 	const [token, setToken] = useState(initialToken);
 	const [vault, setVault] = useState(null);
+	const [nameLoginVault, setNameLoginVault] = useState(null);
+	const [usernameLoginVault, setUsernameLoginVault] = useState(null);
+	const [passwordLoginVault, setPasswordLoginVault] = useState(null);
+	const [nameNoteVault, setNameNoteVault] = useState(null);
+	const [messageNoteVault, setMessageNoteVault] = useState(null);
 	const [masterKey, setMasterKey] = useState(null);
 
 	const userIsLoggedIn = !!token;
@@ -64,6 +79,11 @@ export const AuthContextProvider = (props) => {
 	const logoutHandler = useCallback(() => {
 		setToken(null);
 		setVault(null);
+		setNameLoginVault(null);
+		setUsernameLoginVault(null);
+		setPasswordLoginVault(null);
+		setNameNoteVault(null);
+		setMessageNoteVault(null);
 		setMasterKey(null);
 		localStorage.removeItem('token');
 		localStorage.removeItem('expirationTime');
@@ -91,6 +111,22 @@ export const AuthContextProvider = (props) => {
 		setVault(vault);
 	}
 
+	const nameLoginHandler = (nameLoginVault) => {
+		setNameLoginVault(nameLoginVault);
+	}
+	const usernameLoginHandler = (usernameLoginVault) => {
+		setUsernameLoginVault(usernameLoginVault);
+	}
+	const passwordLoginHandler = (passwordLoginVault) => {
+		setPasswordLoginVault(passwordLoginVault);
+	}
+	const nameNoteHandler = (nameNoteVault) => {
+		setNameNoteVault(nameNoteVault);
+	}
+	const messageNoteHandler = (messageNoteVault) => {
+		setMessageNoteVault(messageNoteVault);
+	}
+
 	const keyHandler = (symkey) => {
 		localStorage.setItem('symkey', symkey);
 	}
@@ -107,10 +143,20 @@ export const AuthContextProvider = (props) => {
 		token: token,
 		isLoggedIn: userIsLoggedIn,
 		vault: vault,
+		nameLoginVault: nameLoginVault,
+		usernameLoginVault: usernameLoginVault,
+		passwordLoginVault: passwordLoginVault,
+		nameNoteVault: nameNoteVault,
+		messageNoteVault: messageNoteVault,
 		masterKey: masterKey,
 		login: loginHandler,
 		logout: logoutHandler,
 		sync: vaultHandler,
+		dataNameLoginSync: nameLoginHandler,
+		dataUsernameLoginSync: usernameLoginHandler,
+		dataPasswordLoginSync: passwordLoginHandler,
+		dataNameNoteSync: nameNoteHandler,
+		dataMessageNoteSync: messageNoteHandler,
 		save: keyHandler,
 	};
 

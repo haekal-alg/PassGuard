@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import TestPage from "./components/TestPage";
 import NotFoundPage from "components/Others/NotFoundPage";
 import LandingPage from "components/Others/LandingPage.js";
+import NewVault from "components/Vault/NewVault";
 
 import AuthContext from "store/auth-context";
 // import ModeSecureNotes from "./components/ModeSecureNotes";
@@ -29,13 +30,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* 
         <Route
           path="/vault"
           element={
-            authCtx.isLoggedIn ? <VaultPage /> : <Navigate to="/login" />
+            authCtx.isLoggedIn ? <NewVault /> : <Navigate to="/login" />
           }
-        /> */}
+        />
         {/* <Route
           path="/vault/note"
           element={
