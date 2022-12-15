@@ -2,7 +2,7 @@ import React, { useRef, useContext, useEffect, useState } from "react";
 import "./NewVault.css";
 // import ModeSecureNotes from "./ModeSecureNotes";
 // import ReactDOM from "react-dom/client";
-import AuthContext from "../store/auth-context";
+import AuthContext from "store/auth-context";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 
@@ -13,8 +13,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import { orange } from "@mui/material/colors";
 import NoteIcon from "@mui/icons-material/Note";
 
-const cipher = require("../libs/cipher");
-const hibp = require("../libs/alertBreached");
+const cipher = require("libs/cipher");
+const hibp = require("libs/alertBreached");
 var generator = require("generate-password");
 
 function NewVault() {
@@ -413,14 +413,6 @@ function NewVault() {
     }
   }
 
-  // const showPassword = (e) => {
-  //   if (e.target.checked) {
-  //     setisShow(true);
-  //   } else {
-  //     setisShow(false);
-  //   }
-  // };
-
   // conditional rendering
   const noteHandler = () => {
     setisNote(true);
@@ -502,30 +494,27 @@ function NewVault() {
                           placeholder="Enter Password"
                           ref={passwordRef}
                         />
-                        <button className="toggle-button" onClick={() => togglePassword()}>Show Password</button>
+                        <input type="button" value="show password" className="toggle-button" onClick={() => togglePassword()} />
                       </div>
                       <div className="button">
-                      <button
-                          type="submit"
+                        <input
+                          type="button"
+                          value="Alert Breached"
                           onClick={check}
                           className="check-btn"
-                        >
-                          Alert Breached
-                        </button>
-                        <button
-                          type="submit"
+                        />
+                        <input
+                          type="button"
+                          value="Generate Password"
                           onClick={() => generateSecurePassword()}
                           className="generate-btn"
-                        >
-                          Generate Password
-                        </button>
-                        <button
-                          type="submit"
+                        />
+                        <input
+                          type="button"
+                          value="Add"
                           className="add-btn"
                           onClick={addLogin}
-                        >
-                          Add
-                        </button>
+                        />
                       </div>
                     </form>
                     <img
@@ -587,27 +576,26 @@ function NewVault() {
                         />
                       </div>
                       <div className="button">
-                        <button
-                          type="submit"
+                        <input
+                          type="button"
                           onClick={check}
                           className="check-btn"
                         >
                           Alert Breached
-                        </button>
-                        <button
-                          type="submit"
+                        </input>
+                        <input
+                          type="button"
                           onClick={() => generateSecurePassword()}
                           className="generate-btn"
                         >
                           Generate Password
-                        </button>
-                        <button
-                          type="submit"
+                        </input>
+                        <input
+                          type="button"
+                          value="Edit Vault"
                           className="add-btn"
                           onClick={() => editLogin(authCtx.vault.noteData[indexEditLogin])}
-                        >
-                          Edit Vault
-                        </button>
+                        />
                       </div>
                     </form>
                     <img
@@ -642,12 +630,6 @@ function NewVault() {
                   </div>
                 </div>
                 <hr />
-                <div className="show-passwords">
-                  <input type="checkbox" className="check-box" id="check" />
-                  <label htmlFor="check" className="label-password">
-                    Show Passwords
-                  </label>
-                </div>
                 <ul className="result-container">
                   {authCtx.nameLoginVault.map(displayLogin)}
                 </ul>
@@ -687,13 +669,12 @@ function NewVault() {
                           ref={nameNoteRef}
                         />
                       </div>
-                      <button
-                        type="submit"
+                      <input
+                        type="button"
+                        value="Add"
                         className="add-btn"
                         onClick={addNote}
-                      >
-                        Add
-                      </button>
+                      />
                     </form>
                     <img
                       src="https://assets.ccbp.in/frontend/react-js/password-manager-lg-img.png"
@@ -734,13 +715,12 @@ function NewVault() {
                           defaultValue={authCtx.nameNoteVault[indexEditNote]}
                         />
                       </div>
-                      <button
-                        type="submit"
+                      <input
+                        type="button"
+                        value="Edit Vault"
                         className="add-btn"
                         onClick={() => editNote(authCtx.vault.noteData[indexEditNote])}
-                      >
-                        Edit Vault
-                      </button>
+                      />
                     </form>
                     <img
                       src="https://assets.ccbp.in/frontend/react-js/password-manager-lg-img.png"
@@ -774,12 +754,6 @@ function NewVault() {
                   </div>
                 </div>
                 <hr />
-                <div className="show-passwords">
-                  <input type="checkbox" className="check-box" id="check" />
-                  <label htmlFor="check" className="label-password">
-                    Show Passwords
-                  </label>
-                </div>
                 <ul className="result-container">
                   {authCtx.messageNoteVault.map(displayNote)}
                 </ul>
