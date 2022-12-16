@@ -46,8 +46,8 @@ function NewVault() {
 	const [indexEditNote, setIndexEditNote] = useState(0);
 	const [indexEditLogin, setIndexEditLogin] = useState(0);
 
-	console.log(indexEditNote);
-	console.log(indexEditLogin);
+	// console.log(indexEditNote);
+	// console.log(indexEditLogin);
 
 	const logoutHandler = () => {
 		authCtx.logout();
@@ -152,7 +152,7 @@ function NewVault() {
 		parseData();
 	}, [isVaultChanged]);
 
-	console.log(authCtx.vault);
+	// console.log(authCtx.vault);
 
 	// Mengedit Item Vault
 	async function editLogin(item) {
@@ -400,7 +400,7 @@ function NewVault() {
 			};
 
 			userData = await userDataEncryptionHandler(userData);
-			console.log(userData);
+			// console.log(userData);
 
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/user/loginInfo`,
@@ -415,7 +415,7 @@ function NewVault() {
 			);
 
 			const data = await response.json();
-			console.log(data);
+			// console.log(data);
 
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
@@ -437,7 +437,7 @@ function NewVault() {
 			};
 
 			userData = await userDataEncryptionHandler(userData);
-			console.log(userData);
+			// console.log(userData);
 
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/user/secureNote`,
@@ -452,7 +452,7 @@ function NewVault() {
 			);
 
 			const data = await response.json();
-			console.log(data);
+			// console.log(data);
 
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);

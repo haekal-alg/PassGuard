@@ -66,20 +66,6 @@ function encryptPasswordAndHashKey(emailField, masterPassField) {
 	return [iv, masterPasswordHash, protectedSymmetricKey];
 }
 
-/*
-const emailField = "muhammadhaekal333@gmail.com";
-const masterPassField = "muhammadhaekal333@gmail.com";
-const [iv, masterPasswordHash, protectedSymmetricKey] = encryptPasswordAndHashKey(emailField, masterPassField);
-
-console.log("\n[ENCRYPTED] protected key => ", protectedSymmetricKey);
-
-const masterKey = hashDataWithSalt(masterPassField, emailField); // BYTE ARRAY
-const decrypted = aes256Decrypt(iv, protectedSymmetricKey, masterKey)
-
-console.log("\n[DECRYPTED] key => ", decrypted);
-*/
-
-
 module.exports.generateSymmetricKey = generateSymmetricKey;
 module.exports.generateIV = generateIV;
 module.exports.hashData = hashData;

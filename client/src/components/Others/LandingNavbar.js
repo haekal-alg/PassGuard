@@ -86,11 +86,10 @@ class DemoNavbar extends Component {
                     <Button
                       className="btn-neutral btn-icon"
                       color="github"
-                      href="#documentation"
+                      href="https://www.canva.com/design/DAFU55fscE4/9Y5iWw4pTvSXo-TEdGpT2w/edit?utm_content=DAFU55fscE4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
                       target="_blank"
                     >
                       <span className="btn-inner--icon">
-                        {/* <i className="fa fa-cloud-download mr-2" /> */}
                       </span>
                       <span className="nav-link-inner--text ml-1">
                         Documentation
