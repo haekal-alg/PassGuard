@@ -479,14 +479,11 @@ function NewVault() {
 		setIsEditNote(false);
 	};
 	const editLoginHandler = (index) => {
-		setIsEditLogin(false);
 		setIsEditLogin(true);
 		setIndexEditLogin(index);
 	};
 	const editNoteHandler = (index) => {
 		console.log("edit");
-		setIsEditNote(true);
-		setIsEditNote(false);
 		setIsEditNote(true);
 		setIndexEditNote(index);
 	};
