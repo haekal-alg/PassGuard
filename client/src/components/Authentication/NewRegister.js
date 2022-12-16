@@ -44,34 +44,34 @@ function SignUp() {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (inputEmail.current.value === "") {
       inputEmail.current.focus();
-      alert("Please enter an email address");
+      toast.error("Please enter an email address");
       return;
     }
     if (inputEmail.current.value !== "") {
       if (!inputEmail.current.value.match(validRegex)) {
-        alert("Please enter a valid email address");
+        toast.error("Please enter a valid email address");
         inputEmail.current.focus();
         return;
       }
       //return;
     }
     if (inputUsername.current.value === "") {
-      alert("Please enter the username field");
+      toast.error("Please enter the username field");
       inputUsername.current.focus();
       return;
     }
     if (inputMasterPassword.current.value === "") {
-      alert("Please enter a master password");
+      toast.error("Please enter a master password");
       inputMasterPassword.current.focus();
       return;
     }
     if (inputMasterPassword.current.value.length < 8) {
-      alert("Master password must be at least 8 characters long");
+      toast.error("Master password must be at least 8 characters long");
       inputMasterPassword.current.focus();
       return;
     }
     if (inputMasterPasswordRetype.current.value === "") {
-      alert("Please Re-type the master password");
+      toast.error("Please Re-type the master password");
       inputMasterPasswordRetype.current.focus();
       return;
     }
@@ -79,7 +79,9 @@ function SignUp() {
       inputMasterPassword.current.value !==
       inputMasterPasswordRetype.current.value
     ) {
-      alert("Master password that you have entered is different, try again!");
+      toast.error(
+        "Master password that you have entered is different, try again!"
+      );
       inputMasterPasswordRetype.current.focus();
       return;
     }
@@ -147,11 +149,14 @@ function SignUp() {
       </Helmet>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
+          <a href="/" target="blank">
           <img
             src="./PG_logo.png"
-            classname="app-logo"
+            className="app-logo"
             style={{ width: "150px", height: "45px" }}
           ></img>
+
+          </a>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto"></ul>
           </div>
@@ -171,39 +176,38 @@ function SignUp() {
                 ref={inputEmail}
                 className="form-control"
                 placeholder="Enter email"
-                style={{width: "315px"}}
+                style={{ width: "315px" }}
               />
             </div>
-            <div
-              className="mb-3"
-            >
+            <div className="mb-3">
               <label style={{ color: "white", fontWeight: "bold" }}>
-                Username</label>
+                Username
+              </label>
               <input
                 type="text"
                 ref={inputUsername}
                 className="form-control"
                 placeholder="Enter username"
-                style={{width: "315px"}}
+                style={{ width: "315px" }}
               />
             </div>
-            <div className="mb-3" >
+            <div className="mb-3">
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Master Password
-              <input
-                type={passwordShown ? "text" : "password"}
-                value={Masterpassword}
-                ref={inputMasterPassword}
-                className="form-control"
-                placeholder="Enter master password"
-                style={{width: "315px"}}
-                onChange={(e) => setMPValue(e.target.value)}
-              />
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  value={Masterpassword}
+                  ref={inputMasterPassword}
+                  className="form-control"
+                  placeholder="Enter master password"
+                  style={{ width: "315px" }}
+                  onChange={(e) => setMPValue(e.target.value)}
+                />
               </label>
               <i
                 class="eye-1"
                 onClick={togglePasswordVisiblity}
-                style={{ marginLeft: '5px', color: "white"}}
+                style={{ marginLeft: "5px", color: "white" }}
               >
                 {passwordShown ? eyeSlash : eye}
               </i>{" "}
@@ -211,8 +215,10 @@ function SignUp() {
             </div>
 
             <div className="mb-3">
-              <br/>
-              <br/>
+              <br />
+              <br />
+              {/* <br/> */}
+              {/* <br/> */}
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Re-type Master Password
                 <input
@@ -220,13 +226,13 @@ function SignUp() {
                   ref={inputMasterPasswordRetype}
                   className="form-control"
                   placeholder="Enter master password"
-                  style={{width: "315px"}}
+                  style={{ width: "315px" }}
                 />
               </label>
               <i
-                class="eye-1"
+                className="eye-1"
                 onClick={togglePasswordVisiblity}
-                style={{ marginLeft: '5px', color: "white"}}
+                style={{ marginLeft: "5px", color: "white" }}
               >
                 {passwordShown ? eyeSlash : eye}
               </i>
@@ -234,21 +240,19 @@ function SignUp() {
             <div className="d-grid">
               <input
                 type="button"
-                value="Submit"
                 className="btn btn-primary"
                 onClick={createAccountHandler}
+                value={isLoading ? "Creating..." : "Submit"}
+                disabled={isLoading ? true : false}
                 style={{ background: "#4e2fff" }}
               />
-              {/* Sign Up
-              </button> */}
             </div>
             <p
               className="forgot-password text-right"
-              aw
               style={{ color: "white", fontWeight: "bold" }}
             >
               <a href="/login" style={{ color: "white", fontWeight: "bold" }}>
-              Already have an account?
+                Already have an account?
               </a>
             </p>
           </form>

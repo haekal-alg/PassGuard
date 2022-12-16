@@ -1,5 +1,4 @@
 import React, {
-  Component,
   useRef,
   useState,
   useContext,
@@ -123,11 +122,14 @@ function NewLogin() {
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
+          <a href="/" target="blank">
           <img
             src="./PG_logo.png"
-            classname="app-logo"
+            alt="Logo"
+            className="app-logo"
             style={{ width: "150px", height: "45px" }}
           ></img>
+          </a>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto"></ul>
           </div>
@@ -171,17 +173,14 @@ function NewLogin() {
             </div>
 
             <div className="d-grid">
-              <button
-                type="submit"
+              <input
+                type="button"
                 className="btn btn-primary"
                 value={isLoading ? "Logging in..." : "Login"}
-                // className={isLoading ? "loginButtonLoading" : "loginButton"}
                 onClick={loginHandler}
                 disabled={isLoading ? true : false}
                 style={{ background: "#4e2fff" }}
-              >
-                Submit
-              </button>
+              />
             </div>
             <p
               style={{ color: "white", fontWeight: "bold" }}

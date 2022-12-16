@@ -93,6 +93,10 @@ body {
   font-size: 16px;
   font-weight: normal;
   color: white;
+<<<<<<< HEAD
+=======
+  font-weight: bold;
+>>>>>>> 5b7c02c16746b13abddb6d1af618e1e3b886569f
 }
 
 .input-holder {

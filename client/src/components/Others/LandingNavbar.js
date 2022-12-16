@@ -11,8 +11,6 @@ import {
   NavLink,
   Nav,
   Container,
-  Row,
-  Col,
   UncontrolledTooltip
 } from "reactstrap";
 
