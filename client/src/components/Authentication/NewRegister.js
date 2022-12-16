@@ -147,11 +147,14 @@ function SignUp() {
       </Helmet>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
+          <a href="/" target="blank">
           <img
             src="./PG_logo.png"
             className="app-logo"
             style={{ width: "150px", height: "45px" }}
           ></img>
+
+          </a>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto"></ul>
           </div>
