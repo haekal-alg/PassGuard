@@ -1,5 +1,4 @@
 import React, {
-  Component,
   useRef,
   useState,
   useContext,
@@ -125,7 +124,8 @@ function NewLogin() {
         <div className="container">
           <img
             src="./PG_logo.png"
-            classname="app-logo"
+            alt="Logo"
+            className="app-logo"
             style={{ width: "150px", height: "45px" }}
           ></img>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
