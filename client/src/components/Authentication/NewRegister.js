@@ -151,7 +151,7 @@ function SignUp() {
         <div className="container">
           <img
             src="./PG_logo.png"
-            classname="app-logo"
+            className="app-logo"
             style={{ width: "150px", height: "45px" }}
           ></img>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -214,6 +214,8 @@ function SignUp() {
             <div className="mb-3">
               <br />
               <br />
+              {/* <br/> */}
+              {/* <br/> */}
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Re-type Master Password
                 <input
@@ -225,7 +227,7 @@ function SignUp() {
                 />
               </label>
               <i
-                class="eye-1"
+                className="eye-1"
                 onClick={togglePasswordVisiblity}
                 style={{ marginLeft: "5px", color: "white" }}
               >
@@ -246,7 +248,6 @@ function SignUp() {
             </div>
             <p
               className="forgot-password text-right"
-              aw
               style={{ color: "white", fontWeight: "bold" }}
             >
               <a href="/login" style={{ color: "white", fontWeight: "bold" }}>

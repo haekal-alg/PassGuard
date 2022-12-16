@@ -1,7 +1,6 @@
 import React, { useRef, useContext, useEffect, useState } from "react";
 import "./NewVault.css";
 import AuthContext from "store/auth-context";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,7 +18,6 @@ function NewVault() {
 	const authCtx = useContext(AuthContext);
 	const [isVaultChanged, setIsVaultChanged] = useState(false);
 	const [globalSymkey] = useState(localStorage.getItem("symkey"));
-	const navigate = useNavigate();
 
 	const nameRef = useRef(null);
 	const usernameRef = useRef(null);
@@ -42,11 +40,9 @@ function NewVault() {
 	const tempMessageNote = [];
 
 	// state
-	const [isShow, setisShow] = useState(false);
 	const [isNote, setisNote] = useState(false);
 	const [isEditLogin, setIsEditLogin] = useState(false);
 	const [isEditNote, setIsEditNote] = useState(false);
-	const [inputText, setInputText] = useState("");
 	const [indexEditNote, setIndexEditNote] = useState(0);
 	const [indexEditLogin, setIndexEditLogin] = useState(0);
 
