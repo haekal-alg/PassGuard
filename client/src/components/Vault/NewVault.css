@@ -14,6 +14,20 @@ body {
   width: 100%;
 }
 
+.iconProfile {
+  position: relative;
+  bottom: 14px;
+  left: 65%;
+}
+
+.profile {
+  color: white;
+  position: relative;
+  bottom: 6px;
+  left: 65.5%;
+  font-size: 20px;
+}
+
 .logoutButtonVault {
   position: relative;
   background-color: #5763a5;
@@ -26,7 +40,7 @@ body {
   border-radius: 5px;
   align-self: flex-end;
   bottom: 32px;
-  left: 79%;
+  left: 72%;
 }
 
 .main-container {
@@ -77,9 +91,8 @@ body {
 
 .detail-heading {
   font-size: 16px;
-  font-weight: normal;
-  color: white;
   font-weight: bold;
+  color: white;
 }
 
 .input-holder {
@@ -387,12 +400,23 @@ hr {
 }
 
 .website {
-  font-size: 12px;
+  font-size: 14px;
   margin: 2px;
   background: none !important;
   border: none;
   /*input has OS specific font-family*/
   color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.website-username {
+  font-size: 12px;
+  margin: 2px;
+  background: none !important;
+  border: none;
+  /*input has OS specific font-family*/
+  color: #B8E8FC;
   cursor: pointer;
   text-decoration: none;
 }
