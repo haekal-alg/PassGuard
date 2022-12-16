@@ -246,8 +246,6 @@ function SignUp() {
                 disabled={isLoading ? true : false}
                 style={{ background: "#4e2fff" }}
               />
-              {/* Sign Up
-              </button> */}
             </div>
             <p
               className="forgot-password text-right"

@@ -173,17 +173,14 @@ function NewLogin() {
             </div>
 
             <div className="d-grid">
-              <button
-                type="submit"
+              <input
+                type="button"
                 className="btn btn-primary"
                 value={isLoading ? "Logging in..." : "Login"}
-                // className={isLoading ? "loginButtonLoading" : "loginButton"}
                 onClick={loginHandler}
                 disabled={isLoading ? true : false}
                 style={{ background: "#4e2fff" }}
-              >
-                Submit
-              </button>
+              />
             </div>
             <p
               style={{ color: "white", fontWeight: "bold" }}
