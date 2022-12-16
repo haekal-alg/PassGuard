@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import LoginIcon from "@mui/icons-material/Login";
-import { orange, grey } from "@mui/material/colors";
+import { orange, grey, deepPurple } from "@mui/material/colors";
 import NoteIcon from "@mui/icons-material/Note";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import CommentIcon from "@mui/icons-material/Comment";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const cipher = require("libs/cipher");
 const hibp = require("libs/alertBreached");
@@ -192,6 +193,7 @@ function NewVault() {
 			const data = await response.json();
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
+				window.location.reload();
 			}
 			toast.success("Item successfully Edited");
 		} else {
@@ -256,6 +258,9 @@ function NewVault() {
 					<div className="list-content">
 						<button className="website" onClick={() => editLoginHandler(index)}>
 							{item}
+						</button>
+						<button className="website-username" onClick={() => editLoginHandler(index)}>
+							{authCtx.usernameLoginVault[index]}
 						</button>
 					</div>
 					<button type="button" className="del-btn" testid="delete">
@@ -478,10 +483,14 @@ function NewVault() {
 		setIsEditNote(false);
 	};
 	const editLoginHandler = (index) => {
+		setIsEditLogin(false);
 		setIsEditLogin(true);
 		setIndexEditLogin(index);
 	};
 	const editNoteHandler = (index) => {
+		console.log("edit");
+		setIsEditNote(true);
+		setIsEditNote(false);
 		setIsEditNote(true);
 		setIndexEditNote(index);
 	};
@@ -501,6 +510,8 @@ function NewVault() {
 				<>
 					<div className="navbar">
 						<img src="./PG_logo.png" className="app-logo" alt="app logo" />
+						<AccountCircleIcon sx={{ color: deepPurple[50] }} fontSize="large" className="iconProfile"/>
+						<p className="profile">{authCtx.vault.profile.name}</p>
 						<button className="logoutButtonVault" onClick={logoutHandler}>
 							logout
 						</button>
