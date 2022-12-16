@@ -154,6 +154,7 @@ function SignUp() {
             src="./PG_logo.png"
             className="app-logo"
             style={{ width: "150px", height: "45px" }}
+            alt="logo"
           ></img>
 
           </a>
