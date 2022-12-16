@@ -4,10 +4,14 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import detectZoom from "detect-zoom";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet";
+
+// import "./NewRegister.css"
+
 const eye = <FontAwesomeIcon icon={faEye} display={false} />;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} display={false} />;
+
 const cipher = require("../../libs/cipher");
 
 function disableZoom() {
@@ -167,68 +171,65 @@ function SignUp() {
                 ref={inputEmail}
                 className="form-control"
                 placeholder="Enter email"
+                style={{width: "315px"}}
               />
             </div>
             <div
               className="mb-3"
-              style={{ color: "white", fontWeight: "bold" }}
             >
-              <label>Username</label>
+              <label style={{ color: "white", fontWeight: "bold" }}>
+                Username</label>
               <input
                 type="text"
                 ref={inputUsername}
                 className="form-control"
                 placeholder="Enter username"
+                style={{width: "315px"}}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3" >
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Master Password
-              </label>
               <input
                 type={passwordShown ? "text" : "password"}
                 value={Masterpassword}
                 ref={inputMasterPassword}
                 className="form-control"
                 placeholder="Enter master password"
+                style={{width: "315px"}}
                 onChange={(e) => setMPValue(e.target.value)}
-              />{" "}
+              />
+              </label>
               <i
-                clssname="eye-1"
+                class="eye-1"
                 onClick={togglePasswordVisiblity}
-                style={{
-                  position: "absolute",
-                  top: "53%",
-                  right: "690px",
-                  onmouseover: "this.style.backgroundColor='#4e2fff'",
-                  onmouseout: "this.style.backgroundColor=''",
-                }}
+                style={{ marginLeft: '5px', color: "white"}}
               >
-                {eye}
+                {passwordShown ? eyeSlash : eye}
               </i>{" "}
               <PasswordStrengthMeter password={Masterpassword} />
             </div>
 
             <div className="mb-3">
+              <br/>
+              <br/>
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Re-type Master Password
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  ref={inputMasterPasswordRetype}
+                  className="form-control"
+                  placeholder="Enter master password"
+                  style={{width: "315px"}}
+                />
               </label>
-              <input
-                type={passwordShown ? "text" : "password"}
-                ref={inputMasterPasswordRetype}
-                className="form-control"
-                placeholder="Enter master password"
-              />
-              <span>
-                {" "}
-                <i
-                  className="eye-2"
-                  onClick={togglePasswordVisiblity}
-                  style={{ position: "absolute", top: "510px", right: "690px" }}
-                >
-                  {eye}
-                </i>{" "}
-              </span>
+              <i
+                class="eye-1"
+                onClick={togglePasswordVisiblity}
+                style={{ marginLeft: '5px', color: "white"}}
+              >
+                {passwordShown ? eyeSlash : eye}
+              </i>
             </div>
             <div className="d-grid">
               <input
@@ -246,9 +247,8 @@ function SignUp() {
               aw
               style={{ color: "white", fontWeight: "bold" }}
             >
-              Already have an{" "}
               <a href="/login" style={{ color: "white", fontWeight: "bold" }}>
-                account?
+              Already have an account?
               </a>
             </p>
           </form>

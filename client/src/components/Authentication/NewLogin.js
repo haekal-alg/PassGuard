@@ -5,12 +5,19 @@ import React, {
   useContext,
   useEffect,
 } from "react";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../../store/auth-context";
 import "react-toastify/dist/ReactToastify.css";
 import "./NewLogin.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} display={false} />;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} display={false} />;
+
 const cipher = require("../../libs/cipher");
+
 
 function NewLogin() {
   const navigate = useNavigate();
@@ -22,6 +29,13 @@ function NewLogin() {
       toast.success("Email is verified");
     }
   });
+
+ // Hide & show password
+ const [passwordShown, setPasswordShown] = useState(false);
+ const togglePasswordVisiblity = () => {
+   setPasswordShown(passwordShown ? false : true);
+ };
+
   const inputEmail = useRef(null);
   const inputMasterPassword = useRef(null);
 
@@ -97,9 +111,9 @@ function NewLogin() {
       //authCtx.login(data.idToken, new Date(Date.now() + 3000));
       navigate("/vault");
       // navigate("/test"); /* FOR TESTING ONLY. Real value is /vault */
-      alert("login success");
+      // alert("login success");
     } else if (data.status === "error") {
-      alert("gagal");
+      // alert("gagal");
       toast.error(data.message);
     } else {
       toast.error("The server seems to be down. Please try again.");
@@ -126,25 +140,34 @@ function NewLogin() {
             <div className="mb-3">
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Email address
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Enter email"
+                  ref={inputEmail}
+                  autoComplete="off"
+                  style={{width: "315px", marginTop: "5px"}}
+                />
               </label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter email"
-                ref={inputEmail}
-                autoComplete="off"
-              />
             </div>
             <div className="mb-3">
               <label style={{ color: "white", fontWeight: "bold" }}>
                 Password
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  className="form-control"
+                  placeholder="Enter password"
+                  ref={inputMasterPassword}
+                  style={{width: "315px", marginTop: "5px"}}
+                />
               </label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-                ref={inputMasterPassword}
-              />
+              <i
+                class="eye-1"
+                onClick={togglePasswordVisiblity}
+                style={{ marginLeft: '5px', color: "white"}}
+              >
+                {passwordShown ? eyeSlash : eye}
+              </i>
             </div>
 
             <div className="d-grid">
@@ -164,11 +187,11 @@ function NewLogin() {
               style={{ color: "white", fontWeight: "bold" }}
               className="forgot-password text-right"
             >
-              Don't have an{" "}
               <a
                 style={{ color: "white", fontWeight: "bold" }}
                 href="/register"
               >
+              Don't have an{" "}
                 account?
               </a>
             </p>
