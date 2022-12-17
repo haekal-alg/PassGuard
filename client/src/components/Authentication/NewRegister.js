@@ -140,124 +140,100 @@ function SignUp() {
   }
   const [Masterpassword, setMPValue] = useState("");
   return (
-    <div className="App">
-      <Helmet>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        ></meta>
-      </Helmet>
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <a href="/" target="blank">
-          <img
-            src="./PG_logo.png"
-            className="app-logo"
-            style={{ width: "150px", height: "45px" }}
-            alt="logo"
-          ></img>
+    <div className="auth-wrapper">
+      <div className="auth-inner">
+        <form>
+          <h3 style={{ color: "white", fontWeight: "bold" }}>Sign Up</h3>
 
-          </a>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto"></ul>
+          <div className="mb-3">
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Email address
+            </label>
+            <input
+              type="email"
+              ref={inputEmail}
+              className="form-control"
+              placeholder="Enter email"
+              style={{ width: "315px" }}
+            />
           </div>
-        </div>
-      </nav>
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <form>
-            <h3 style={{ color: "white", fontWeight: "bold" }}>Sign Up</h3>
-
-            <div className="mb-3">
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Email address
-              </label>
+          <div className="mb-3">
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Username
+            </label>
+            <input
+              type="text"
+              ref={inputUsername}
+              className="form-control"
+              placeholder="Enter username"
+              style={{ width: "315px" }}
+            />
+          </div>
+          <div className="mb-3">
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Master Password
               <input
-                type="email"
-                ref={inputEmail}
+                type={passwordShown ? "text" : "password"}
+                value={Masterpassword}
+                ref={inputMasterPassword}
                 className="form-control"
-                placeholder="Enter email"
+                placeholder="Enter master password"
                 style={{ width: "315px" }}
+                onChange={(e) => setMPValue(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Username
-              </label>
-              <input
-                type="text"
-                ref={inputUsername}
-                className="form-control"
-                placeholder="Enter username"
-                style={{ width: "315px" }}
-              />
-            </div>
-            <div className="mb-3">
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Master Password
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  value={Masterpassword}
-                  ref={inputMasterPassword}
-                  className="form-control"
-                  placeholder="Enter master password"
-                  style={{ width: "315px" }}
-                  onChange={(e) => setMPValue(e.target.value)}
-                />
-              </label>
-              <i
-                class="eye-1"
-                onClick={togglePasswordVisiblity}
-                style={{ marginLeft: "5px", color: "white" }}
-              >
-                {passwordShown ? eyeSlash : eye}
-              </i>{" "}
-              <PasswordStrengthMeter password={Masterpassword} />
-            </div>
-
-            <div className="mb-3">
-              <br />
-              <br />
-              {/* <br/> */}
-              {/* <br/> */}
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Re-type Master Password
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  ref={inputMasterPasswordRetype}
-                  className="form-control"
-                  placeholder="Enter master password"
-                  style={{ width: "315px" }}
-                />
-              </label>
-              <i
-                className="eye-1"
-                onClick={togglePasswordVisiblity}
-                style={{ marginLeft: "5px", color: "white" }}
-              >
-                {passwordShown ? eyeSlash : eye}
-              </i>
-            </div>
-            <div className="d-grid">
-              <input
-                type="button"
-                className="btn btn-primary"
-                onClick={createAccountHandler}
-                value={isLoading ? "Creating..." : "Submit"}
-                disabled={isLoading ? true : false}
-                style={{ background: "#4e2fff" }}
-              />
-            </div>
-            <p
-              className="forgot-password text-right"
-              style={{ color: "white", fontWeight: "bold" }}
+            </label>
+            <i
+              class="eye-1"
+              onClick={togglePasswordVisiblity}
+              style={{ marginLeft: "5px", color: "white" }}
             >
-              <a href="/login" style={{ color: "white", fontWeight: "bold" }}>
-                Already have an account?
-              </a>
-            </p>
-          </form>
-        </div>
+              {passwordShown ? eyeSlash : eye}
+            </i>{" "}
+            <PasswordStrengthMeter password={Masterpassword} />
+          </div>
+
+          <div className="mb-3">
+            <br />
+            <br />
+            {/* <br/> */}
+            {/* <br/> */}
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Re-type Master Password
+              <input
+                type={passwordShown ? "text" : "password"}
+                ref={inputMasterPasswordRetype}
+                className="form-control"
+                placeholder="Enter master password"
+                style={{ width: "315px" }}
+              />
+            </label>
+            <i
+              className="eye-1"
+              onClick={togglePasswordVisiblity}
+              style={{ marginLeft: "5px", color: "white" }}
+            >
+              {passwordShown ? eyeSlash : eye}
+            </i>
+          </div>
+          <div className="d-grid">
+            <input
+              type="button"
+              className="btn btn-primary"
+              onClick={createAccountHandler}
+              value={isLoading ? "Creating..." : "Submit"}
+              disabled={isLoading ? true : false}
+              style={{ background: "#4e2fff" }}
+            />
+          </div>
+          <p
+            className="forgot-password text-right"
+            style={{ color: "white", fontWeight: "bold" }}
+          >
+            <a href="/login" style={{ color: "white", fontWeight: "bold" }}>
+              Already have an account?
+            </a>
+          </p>
+        </form>
       </div>
     </div>
   );
