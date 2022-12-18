@@ -13,10 +13,12 @@ import LandingNavbar from "components/Others/LandingNavbar.js";
 class LandingPage extends Component {
   state = {};
   componentDidMount() {
+    document.title = "Home | PassGuard";
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
   render() {
     return (
       <>

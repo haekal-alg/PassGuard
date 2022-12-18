@@ -14,16 +14,9 @@ const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} display={false} />;
 
 const cipher = require("../../libs/cipher");
 
-function disableZoom() {
-  const metaTag = document.createElement("meta");
-  metaTag.name = "viewport";
-  metaTag.content =
-    "width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no";
-  document.getElementsByTagName("head")[0].appendChild(metaTag);
-}
 function SignUp() {
   useEffect(() => {
-    disableZoom();
+    document.title = "Create account | PassGuard";
   }, []);
   const navigate = useNavigate();
 

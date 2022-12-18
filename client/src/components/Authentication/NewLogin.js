@@ -13,6 +13,9 @@ const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} display={false} />;
 const cipher = require("../../libs/cipher");
 
 function NewLogin() {
+  useEffect(() => {
+    document.title = "Login | PassGuard";
+  }, []);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
