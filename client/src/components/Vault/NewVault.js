@@ -732,7 +732,7 @@ function NewVault() {
 										className="empty-image"
 										alt="no passwords"
 									/>
-									<p className="no-passwords">No Passwords</p>
+									<p className="no-passwords">There's No Login Info Item</p>
 									</div>
 								)}
 								{isTrueLogin && (
@@ -870,7 +870,7 @@ function NewVault() {
 										className="empty-image"
 										alt="no passwords"
 										/>
-										<p className="no-passwords">No Passwords</p>
+										<p className="no-passwords">There's No Secure Note Item</p>
 									</div>
 								)}
 								{isTrue && (
