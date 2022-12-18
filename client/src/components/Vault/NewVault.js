@@ -257,8 +257,13 @@ function NewVault() {
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
 				toast.success("Secure Note Item successfully Edited");
-				await delay(1000);
-				window.location.reload();
+				newNoteName.current.value = "";
+				newNoteMessage.current.value = "";
+				setisNote(false);
+				setisNote(true);
+				setIsEditNote(false);
+				// await delay(1000);
+				// window.location.reload();
 			}
 		} else {
 			toast.error("Please fill the required field");
