@@ -47,8 +47,8 @@ function NewVault() {
 	const [indexEditNote, setIndexEditNote] = useState(0);
 	const [indexEditLogin, setIndexEditLogin] = useState(0);
 
-	// console.log(indexEditNote);
-	// console.log(indexEditLogin);
+	console.log(indexEditNote);
+	console.log(indexEditLogin);
 
 	const logoutHandler = () => {
 		authCtx.logout();
@@ -153,7 +153,7 @@ function NewVault() {
 		parseData();
 	}, [isVaultChanged]);
 
-	// console.log(authCtx.vault);
+	console.log(authCtx.vault);
 
 	// Mengedit Item Vault
 	async function editLogin(item) {
@@ -397,7 +397,7 @@ function NewVault() {
 
 	// Add Item Vault
 	async function addLogin() {
-		if (nameRef !== "" && usernameRef !== "" && passwordRef !== "") {
+		if (nameRef.current.value !== "" && usernameRef.current.value !== "" && passwordRef.current.value !== "") {
 			let userData = {
 				name: nameRef.current.value,
 				username: usernameRef.current.value,
@@ -405,7 +405,7 @@ function NewVault() {
 			};
 
 			userData = await userDataEncryptionHandler(userData);
-			// console.log(userData);
+			console.log(userData);
 
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/user/loginInfo`,
@@ -420,7 +420,7 @@ function NewVault() {
 			);
 
 			const data = await response.json();
-			// console.log(data);
+			console.log(data);
 
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
@@ -432,17 +432,14 @@ function NewVault() {
 	}
 
 	async function addNote() {
-		if (
-			nameNoteRef.current.value !== "" &&
-			messageNoteRef.current.value !== ""
-		) {
+		if ( nameNoteRef.current.value !== "" && messageNoteRef.current.value !== "" ) {
 			let userData = {
 				name: nameNoteRef.current.value,
 				notes: messageNoteRef.current.value,
 			};
 
 			userData = await userDataEncryptionHandler(userData);
-			// console.log(userData);
+			console.log(userData);
 
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/user/secureNote`,
@@ -457,7 +454,7 @@ function NewVault() {
 			);
 
 			const data = await response.json();
-			// console.log(data);
+			console.log(data);
 
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
@@ -503,8 +500,9 @@ function NewVault() {
 				<>
 					<div className="navbar">
 						<img src="./PG_logo.png" className="app-logo" alt="app logo" />
-						<AccountCircleIcon sx={{ color: deepPurple[50] }} fontSize="large" className="iconProfile"/>
-						<p className="profile">{authCtx.vault.profile.name}</p>
+						<AccountCircleIcon sx={{ color: deepPurple[50] }} fontSize="medium" className="iconProfile"/>
+						<p className="profile">malikardiansyah7@gmail.com</p>
+						{/* <p className="profile">{authCtx.vault.profile.name}</p> */}
 						<button className="logoutButtonVault" onClick={logoutHandler}>
 							logout
 						</button>

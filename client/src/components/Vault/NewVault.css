@@ -17,15 +17,15 @@ body {
 .iconProfile {
   position: relative;
   bottom: 14px;
-  left: 65%;
+  margin-left: 50%;
 }
 
 .profile {
   color: white;
   position: relative;
   bottom: 6px;
-  left: 65.5%;
-  font-size: 20px;
+  margin-left: 10px;
+  font-size: 16px;
 }
 
 .logoutButtonVault {
@@ -40,7 +40,7 @@ body {
   border-radius: 5px;
   align-self: flex-end;
   bottom: 32px;
-  left: 72%;
+  margin-left: 20px;
 }
 
 .main-container {
@@ -366,7 +366,7 @@ hr {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 200px;
+  width: 290px;
   height: 80px;
   background-color: transparent;
   border-style: solid;
@@ -471,12 +471,6 @@ hr {
   .sub-div1-image1 {
     display: none;
   }
-  /* .sub-div1-image2 {
-		display: block;
-		width: 300px;
-		height: 200px;
-		margin-bottom: 18px;
-	} */
   .sub-div2 {
     min-height: 70vh;
   }

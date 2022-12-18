@@ -1,9 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../../store/auth-context";
@@ -17,7 +12,6 @@ const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} display={false} />;
 
 const cipher = require("../../libs/cipher");
 
-
 function NewLogin() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,11 +23,11 @@ function NewLogin() {
     }
   });
 
- // Hide & show password
- const [passwordShown, setPasswordShown] = useState(false);
- const togglePasswordVisiblity = () => {
-   setPasswordShown(passwordShown ? false : true);
- };
+  // Hide & show password
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   const inputEmail = useRef(null);
   const inputMasterPassword = useRef(null);
@@ -119,83 +113,62 @@ function NewLogin() {
     }
   }
   return (
-    <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <a href="/" target="blank">
-          <img
-            src="./PG_logo.png"
-            alt="Logo"
-            className="app-logo"
-            style={{ width: "150px", height: "45px" }}
-          ></img>
-          </a>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto"></ul>
-          </div>
-        </div>
-      </nav>
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <form>
-            <h3 style={{ color: "white", fontWeight: "bold" }}>Sign In</h3>
-            <div className="mb-3">
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Email address
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Enter email"
-                  ref={inputEmail}
-                  autoComplete="off"
-                  style={{width: "315px", marginTop: "5px"}}
-                />
-              </label>
-            </div>
-            <div className="mb-3">
-              <label style={{ color: "white", fontWeight: "bold" }}>
-                Password
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  className="form-control"
-                  placeholder="Enter password"
-                  ref={inputMasterPassword}
-                  style={{width: "315px", marginTop: "5px"}}
-                />
-              </label>
-              <i
-                class="eye-1"
-                onClick={togglePasswordVisiblity}
-                style={{ marginLeft: '5px', color: "white"}}
-              >
-                {passwordShown ? eyeSlash : eye}
-              </i>
-            </div>
-
-            <div className="d-grid">
+    <div className="auth-wrapper">
+      <div className="auth-inner">
+        <form>
+          <h3 style={{ color: "white", fontWeight: "bold" }}>Sign In</h3>
+          <div className="mb-3">
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Email address
               <input
-                type="button"
-                className="btn btn-primary"
-                value={isLoading ? "Logging in..." : "Login"}
-                onClick={loginHandler}
-                disabled={isLoading ? true : false}
-                style={{ background: "#4e2fff" }}
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                ref={inputEmail}
+                autoComplete="off"
+                style={{ width: "315px", marginTop: "5px" }}
               />
-            </div>
-            <p
-              style={{ color: "white", fontWeight: "bold" }}
-              className="forgot-password text-right"
+            </label>
+          </div>
+          <div className="mb-3">
+            <label style={{ color: "white", fontWeight: "bold" }}>
+              Password
+              <input
+                type={passwordShown ? "text" : "password"}
+                className="form-control"
+                placeholder="Enter password"
+                ref={inputMasterPassword}
+                style={{ width: "315px", marginTop: "5px" }}
+              />
+            </label>
+            <i
+              class="eye-1"
+              onClick={togglePasswordVisiblity}
+              style={{ marginLeft: "5px", color: "white" }}
             >
-              <a
-                style={{ color: "white", fontWeight: "bold" }}
-                href="/register"
-              >
-              Don't have an{" "}
-                account?
-              </a>
-            </p>
-          </form>
-        </div>
+              {passwordShown ? eyeSlash : eye}
+            </i>
+          </div>
+
+          <div className="d-grid">
+            <input
+              type="button"
+              className="btn btn-primary"
+              value={isLoading ? "Logging in..." : "Login"}
+              onClick={loginHandler}
+              disabled={isLoading ? true : false}
+              style={{ background: "#4e2fff" }}
+            />
+          </div>
+          <p
+            style={{ color: "white", fontWeight: "bold" }}
+            className="forgot-password text-right"
+          >
+            <a style={{ color: "white", fontWeight: "bold" }} href="/register">
+              Don't have an account?
+            </a>
+          </p>
+        </form>
       </div>
     </div>
   );
