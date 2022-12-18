@@ -47,8 +47,8 @@ function NewVault() {
   const [indexEditNote, setIndexEditNote] = useState(0);
   const [indexEditLogin, setIndexEditLogin] = useState(0);
 
-  console.log(indexEditNote);
-  console.log(indexEditLogin);
+  // console.log(indexEditNote);
+  // console.log(indexEditLogin);
 
   const logoutHandler = () => {
     authCtx.logout();

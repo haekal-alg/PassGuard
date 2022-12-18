@@ -50,7 +50,7 @@ class DemoNavbar extends Component {
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img
                   alt="..."
-                  src={require("assets/img/brand/PG_logo_white.png").default}
+                  src={require("assets/img/brand/PG_logo_large.png").default}
                 />
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">

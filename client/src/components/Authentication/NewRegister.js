@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
 
 // import "./NewRegister.css"
 
