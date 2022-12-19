@@ -7,30 +7,26 @@
 	font-family: "Roboto", sans-serif;
   }
   
-  .navbar {
-	  position: relative;
+  .navbar-vault {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	width: 100%;
   }
   
-  .navbar > * {
-	  position: absolute;
-  }
-  
   .iconProfile {
 	position: relative;
-	bottom: 18px;
-	margin-left: 18%;
+	margin-left: 4%;
+	top: 4px;
   }
   
   .profile {
 	color: white;
 	position: relative;
-	bottom: 10px;
-	margin-left: 10px;
+	margin-left: 8px;
 	font-size: 20px;
+	top: 4px;
   }
   
   .logoutButtonVault {
@@ -44,11 +40,10 @@
 	outline: none;
 	border-radius: 5px;
 	align-self: flex-end;
-	bottom: 36px;
+	bottom: 26px;
 	right: 0px;
 	margin-left: 20px;
   }
-  
   
   .main-container {
 	display: flex;

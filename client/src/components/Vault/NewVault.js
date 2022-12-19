@@ -105,12 +105,12 @@ function NewVault() {
 			// Parse encrypted user data
 			if (globalSymkey === null) {
 				symkey = Buffer.from(symkey, "base64");
+				window.location.reload();
 			}
 			else {
 				symkey = Buffer.from(globalSymkey, "base64");
 			}
 
-			// Parse encrypted user data
 			if (data.noteData.length === 0) {
 				setiIsTrue(false);
 			}
@@ -511,8 +511,8 @@ function NewVault() {
 		setIndexEditLogin(index);
 		setIsEditLogin(true);
 	};
-	const editNoteHandler = (index) => {
-		setIndexEditNote(index);
+	const editNoteHandler = async(index) => {
+		console.log(indexEditNote);
 		setIsEditNote(true);
 	};
 
@@ -529,7 +529,7 @@ function NewVault() {
 		<div className="main-container">
 			{authCtx.vault && (
 				<>
-					<div className="navbar">
+					<div className="navbar-vault">
 						<img src="PG_logo.png" className="app-logo" alt="app logo" />
 						<AccountCircleIcon sx={{ color: deepPurple[50] }} fontSize="large" className="iconProfile"/>
 						<p className="profile">{authCtx.vault.profile.name}</p>
