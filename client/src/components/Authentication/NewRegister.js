@@ -118,7 +118,7 @@ function SignUp() {
         <div>
           <strong>{data.message}</strong>
           <br />
-          Please check your inbox folder and/or spam folder to confirm your
+          Please check your inbox folder or spam folder to confirm your
           email
         </div>,
         { autoClose: 6500 }

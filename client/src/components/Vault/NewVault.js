@@ -16,6 +16,10 @@ const hibp = require("libs/alertBreached");
 var generator = require("generate-password");
 
 function NewVault() {
+  useEffect(() => {
+	document.title = "Vaults | PassGuard";
+  }, []);
+
 	const authCtx = useContext(AuthContext);
 	const [isVaultChanged, setIsVaultChanged] = useState(false);
 	const [globalSymkey] = useState(localStorage.getItem("symkey"));
