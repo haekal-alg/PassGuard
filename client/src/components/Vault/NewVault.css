@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 * {
 	box-sizing: border-box;
   }
   
   body {
 	margin: 0;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Roboto';
   }
   
   .navbar-vault {
@@ -22,20 +23,21 @@
   }
   
   .profile {
-	color: white;
+	color: #5763a5;
 	position: relative;
 	margin-left: 8px;
 	font-size: 20px;
 	top: 4px;
+	font-weight: 500;
   }
   
   .logoutButtonVault {
 	position: absolute;
 	background-color: #5763a5;
 	color: white;
-	font-size: 20px;
+	font-size: 18px;
 	width: 80px;
-	padding: 5px;
+	padding: 10px 10px 10px 10px;
 	border-style: none;
 	outline: none;
 	border-radius: 5px;
@@ -56,7 +58,7 @@
 	background-color: #9ba9eb;
 	padding-left: 100px;
 	padding-right: 100px;
-	font-family: "Roboto";
+	font-family: 'Roboto';
   }
   
   .app-logo {
@@ -93,7 +95,7 @@
   
   .detail-heading {
 	font-size: 16px;
-	font-weight: bold;
+	/* font-weight: bold; */
 	color: white;
   }
   
@@ -179,7 +181,7 @@
 	align-self: flex-end;
   }
   
-  .check-btn {
+  .check-btn, .check-btn-edit {
 	background-color: #0b69ff;
 	color: white;
 	font-size: 10px;
@@ -192,7 +194,7 @@
 	margin-right: 20px;
   }
   
-  .generate-btn {
+  .generate-btn, .generate-btn-edit {
 	background-color: #0b69ff;
 	color: white;
 	font-size: 10px;

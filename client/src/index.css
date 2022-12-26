@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
 * {
   box-sizing: border-box;
 }
@@ -7,7 +7,7 @@ body {
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 h1,
 h2,
@@ -17,8 +17,8 @@ h5,
 h6,
 label,
 span {
-  font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  /* font-weight: 500 */
+  font-family: 'Roboto', sans-serif;
 }
 body,
 html,
