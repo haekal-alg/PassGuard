@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import NotFoundPage from "components/Others/NotFoundPage";
-import LandingPage from "components/Others/LandingPage.js";
-import NewVault from "components/Vault/NewVault";
-
-import AuthContext from "store/auth-context";
-
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import NewLogin from "./components/Authentication/NewLogin";
+import LandingPage from "components/Others/LandingPage.js";
 import NewRegister from "./components/Authentication/NewRegister";
+import NewLogin from "./components/Authentication/NewLogin";
+import NewVault from "components/Vault/NewVault";
+import NotFoundPage from "components/Others/NotFoundPage";
+
+import AuthContext from "store/auth-context";
 
 function App() {
   const authCtx = useContext(AuthContext);

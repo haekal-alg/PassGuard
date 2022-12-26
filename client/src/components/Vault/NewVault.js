@@ -1,8 +1,8 @@
 import React, { useRef, useContext, useEffect, useState } from "react";
-import "./NewVault.css";
 import AuthContext from "store/auth-context";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./NewVault.css";
 
 import LoginIcon from "@mui/icons-material/Login";
 import { orange, grey, deepPurple } from "@mui/material/colors";
@@ -13,12 +13,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const cipher = require("libs/cipher");
 const hibp = require("libs/alertBreached");
-var generator = require("generate-password");
+const generator = require("generate-password");
 
 function NewVault() {
-  useEffect(() => {
-	document.title = "Vaults | PassGuard";
-  }, []);
+	useEffect(() => {
+		document.title = "Vaults | PassGuard";
+	}, []);
 
 	const authCtx = useContext(AuthContext);
 	const [isVaultChanged, setIsVaultChanged] = useState(false);
@@ -31,12 +31,12 @@ function NewVault() {
 	const nameNoteRef = useRef(null);
 	const messageNoteRef = useRef(null);
 
-	const newNoteName = useRef(null);
-	const newNoteMessage = useRef(null);
+	const newNoteNameRef = useRef(null);
+	const newNoteMessageRef = useRef(null);
+	const newLoginNameRef = useRef(null);
 
-	const newLoginName = useRef(null);
 	const newUsername = useRef(null);
-	const newPassword = useRef(null);
+	const newPasswordRef = useRef(null);
 
 	const tempNameLogin = [];
 	const tempUsernameLogin = [];
@@ -44,7 +44,7 @@ function NewVault() {
 	const tempNameNote = [];
 	const tempMessageNote = [];
 
-	// state
+	// states
 	const [isNote, setisNote] = useState(false);
 	const [isEditLogin, setIsEditLogin] = useState(false);
 	const [isEditNote, setIsEditNote] = useState(false);
@@ -53,12 +53,16 @@ function NewVault() {
 	const [indexEditNote, setIndexEditNote] = useState(0);
 	const [indexEditLogin, setIndexEditLogin] = useState(0);
 
+	const authHeader =  {
+		"Content-type": "application/json",
+		Authorization: "Bearer " + authCtx.token,
+	}
+
 	const logoutHandler = () => {
 		authCtx.logout();
 	};
 
 	useEffect(() => {
-		/* [TODO] add validation. if error occured do not sync */
 		async function syncVault() {
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/sync`,
@@ -67,7 +71,6 @@ function NewVault() {
 				}
 			);
 			const data = await response.json();
-			//console.log("syncvault() => ", data)
 
 			// store user data in memory
 			authCtx.sync(data);
@@ -171,107 +174,81 @@ function NewVault() {
 		parseData();
 	}, [isVaultChanged]);
 
-	// console.log(authCtx.vault);
-	const delay = ms => new Promise(
-		resolve => setTimeout(resolve, ms)
-	);
-	  
+	// return a json object with all its values encrypted
+	async function userDataEncryptionHandler(userData) {
+		const symkey = Buffer.from(globalSymkey, "base64");
+		const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
 
-	// Mengedit Item Vault
+		for (let key in userData) {
+			const encrypted = cipher.aes256Encrypt(iv, userData[key], symkey); 	// encrypt
+			userData[key] = Buffer.from(encrypted).toString("base64"); 			// base64 encode
+			userData[key] = encodeURIComponent(userData[key]); 					// URI encode
+		}
+
+		return userData;
+	}
+
 	async function editLogin(item) {
-		if ( newLoginName.current.value !== "" && newUsername.current.value !== "" && newPassword.current.value !== "" ) {
-			const symkey = Buffer.from(globalSymkey, "base64");
-			const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
+		const loginName = newLoginNameRef.current.value;
+		const loginUsername = newUsername.current.value;
+		const loginPassword = newPasswordRef.current.value;
 
-			const encryptedNewLoginName = cipher.aes256Encrypt(iv, newLoginName.current.value, symkey); // encrypt
-			newLoginName.current.value = Buffer.from(encryptedNewLoginName).toString("base64"); // encode with base64
-			let encodeName = encodeURIComponent(newLoginName.current.value);
-
-			const encryptedNewLoginUsername = cipher.aes256Encrypt(iv, newUsername.current.value, symkey); // encrypt
-			newUsername.current.value = Buffer.from(encryptedNewLoginUsername).toString("base64"); // encode with base64
-			let encodeUsername = encodeURIComponent(newUsername.current.value);
-
-			const encryptedNewLoginPassword = cipher.aes256Encrypt(iv, newPassword.current.value, symkey); // encrypt
-			newPassword.current.value = Buffer.from(encryptedNewLoginPassword).toString("base64"); // encode with base64
-			let encodePassword = encodeURIComponent(newPassword.current.value);
-
-
-			// send data to server to update data
-			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/api/user/loginInfo?loginInfoId=${item.loginInfoId}&name=${encodeName}&username=${encodeUsername}&password=${encodePassword}`,
-				{
-					method: "PATCH",
-					headers: {
-						"Content-type": "application/json",
-						Authorization: "Bearer " + authCtx.token,
-					},
-				}
-			);
-
-			const data = await response.json();
-			if (!(data.status && data.status === "error")) {
-				setIsVaultChanged(true);
-				toast.success("Login Info Item successfully Edited");
-				await delay(1000);
-				window.location.reload();
-			}
-		} else {
+		if (loginName === "" || loginUsername === "" || loginPassword === "") {
 			toast.error("Please fill the required field");
+			return;
+		}
+
+		let userData = {
+			name: loginName,
+			username: loginUsername,
+			password: loginPassword
+		}
+		userData = await userDataEncryptionHandler(userData);
+
+		const url = `${process.env.REACT_APP_API_URL}/api/user/loginInfo?
+					loginInfoId=${item.loginInfoId}&name=${userData.name}&username=${userData.username}&password=${userData.password}`
+					
+		const response = await fetch(url, { method: "PATCH", headers: authHeader });
+		const data = await response.json();
+
+		if (!(data.status && data.status === "error")) {
+			setIsVaultChanged(true);
+			setIsEditLogin(false);
+
+			toast.success("Login Info Item successfully Edited");
 		}
 	}
 
 	async function editNote(item) {
-		if (newNoteName !== "" && newNoteMessage !== "") {
-			const symkey = Buffer.from(globalSymkey, "base64");
-			const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
-
-			const encryptedNewNoteName = cipher.aes256Encrypt(
-				iv,
-				newNoteName.current.value,
-				symkey
-			); // encrypt
-			newNoteName.current.value = Buffer.from(encryptedNewNoteName).toString("base64"); // encode with base64
-			let encodeNoteName = encodeURIComponent(newNoteName.current.value);
-
-			const encryptedNewNoteMessage = cipher.aes256Encrypt(
-				iv,
-				newNoteMessage.current.value,
-				symkey
-			); // encrypt
-			newNoteMessage.current.value = Buffer.from(encryptedNewNoteMessage).toString("base64"); // encode with base64
-			let encodeNoteMessage = encodeURIComponent(newNoteMessage.current.value);
-
-			// send data to server to update data
-			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/api/user/secureNote?secureNoteId=${item.secureNoteId}&name=${encodeNoteMessage}&notes=${encodeNoteName}`,
-				{
-					method: "PATCH",
-					headers: {
-						"Content-type": "application/json",
-						Authorization: "Bearer " + authCtx.token,
-					},
-				}
-			);
-
-			const data = await response.json();
-			
-			if (!(data.status && data.status === "error")) {
-				setIsVaultChanged(true);
-				toast.success("Secure Note Item successfully Edited");
-				newNoteName.current.value = "";
-				newNoteMessage.current.value = "";
-				setisNote(false);
-				setisNote(true);
-				setIsEditNote(false);
-				// await delay(1000);
-				// window.location.reload();
-			}
-		} else {
+		const noteName = newNoteNameRef.current.value;
+		const noteMessage = newNoteMessageRef.current.value;
+		
+		if (noteName === "" || noteMessage === "") {
 			toast.error("Please fill the required field");
+			return;
+		}
+
+		let userData = { name: noteName, message: noteMessage }
+		userData = await userDataEncryptionHandler(userData);
+
+		const url = `${process.env.REACT_APP_API_URL}/api/user/secureNote?
+					secureNoteId=${item.secureNoteId}&name=${userData.name}&notes=${userData.message}`;
+
+		const response = await fetch(url, { method: "PATCH", headers: authHeader });
+		const data = await response.json();
+		
+		if (!(data.status && data.status === "error")) {
+			newNoteNameRef.current.value = "";
+			newNoteMessageRef.current.value = "";
+
+			setIsVaultChanged(true);
+			setIsEditNote(false);
+
+			toast.success("Secure note is successfully edited");
 		}
 	}
 
-	// Menampilkan Item Vault
+	/* Displays vault items */
 	function displayLogin(item, index) {
 		return (
 			<>
@@ -327,101 +304,58 @@ function NewVault() {
 		);
 	}
 
-	// Delete Item Vault
 	async function deleteNote(item) {
-		const response = await fetch(
-			`${process.env.REACT_APP_API_URL}/api/user/secureNote?secureNoteId=${item.secureNoteId}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-type": "application/json",
-					Authorization: "Bearer " + authCtx.token,
-				},
-			}
-		);
-
+		const url = `${process.env.REACT_APP_API_URL}/api/user/secureNote?secureNoteId=${item.secureNoteId}`;
+		const response = await fetch(url, { method: "DELETE", headers: authHeader });
 		const data = await response.json();
+
 		if (!(data.status && data.status === "error")) {
 			setIsVaultChanged(true);
 			toast.success("Item successfully deleted");
-		} // has to exist for every handler that changes the vault
+		}
 	}
 
 	async function deleteLogin(item) {
-		const response = await fetch(
-			`${process.env.REACT_APP_API_URL}/api/user/loginInfo?loginInfoId=${item.loginInfoId}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-type": "application/json",
-					Authorization: "Bearer " + authCtx.token,
-				},
-			}
-		);
-
+		const url = `${process.env.REACT_APP_API_URL}/api/user/loginInfo?loginInfoId=${item.loginInfoId}`;
+		const response = await fetch(url, { method: "DELETE", headers: authHeader });
 		const data = await response.json();
+
 		if (!(data.status && data.status === "error")) {
 			setIsVaultChanged(true);
 			toast.success("Item successfully deleted");
-		} // has to exist for every handler that changes the vault
-	}
-
-	// return a json object with all its values encrypted
-	async function userDataEncryptionHandler(userData) {
-		const symkey = Buffer.from(globalSymkey, "base64");
-		const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
-
-		for (let key in userData) {
-			const encrypted = cipher.aes256Encrypt(iv, userData[key], symkey); // encrypt
-			userData[key] = Buffer.from(encrypted).toString("base64"); // encode with base64
-			userData[key] = encodeURIComponent(userData[key]);
 		}
-
-		return userData;
 	}
+
 
 	/* Check for breached password */
-	const check = async () => {
-		const text = passwordRef.current.value;
+	const checkBreached = async (event) => {
+		let text;
+
+		if (event.target.className === "check-btn-edit") text = newPasswordRef.current.value;
+		else text = passwordRef.current.value;
 
 		if (text === "") {
 			toast.error("Please fill the password field");
 			return;
 		}
-		const times = await hibp.checkBreachedPassword(text);
-		toast.info("Your password has been breached " + times + " times");
-	};
 
-	const checkEdit = async () => {
-		const text = newPassword.current.value;
-
-		if (text === "") {
-			toast.error("Please fill the password field");
-			return;
-		}
 		const times = await hibp.checkBreachedPassword(text);
 		toast.info("Your password has been breached " + times + " times");
 	};
 
 	/* Generate secure random password */
-	const generateSecurePassword = () => {
+	const generateSecurePassword = (event) => {
 		const password = generator.generate({
 			length: 14,
 			numbers: true,
 			uppercase: true,
 			excludeSimilarCharacters: true,
 		});
-		passwordRef.current.value = password;
-	};
 
-	const generateSecurePasswordEdit = () => {
-		const password = generator.generate({
-			length: 14,
-			numbers: true,
-			uppercase: true,
-			excludeSimilarCharacters: true,
-		});
-		newPassword.current.value = password;
+		if (event.target.className === "generate-btn-edit")
+			newPasswordRef.current.value = password;
+		else
+			passwordRef.current.value = password;
 	};
 
 	// Add Item Vault
@@ -471,7 +405,6 @@ function NewVault() {
 			};
 
 			userData = await userDataEncryptionHandler(userData);
-			// console.log(userData);
 
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/api/user/secureNote`,
@@ -486,7 +419,6 @@ function NewVault() {
 			);
 
 			const data = await response.json();
-			// console.log(data);
 
 			if (!(data.status && data.status === "error")) {
 				setIsVaultChanged(true);
@@ -499,30 +431,68 @@ function NewVault() {
 		}
 	}
 
-	// conditional rendering
+	// for conditional rendering
 	const noteHandler = () => {
 		setisNote(true);
 		setIsEditLogin(false);
 	};
+
 	const loginHandler = () => {
 		setisNote(false);
 		setIsEditNote(false);
 	};
+
+	// handles button click for each login info item
 	const editLoginHandler = (index) => {
 		setIndexEditLogin(index);
 		setIsEditLogin(true);
+
+		setNewLoginNameValue(authCtx.nameLoginVault[index]);
+		setNewLoginUsernameValue(authCtx.usernameLoginVault[index]);
+		setNewLoginPasswordValue(authCtx.passwordLoginVault[index]);
 	};
+
 	const editNoteHandler = async(index) => {
 		setIndexEditNote(index);
 		setIsEditNote(true);
+
+		setNewNoteNameValue(authCtx.nameNoteVault[index]);
+		setNewNoteMessageValue(authCtx.messageNoteVault[index]);
 	};
 
-	// Toogle Password Visibility
-	const [passwordShown, setPasswordShown] = useState(false);
-
 	// Password toggle handler
+	const [passwordShown, setPasswordShown] = useState(false);
 	const togglePassword = () => {
 		setPasswordShown(!passwordShown);
+	};
+	
+	/* HANDLERS FOR LOGININFO FORMS IN EDIT MODE */
+	const [newLoginNameValue, setNewLoginNameValue] = useState("");
+	const [newLoginUsernameValue, setNewLoginUsernameValue] = useState("");
+	const [newLoginPasswordValue, setNewLoginPasswordValue] = useState("");
+
+	const handleEditLoginName = event => {
+		setNewLoginNameValue(event.target.value);
+	};
+
+	const handleEditLoginUsername = event => {
+		setNewLoginUsernameValue(event.target.value);
+	};
+
+	const handleEditLoginPassword = event => {
+		setNewLoginPasswordValue(event.target.value);
+	};
+
+	/* HANDLERS FOR SECURENOTE FORMS IN EDIT MODE */
+	const [newNoteNameValue, setNewNoteNameValue] = useState("");
+	const [newNoteMessageValue, setNewNoteMessageValue] = useState("");
+
+	const handleEditNoteName = event => {
+		setNewNoteNameValue(event.target.value);
+	};
+
+	const handleEditNoteMessage = event => {
+		setNewNoteMessageValue(event.target.value);
 	};
 
 	// yang akan ditampilkan di browser
@@ -535,7 +505,7 @@ function NewVault() {
 						<AccountCircleIcon sx={{ color: deepPurple[50] }} fontSize="large" className="iconProfile"/>
 						<p className="profile">{authCtx.vault.profile.name}</p>
 						<button className="logoutButtonVault" onClick={logoutHandler}>
-							logout
+							Logout
 						</button>
 					</div>
 					{!isNote && (
@@ -595,13 +565,13 @@ function NewVault() {
 												<input
 													type="button"
 													value="Alert Breached"
-													onClick={check}
+													onClick={checkBreached}
 													className="check-btn"
 												/>
 												<input
 													type="button"
 													value="Generate Password"
-													onClick={() => generateSecurePassword()}
+													onClick={generateSecurePassword}
 													className="generate-btn"
 												/>
 												<input
@@ -633,8 +603,9 @@ function NewVault() {
 													type="text"
 													className="input-element"
 													placeholder="Enter Website Name"
-													ref={newLoginName}
-													defaultValue={authCtx.nameLoginVault[indexEditLogin]}
+													ref={newLoginNameRef}
+													value={newLoginNameValue}
+													onChange={handleEditLoginName}
 												/>
 											</div>
 
@@ -649,9 +620,8 @@ function NewVault() {
 													className="input-element"
 													placeholder="Enter Username"
 													ref={newUsername}
-													defaultValue={
-														authCtx.usernameLoginVault[indexEditLogin]
-													}
+													value={newLoginUsernameValue}
+													onChange={handleEditLoginUsername}
 												/>
 											</div>
 											<div className="input-holder">
@@ -664,10 +634,9 @@ function NewVault() {
 													type={passwordShown ? "text" : "password"}
 													className="input-element"
 													placeholder="Enter Password"
-													ref={newPassword}
-													defaultValue={
-														authCtx.passwordLoginVault[indexEditLogin]
-													}
+													ref={newPasswordRef}
+													value={newLoginPasswordValue}
+													onChange={handleEditLoginPassword}
 												/>
 												<input
 													type="button"
@@ -679,14 +648,14 @@ function NewVault() {
 											<div className="button">
 												<input
 													type="button"
-													onClick={checkEdit}
-													className="check-btn"
+													onClick={checkBreached}
+													className="check-btn-edit"
 													value="Alert Breached"
 												/>
 												<input
 													type="button"
-													onClick={() => generateSecurePasswordEdit()}
-													className="generate-btn"
+													onClick={generateSecurePassword}
+													className="generate-btn-edit"
 													value="Generate Password"
 												/>
 												<input
@@ -766,7 +735,7 @@ function NewVault() {
 													type="text"
 													className="input-element"
 													placeholder="Enter Note Name"
-													ref={messageNoteRef}
+													ref={nameNoteRef}
 												/>
 											</div>
 
@@ -779,7 +748,7 @@ function NewVault() {
 												<textarea
 													className="input-element-message"
 													placeholder="Enter Message"
-													ref={nameNoteRef}
+													ref={messageNoteRef}
 												/>
 											</div>
 											<input
@@ -810,8 +779,9 @@ function NewVault() {
 													type="text"
 													className="input-element"
 													placeholder="Enter Note Name"
-													ref={newNoteName}
-													defaultValue={authCtx.messageNoteVault[indexEditNote]}
+													ref={newNoteNameRef}
+													value={newNoteNameValue}
+													onChange={handleEditNoteName}
 												/>
 											</div>
 
@@ -824,8 +794,9 @@ function NewVault() {
 												<textarea
 													className="input-element-message"
 													placeholder="Enter Message"
-													ref={newNoteMessage}
-													defaultValue={authCtx.nameNoteVault[indexEditNote]}
+													ref={newNoteMessageRef}
+													value={newNoteMessageValue}
+													onChange={handleEditNoteMessage}
 												/>
 											</div>
 											<input
@@ -881,7 +852,7 @@ function NewVault() {
 								)}
 								{isTrue && (
 									<ul className="result-container">
-										{authCtx.messageNoteVault.map(displayNote)}
+										{authCtx.nameNoteVault.map(displayNote)}
 									</ul>
 								)}
 							</div>
