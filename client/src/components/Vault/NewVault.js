@@ -16,9 +16,9 @@ const hibp = require("libs/alertBreached");
 var generator = require("generate-password");
 
 function NewVault() {
-  useEffect(() => {
-	document.title = "Vaults | PassGuard";
-  }, []);
+	useEffect(() => {
+		document.title = "Vaults | PassGuard";
+	}, []);
 
 	const authCtx = useContext(AuthContext);
 	const [isVaultChanged, setIsVaultChanged] = useState(false);
@@ -34,7 +34,8 @@ function NewVault() {
 	const newNoteName = useRef(null);
 	const newNoteMessage = useRef(null);
 
-	const newLoginName = useRef(null);
+	const newLoginNameRef = useRef(null);
+
 	const newUsername = useRef(null);
 	const newPassword = useRef(null);
 
@@ -179,13 +180,13 @@ function NewVault() {
 
 	// Mengedit Item Vault
 	async function editLogin(item) {
-		if ( newLoginName.current.value !== "" && newUsername.current.value !== "" && newPassword.current.value !== "" ) {
+		if ( newLoginNameRef.current.value !== "" && newUsername.current.value !== "" && newPassword.current.value !== "" ) {
 			const symkey = Buffer.from(globalSymkey, "base64");
 			const iv = Buffer.from(authCtx.vault.profile.iv, "base64");
 
-			const encryptedNewLoginName = cipher.aes256Encrypt(iv, newLoginName.current.value, symkey); // encrypt
-			newLoginName.current.value = Buffer.from(encryptedNewLoginName).toString("base64"); // encode with base64
-			let encodeName = encodeURIComponent(newLoginName.current.value);
+			const encryptedNewLoginName = cipher.aes256Encrypt(iv, newLoginNameRef.current.value, symkey); // encrypt
+			newLoginNameRef.current.value = Buffer.from(encryptedNewLoginName).toString("base64"); // encode with base64
+			let encodeName = encodeURIComponent(newLoginNameRef.current.value);
 
 			const encryptedNewLoginUsername = cipher.aes256Encrypt(iv, newUsername.current.value, symkey); // encrypt
 			newUsername.current.value = Buffer.from(encryptedNewLoginUsername).toString("base64"); // encode with base64
@@ -499,30 +500,68 @@ function NewVault() {
 		}
 	}
 
-	// conditional rendering
+	// for conditional rendering
 	const noteHandler = () => {
 		setisNote(true);
 		setIsEditLogin(false);
 	};
+
 	const loginHandler = () => {
 		setisNote(false);
 		setIsEditNote(false);
 	};
+
+	// handles button click for each login info item
 	const editLoginHandler = (index) => {
 		setIndexEditLogin(index);
 		setIsEditLogin(true);
+
+		setNewLoginNameValue(authCtx.nameLoginVault[index]);
+		setNewLoginUsernameValue(authCtx.usernameLoginVault[index]);
+		setNewLoginPasswordValue(authCtx.passwordLoginVault[index]);
 	};
+
 	const editNoteHandler = async(index) => {
 		setIndexEditNote(index);
 		setIsEditNote(true);
+
+		setNewNoteNameValue(authCtx.nameNoteVault[index]);
+		setNewNoteMessageValue(authCtx.nameNoteVault[index]);
 	};
 
-	// Toogle Password Visibility
-	const [passwordShown, setPasswordShown] = useState(false);
-
 	// Password toggle handler
+	const [passwordShown, setPasswordShown] = useState(false);
 	const togglePassword = () => {
 		setPasswordShown(!passwordShown);
+	};
+	
+	/* HANDLERS FOR LOGININFO FORMS IN EDIT MODE */
+	const [newLoginNameValue, setNewLoginNameValue] = useState("");
+	const [newLoginUsernameValue, setNewLoginUsernameValue] = useState("");
+	const [newLoginPasswordValue, setNewLoginPasswordValue] = useState("");
+
+	const handleEditLoginName = event => {
+		setNewLoginNameValue(event.target.value);
+	};
+
+	const handleEditLoginUsername = event => {
+		setNewLoginUsernameValue(event.target.value);
+	};
+
+	const handleEditLoginPassword = event => {
+		setNewLoginPasswordValue(event.target.value);
+	};
+
+	/* HANDLERS FOR SECURENOTE FORMS IN EDIT MODE */
+	const [newNoteNameValue, setNewNoteNameValue] = useState("");
+	const [newNoteMessageValue, setNewNoteMessageValue] = useState("");
+
+	const handleEditNoteName = event => {
+		setNewNoteNameValue(event.target.value);
+	};
+
+	const handleEditNoteMessage = event => {
+		setNewNoteMessageValue(event.target.value);
 	};
 
 	// yang akan ditampilkan di browser
@@ -633,8 +672,9 @@ function NewVault() {
 													type="text"
 													className="input-element"
 													placeholder="Enter Website Name"
-													ref={newLoginName}
-													defaultValue={authCtx.nameLoginVault[indexEditLogin]}
+													ref={newLoginNameRef}
+													value={newLoginNameValue}
+													onChange={handleEditLoginName}
 												/>
 											</div>
 
@@ -649,9 +689,8 @@ function NewVault() {
 													className="input-element"
 													placeholder="Enter Username"
 													ref={newUsername}
-													defaultValue={
-														authCtx.usernameLoginVault[indexEditLogin]
-													}
+													value={newLoginUsernameValue}
+													onChange={handleEditLoginUsername}
 												/>
 											</div>
 											<div className="input-holder">
@@ -665,9 +704,8 @@ function NewVault() {
 													className="input-element"
 													placeholder="Enter Password"
 													ref={newPassword}
-													defaultValue={
-														authCtx.passwordLoginVault[indexEditLogin]
-													}
+													value={newLoginPasswordValue}
+													onChange={handleEditLoginPassword}
 												/>
 												<input
 													type="button"
@@ -811,7 +849,8 @@ function NewVault() {
 													className="input-element"
 													placeholder="Enter Note Name"
 													ref={newNoteName}
-													defaultValue={authCtx.messageNoteVault[indexEditNote]}
+													value={newNoteNameValue}
+													onChange={handleEditNoteName}
 												/>
 											</div>
 
@@ -825,7 +864,8 @@ function NewVault() {
 													className="input-element-message"
 													placeholder="Enter Message"
 													ref={newNoteMessage}
-													defaultValue={authCtx.nameNoteVault[indexEditNote]}
+													value={newNoteMessageValue}
+													onChange={handleEditNoteMessage}
 												/>
 											</div>
 											<input
